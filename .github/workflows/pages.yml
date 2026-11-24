@@ -1,4 +1,4 @@
-name: Deploy Showcase to GitHub Pages
+name: Deploy Showcase to GitHub Pages & Cloudflare Pages
 
 on:
   push:
@@ -44,3 +44,18 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  deploy-cloudflare:
+    needs: build
+    if: ${{ github.repository == 'abca12a/gate-first' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to Cloudflare Pages (gate-first.dimilinks.com)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy showcase --project-name=gate-first --branch=main

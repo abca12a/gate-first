@@ -172,9 +172,9 @@ gate-first/
 ├─ gates/                   # 门禁自增长协议、3 个真实事故复盘样本（含阳性对照）与 Git/Stop 钩子
 ├─ scaffold/                # 3 分钟给任意 Git 仓库接入协作骨架的零依赖初始化器
 ├─ docs/                    # 六层生产配套全栈白皮书（REFERENCE-STACK.md / .en.md）与本仓狗粮状态入口（STATE.md）
-├─ showcase/                # 在线 (GitHub Pages) 与本地直开的交互式全流程架构展示页
+├─ showcase/                # 在线双端同步 (GitHub Pages + Cloudflare Pages) 与本地直开的交互式全流程架构展示页
 ├─ scripts/                 # 本仓统一狗粮总门禁（check-all.mjs）与通用隐私脱敏门禁（check-no-private-leak.mjs）
-├─ .github/workflows/       # GitHub Pages 零构建自动部署工作流（pages.yml）
+├─ .github/workflows/       # GitHub Pages + Cloudflare Pages 零构建双端自动部署工作流（pages.yml）
 └─ .githooks/               # 本仓自身启用的提交前门禁钩子（LF + 100755 强约束）
 ```
 
@@ -182,7 +182,7 @@ gate-first/
 
 - **作者**：**han**
 - **GitHub 仓库**：[`https://github.com/abca12a/gate-first`](https://github.com/abca12a/gate-first)
-- **在线全景架构图**：[`https://abca12a.github.io/gate-first/`](https://abca12a.github.io/gate-first/)
+- **在线全景架构图**：[`https://abca12a.github.io/gate-first/?lang=zh`](https://abca12a.github.io/gate-first/?lang=zh) · 国内加速镜 [`https://gate-first.dimilinks.com/?lang=zh`](https://gate-first.dimilinks.com/?lang=zh)
 - **个人站点**：[`dimilinks.com`](https://dimilinks.com/)
 
 ## 许可证

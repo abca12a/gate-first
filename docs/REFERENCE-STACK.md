@@ -2,7 +2,7 @@
 
 **简体中文** · [English](./REFERENCE-STACK.en.md)
 
-> **交互式全景导览**：想直观查看本白皮书描述的六层生产架构流转、EasyTier 加密组网拓扑、OpenViking 异构双模型记忆流水线与门禁阳性对照实验，可直接在线访问 👉 [**`https://abca12a.github.io/gate-first/?lang=zh`**](https://abca12a.github.io/gate-first/?lang=zh)，或在本地浏览器打开 [**`showcase/index.html`**](../showcase/index.html)。
+> **交互式全景导览**：想直观查看本白皮书描述的六层生产架构流转、EasyTier 加密组网拓扑、OpenViking 异构双模型记忆流水线与门禁阳性对照实验，可直接在线访问 👉 [**`https://abca12a.github.io/gate-first/?lang=zh`**](https://abca12a.github.io/gate-first/?lang=zh)（国内加速镜 [**`https://gate-first.dimilinks.com/?lang=zh`**](https://gate-first.dimilinks.com/?lang=zh)），或在本地浏览器打开 [**`showcase/index.html`**](../showcase/index.html)。
 
 `gate-first` 的基础契约刻意做到了**零外部服务依赖**：只要机器上有 `Git` 和 `Node.js >= 20`，你就能在 3 分钟内跑起「29 行全局规则 + 10 个核心工作流 Skill + 提交前自增长门禁 + 纯文件记忆模板」的完整最小闭环。
 

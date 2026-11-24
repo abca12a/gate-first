@@ -8,7 +8,7 @@ A cross-host engineering governance kit for high-intensity AI-assisted developme
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-0-success.svg)](./package.json)
 [![Live Blueprint](https://img.shields.io/badge/Live_Blueprint-GitHub_Pages-0ea5e9.svg)](https://abca12a.github.io/gate-first/?lang=en)
 
-[简体中文 (`README.md`)](./README.md) · **English** · [Live Interactive Blueprint (EN/中文)](https://abca12a.github.io/gate-first/?lang=en) · [Production Reference Stack (EN)](./docs/REFERENCE-STACK.en.md)
+[简体中文 (`README.md`)](./README.md) · **English** · [Live Blueprint (GitHub Pages)](https://abca12a.github.io/gate-first/?lang=en) · [Cloudflare Mirror](https://gate-first.dimilinks.com/?lang=en) · [Production Reference Stack (EN)](./docs/REFERENCE-STACK.en.md)
 
 ---
 
@@ -32,7 +32,7 @@ Teams running coding agents across real production repositories hit the same fou
 3. **Backend-Agnostic Memory Contract ([`memory/CONTRACT.md`](./memory/CONTRACT.md))**: Separate always-injected user preferences from repo-scoped facts (`peers`), cold long-form archives (`resources`), and reusable troubleshooting recipes (`experiences`), enforced with **L0 / L1 / L2 progressive disclosure** (abstracts screen candidates; full L2 bodies must be read before acting).
 4. **Start Zero-Dependency, Scale to a Six-Layer Production Stack ([`docs/REFERENCE-STACK.en.md`](./docs/REFERENCE-STACK.en.md))**: Run the entire core loop in 3 minutes using nothing but `Git` + `Node.js >= 20`, then optionally scale to multi-host distribution (**Magpie**), zero-public-exposure mesh networking (**EasyTier**), and heterogeneous dual-model memory (**OpenViking `v0.5.5`**).
 
-> 💡 **Interactive Architecture Blueprint**: Visit the live GitHub Pages deployment at [**`https://abca12a.github.io/gate-first/?lang=en`**](https://abca12a.github.io/gate-first/?lang=en) (or open [**`showcase/index.html`**](./showcase/index.html) locally) to explore the 6-layer architecture flow, EasyTier mesh topology, dual-model memory pipeline, and interactive positive-control gate lab.
+> 💡 **Interactive Architecture Blueprint**: Visit the live deployment on [**`abca12a.github.io/gate-first`**](https://abca12a.github.io/gate-first/?lang=en) or the Cloudflare Edge mirror at [**`gate-first.dimilinks.com`**](https://gate-first.dimilinks.com/?lang=en) (or open [**`showcase/index.html`**](./showcase/index.html) locally) to explore the 6-layer architecture flow, EasyTier mesh topology, dual-model memory pipeline, and interactive positive-control gate lab.
 
 ---
 
@@ -133,7 +133,7 @@ For power users working across multiple machines and **5+ coding hosts**, [`docs
 
 - **Author**: **han**
 - **GitHub Repository**: [`https://github.com/abca12a/gate-first`](https://github.com/abca12a/gate-first)
-- **Live Architecture Blueprint**: [`https://abca12a.github.io/gate-first/?lang=en`](https://abca12a.github.io/gate-first/?lang=en)
+- **Live Architecture Blueprint**: [`https://abca12a.github.io/gate-first/?lang=en`](https://abca12a.github.io/gate-first/?lang=en) · Cloudflare Mirror [`https://gate-first.dimilinks.com/?lang=en`](https://gate-first.dimilinks.com/?lang=en)
 - **Personal Website**: [`dimilinks.com`](https://dimilinks.com/)
 
 ## License

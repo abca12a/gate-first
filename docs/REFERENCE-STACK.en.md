@@ -2,7 +2,7 @@
 
 [简体中文](./REFERENCE-STACK.md) · **English**
 
-> **Interactive Architecture Tour**: To visually trace the six-layer production flow, EasyTier encrypted mesh topology, OpenViking heterogeneous dual-model memory pipeline, and interactive positive-control gate lab, visit [**`https://abca12a.github.io/gate-first/?lang=en`**](https://abca12a.github.io/gate-first/?lang=en) or open [**`showcase/index.html`**](../showcase/index.html) locally in any browser.
+> **Interactive Architecture Tour**: To visually trace the six-layer production flow, EasyTier encrypted mesh topology, OpenViking heterogeneous dual-model memory pipeline, and interactive positive-control gate lab, visit [**`https://abca12a.github.io/gate-first/?lang=en`**](https://abca12a.github.io/gate-first/?lang=en) (Cloudflare Edge mirror: [**`https://gate-first.dimilinks.com/?lang=en`**](https://gate-first.dimilinks.com/?lang=en)) or open [**`showcase/index.html`**](../showcase/index.html) locally in any browser.
 
 The core `gate-first` contract is intentionally **zero-external-dependency**: with nothing more than `Git` and `Node.js >= 20`, you can stand up the complete minimal loop in 3 minutes—a 29-line global rule file, 10 host-neutral workflow skills, self-growing pre-commit gates, and pure-file memory templates.
 
