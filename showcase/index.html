@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="dark" data-stack="full">
+<html lang="zh-CN" data-lang="zh" data-theme="dark" data-stack="full">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,6 +16,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="gate-first · 全流程交互式架构蓝图与门禁自增长系统" />
   <meta name="twitter:description" content="踩过一次坑，就长出一个下次会变红的门禁：多宿主责任隔离 + 门禁自增长 + EasyTier × OpenViking 异构双模型记忆架构。" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E0823A' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='24' height='24' rx='4' fill='%230B0D10' stroke='none'/%3E%3Cpath d='M4 5h16v14H4zM9 5v14M15 5v14M4 12h5M15 12h5'/%3E%3Ccircle cx='12' cy='12' r='2'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
@@ -260,25 +261,27 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
     .brand-group {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+      flex-shrink: 0;
     }
 
     .brand-link {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 9px;
       text-decoration: none;
       font-family: 'Space Grotesk', monospace;
       font-weight: 700;
-      font-size: 1.08rem;
+      font-size: 1.05rem;
       letter-spacing: -0.02em;
+      white-space: nowrap;
     }
 
     .brand-mark {
@@ -293,27 +296,29 @@
     }
 
     .rev-tag {
-      font-size: 0.74rem;
-      padding: 2px 7px;
+      font-size: 0.72rem;
+      padding: 2px 6px;
       border: 1px solid var(--line);
       border-radius: 3px;
       color: var(--ink-secondary);
       background: var(--bg-sheet);
+      white-space: nowrap;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 2px;
       flex-wrap: wrap;
     }
 
     .nav-links a {
       text-decoration: none;
-      font-size: 0.86rem;
+      font-size: 0.83rem;
       color: var(--ink-secondary);
-      padding: 6px 10px;
+      padding: 5px 8px;
       border-radius: 4px;
+      white-space: nowrap;
       transition: color 0.16s ease, background-color 0.16s ease;
     }
     .nav-links a:hover {
@@ -324,14 +329,15 @@
     .console-controls {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
     }
 
     .quick-actions {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      flex-shrink: 0;
     }
 
     .mode-switch {
@@ -347,9 +353,9 @@
     .mode-btn {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 5px 9px;
-      font-size: 0.78rem;
+      gap: 5px;
+      padding: 5px 8px;
+      font-size: 0.74rem;
       font-weight: 500;
       border-radius: 3px;
       color: var(--ink-secondary);
@@ -369,6 +375,7 @@
       height: 7px;
       border-radius: 50%;
       background: var(--ink-muted);
+      flex-shrink: 0;
     }
     .mode-btn[data-mode="minimal"][aria-pressed="true"] .mode-dot {
       background: var(--sig-green);
@@ -377,17 +384,50 @@
       background: var(--sig-amber);
     }
 
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg-sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      padding: 2px;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+
+    .lang-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 7px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      line-height: 1.2;
+      border-radius: 3px;
+      color: var(--ink-secondary);
+      transition: background-color 0.16s ease, color 0.16s ease;
+      white-space: nowrap;
+    }
+    .lang-btn:hover {
+      color: var(--ink);
+    }
+    .lang-btn[aria-pressed="true"] {
+      background: var(--bg-elevated);
+      color: var(--ink);
+      box-shadow: inset 0 0 0 1px var(--sig-amber-border);
+    }
+
     .theme-btn,
     .gh-top-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      padding: 6px 10px;
+      gap: 5px;
+      padding: 5px 8px;
       border: 1px solid var(--line-strong);
       background: var(--bg-sheet);
       border-radius: 5px;
-      font-size: 0.79rem;
+      font-size: 0.75rem;
       font-weight: 500;
       color: var(--ink-secondary);
       text-decoration: none;
@@ -395,7 +435,7 @@
       white-space: nowrap;
     }
     .gh-top-link {
-      padding: 6px 9px;
+      padding: 5px 8px;
     }
     .theme-btn:hover,
     .gh-top-link:hover {
@@ -497,6 +537,12 @@
       letter-spacing: -0.032em;
       line-height: 1.2;
       max-width: 24ch;
+    }
+    [data-lang="en"] .hero-title {
+      max-width: none;
+      font-size: clamp(1.65rem, 2.75vw, 2.4rem);
+      letter-spacing: -0.03em;
+      text-wrap: initial;
     }
 
     .hero-title .em-amber {
@@ -895,8 +941,8 @@
     }
     .lane-title-svg {
       fill: var(--ink-secondary);
-      font-family: 'IBM Plex Sans SC', sans-serif;
-      font-size: 11.5px;
+      font-family: 'Space Grotesk', 'IBM Plex Sans SC', sans-serif;
+      font-size: 11px;
       font-weight: 500;
     }
 
@@ -938,7 +984,7 @@
     .wire-label-text {
       fill: var(--ink-secondary);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 9.8px;
+      font-size: 8.8px;
     }
 
     /* Interactive SVG Nodes */
@@ -1224,9 +1270,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 12px;
       padding-bottom: 6px;
       border-bottom: 1px dashed var(--line);
+    }
+    .eq-row > span:first-child {
+      white-space: nowrap;
+      flex-shrink: 0;
     }
     .eq-row:last-child {
       padding-bottom: 0;
@@ -1810,7 +1860,7 @@
       width: 100%;
       padding: 15px 20px;
       display: grid;
-      grid-template-columns: 44px minmax(190px, 0.9fr) 140px minmax(240px, 1.8fr) 28px;
+      grid-template-columns: 44px minmax(190px, 0.9fr) 164px minmax(240px, 1.8fr) 28px;
       gap: 14px;
       align-items: center;
       text-align: left;
@@ -2135,6 +2185,7 @@
       .quick-actions {
         width: 100%;
         justify-content: space-between;
+        flex-wrap: wrap;
       }
     }
 
@@ -2155,7 +2206,7 @@
   </style>
 </head>
 <body>
-  <a href="#main-content" class="skip-link">跳至主图纸内容</a>
+  <a href="#main-content" class="skip-link" data-i18n="skipLink">跳至主图纸内容</a>
 
   <!-- ========================================================================
        MODULE 1A — STICKY TOP CONTROL CONSOLE
@@ -2163,7 +2214,7 @@
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand-group">
-        <a href="#top" class="brand-link" aria-label="gate-first 架构蓝图首页">
+        <a href="#top" class="brand-link" aria-label="gate-first 架构蓝图首页" data-i18n-aria="brandAria">
           <span class="brand-mark" aria-hidden="true">
             <svg class="icon" viewBox="0 0 24 24">
               <path d="M4 5h16v14H4z" />
@@ -2176,34 +2227,39 @@
         <span class="rev-tag mono">REV 2.4</span>
       </div>
 
-      <nav class="nav-links" aria-label="核心模块导航">
-        <a href="#blueprint">五层全景推演</a>
-        <a href="#dual-model">异构双模型记忆</a>
-        <a href="#gate-lab">阳性对照实验室</a>
-        <a href="#skill-matrix">4+6 技能矩阵</a>
+      <nav class="nav-links" aria-label="核心模块导航" data-i18n-aria="navAria">
+        <a href="#blueprint" data-i18n="navBlueprint">五层全景推演</a>
+        <a href="#dual-model" data-i18n="navDualModel">异构双模型记忆</a>
+        <a href="#gate-lab" data-i18n="navGateLab">阳性对照实验室</a>
+        <a href="#skill-matrix" data-i18n="navSkillMatrix">4+6 技能矩阵</a>
       </nav>
 
       <div class="console-controls">
-        <div class="mode-switch" role="group" aria-label="架构层级全局滤镜">
+        <div class="mode-switch" role="group" aria-label="架构层级全局滤镜" data-i18n-aria="modeSwitchAria">
           <button type="button" class="mode-btn" data-mode="minimal" aria-pressed="false" id="btn-mode-minimal">
             <span class="mode-dot" aria-hidden="true"></span>
-            <span>3 分钟最小闭环</span>
+            <span data-i18n="modeMinimal">3 分钟最小闭环</span>
           </button>
           <button type="button" class="mode-btn" data-mode="full" aria-pressed="true" id="btn-mode-full">
             <span class="mode-dot" aria-hidden="true"></span>
-            <span>生产全栈 (+Magpie+EasyTier+OV)</span>
+            <span data-i18n="modeFull">生产全栈 (+Magpie+EasyTier+OV)</span>
           </button>
         </div>
 
         <div class="quick-actions">
-          <a href="https://github.com/abca12a/gate-first" target="_blank" rel="noopener noreferrer" class="gh-top-link" aria-label="GitHub 仓库" title="GitHub · abca12a/gate-first">
+          <div class="lang-switch mono" role="group" aria-label="切换界面语言" data-i18n-aria="langSwitchAria">
+            <button type="button" class="lang-btn" data-lang="zh" aria-pressed="true" id="btn-lang-zh">中文</button>
+            <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" id="btn-lang-en">EN</button>
+          </div>
+
+          <a href="https://github.com/abca12a/gate-first" target="_blank" rel="noopener noreferrer" class="gh-top-link" aria-label="GitHub 仓库" data-i18n-aria="ghAria" title="GitHub · abca12a/gate-first">
             <svg class="icon" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
               <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
             </svg>
             <span class="mono">GitHub</span>
           </a>
 
-          <button type="button" class="theme-btn" id="btn-theme-toggle" aria-pressed="false" aria-label="切换深浅图纸主题">
+          <button type="button" class="theme-btn" id="btn-theme-toggle" aria-pressed="false" aria-label="切换深浅图纸主题" data-i18n-aria="themeAria">
             <svg class="icon" id="theme-icon-dark" viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="12" cy="12" r="4.5" />
               <path d="M12 2.5v2.5M12 19v2.5M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2.5 12H5M19 12h2.5M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" />
@@ -2234,10 +2290,10 @@
           <div class="hero-grid">
             <div class="hero-main">
               <div>
-                <h1 class="hero-title">
+                <h1 class="hero-title" data-i18n-html="heroTitle">
                   踩过一次坑，<br />就长出一个下次<span class="em-red">会变红</span>的<span class="em-amber">门禁</span>
                 </h1>
-                <p class="hero-lead">
+                <p class="hero-lead" data-i18n-html="heroLead">
                   提示词写十遍「请注意不要犯错」，不如在真实提交入口挂一条违规即退 <code>exit 1</code> 的脚本。<strong>gate-first</strong> 不赌 AI 自觉，而是用<strong>唯一主导责任隔离</strong>、<strong>带阳性对照的门禁自增长</strong>与<strong>异构双模型分层记忆契约</strong>，让每一次返工都沉淀为机器可复验的工程护栏。
                 </p>
               </div>
@@ -2248,18 +2304,18 @@
                     <svg class="icon" viewBox="0 0 24 24" style="color:var(--sig-amber)" aria-hidden="true">
                       <path d="M12 3v6m0 0l-4 4m4-4l4 4M5 17h4v4H5zm10 0h4v4h-4z" />
                     </svg>
-                    <span>责任物理隔离</span>
+                    <span data-i18n="axiom1Title">责任物理隔离</span>
                   </div>
-                  <p class="axiom-desc">唯一主导只对齐、拆单、审查与合并；写者在独立 <code>git worktree</code> 施工，子代理禁写共享记忆。</p>
+                  <p class="axiom-desc" data-i18n-html="axiom1Desc">唯一主导只对齐、拆单、审查与合并；写者在独立 <code>git worktree</code> 施工，子代理禁写共享记忆。</p>
                 </div>
                 <div class="axiom-cell">
                   <div class="axiom-head">
                     <svg class="icon" viewBox="0 0 24 24" style="color:var(--sig-red)" aria-hidden="true">
                       <path d="M12 8v5m0 3.5h.01M4.5 19.5h15L12 4.5z" />
                     </svg>
-                    <span>阳性对照防假绿</span>
+                    <span data-i18n="axiom2Title">阳性对照防假绿</span>
                   </div>
-                  <p class="axiom-desc">只打黄字退 <code>0</code> 不是门禁。新门禁必须向真实入口注入违规确认 <code>exit 1</code>，再恢复确认 <code>exit 0</code>。</p>
+                  <p class="axiom-desc" data-i18n-html="axiom2Desc">只打黄字退 <code>0</code> 不是门禁。新门禁必须向真实入口注入违规确认 <code>exit 1</code>，再恢复确认 <code>exit 0</code>。</p>
                 </div>
                 <div class="axiom-cell">
                   <div class="axiom-head">
@@ -2268,16 +2324,16 @@
                       <circle cx="16.5" cy="12" r="3.5" />
                       <path d="M11 12h2" />
                     </svg>
-                    <span>异构双模型记忆</span>
+                    <span data-i18n="axiom3Title">异构双模型记忆</span>
                   </div>
-                  <p class="axiom-desc"><code>gemini-embedding-2</code> 专司 3072d 稠密召回，<code>deepseek-v4.1-flash-1017</code> 异步编译 L0/L1 摘要，零重算解耦。</p>
+                  <p class="axiom-desc" data-i18n-html="axiom3Desc"><code>gemini-embedding-2</code> 专司 3072d 稠密召回，<code>deepseek-v4.1-flash-1017</code> 异步编译 L0/L1 摘要，零重算解耦。</p>
                 </div>
               </div>
             </div>
 
-            <aside class="hero-ledger" aria-label="架构分层对照清单">
+            <aside class="hero-ledger" aria-label="架构分层对照清单" data-i18n-aria="ledgerAria">
               <div class="ledger-header">
-                <span class="ledger-title">渐进采用契约（点击顶部切换滤镜对比）</span>
+                <span class="ledger-title" data-i18n="ledgerTitle">渐进采用契约（点击顶部切换滤镜对比）</span>
                 <span class="ledger-state mono" id="ledger-state-badge">生产全栈已点亮</span>
               </div>
 
@@ -2285,14 +2341,14 @@
                 <div class="tier-top">
                   <span class="tier-name">
                     <span class="led led-green" aria-hidden="true"></span>
-                    <span>Layer A · 3 分钟最小闭环（常驻基座）</span>
+                    <span data-i18n="tierATitle">Layer A · 3 分钟最小闭环（常驻基座）</span>
                   </span>
-                  <span class="tier-badge mono">Git + Node.js 零外部依赖</span>
+                  <span class="tier-badge mono" data-i18n="tierABadge">Git + Node.js 零外部依赖</span>
                 </div>
                 <ul class="tier-items">
-                  <li><span>仓内脚手架 <code>scaffold/init-project.mjs</code> + 记忆模板 <code>memory/templates/STATE.md</code></span></li>
-                  <li><span><code>.githooks/pre-commit</code> → <code>scripts/check-all.mjs</code>（POSIX LF、<code>unset GIT_*</code>、缺环境退 <code>1</code>）</span></li>
-                  <li><span><code>gates/PROTOCOL.md</code> 阳性对照协议 + <code>pit-to-gate</code> / <code>defect-review</code></span></li>
+                  <li><span data-i18n-html="tierALi1">仓内脚手架 <code>scaffold/init-project.mjs</code> + 记忆模板 <code>memory/templates/STATE.md</code></span></li>
+                  <li><span data-i18n-html="tierALi2"><code>.githooks/pre-commit</code> → <code>scripts/check-all.mjs</code>（POSIX LF、<code>unset GIT_*</code>、缺环境退 <code>1</code>）</span></li>
+                  <li><span data-i18n-html="tierALi3"><code>gates/PROTOCOL.md</code> 阳性对照协议 + <code>pit-to-gate</code> / <code>defect-review</code></span></li>
                 </ul>
               </div>
 
@@ -2300,14 +2356,14 @@
                 <div class="tier-top">
                   <span class="tier-name">
                     <span class="led led-amber" aria-hidden="true"></span>
-                    <span>Layer B · 作者生产全栈（多宿主 + 加密内网 + 记忆引擎）</span>
+                    <span data-i18n="tierBTitle">Layer B · 作者生产全栈（多宿主 + 加密内网 + 记忆引擎）</span>
                   </span>
                   <span class="tier-badge mono">Magpie + EasyTier + OV v0.5.5</span>
                 </div>
                 <ul class="tier-items">
-                  <li><span><strong>Magpie 单源</strong>：29 行独立普通文件分发 5 宿主 + 严禁下发裸 <code>openviking</code> MCP 防冲突</span></li>
-                  <li><span><strong>EasyTier 虚拟内网</strong>：容器仅绑 <code>127.0.0.1:1933</code>，<code>&lt;easytier-virtual-ip&gt;%tun0</code> 10s 自愈转发</span></li>
-                  <li><span><strong>OpenViking v0.5.5</strong>：<code>gemini-embedding-2</code> (3072d) × <code>deepseek-v4.1-flash-1017</code> + 三联 <code>systemd</code></span></li>
+                  <li><span data-i18n-html="tierBLi1"><strong>Magpie 单源</strong>：29 行独立普通文件分发 5 宿主 + 严禁下发裸 <code>openviking</code> MCP 防冲突</span></li>
+                  <li><span data-i18n-html="tierBLi2"><strong>EasyTier 虚拟内网</strong>：容器仅绑 <code>127.0.0.1:1933</code>，<code>&lt;easytier-virtual-ip&gt;%tun0</code> 10s 自愈转发</span></li>
+                  <li><span data-i18n-html="tierBLi3"><strong>OpenViking v0.5.5</strong>：<code>gemini-embedding-2</code> (3072d) × <code>deepseek-v4.1-flash-1017</code> + 三联 <code>systemd</code></span></li>
                 </ul>
               </div>
             </aside>
@@ -2323,8 +2379,8 @@
       <div class="shell">
         <div class="section-header">
           <div>
-            <h2 class="section-title">五层全景交互式架构与 6 步信号推演</h2>
-            <p class="section-desc">
+            <h2 class="section-title" data-i18n="mod2Title">五层全景交互式架构与 6 步信号推演</h2>
+            <p class="section-desc" data-i18n="mod2Desc">
               使用播放控制器观察单次研发任务从「开场资产注入」到「异步记忆编译」的完整控制流；点击画布中任意架构节点，右侧解剖面板即刻调出其真实参数、踩坑事故复盘与仓内路径。
             </p>
           </div>
@@ -2340,38 +2396,38 @@
         <div class="blueprint-frame">
           <!-- Simulator Transport Controls -->
           <div class="sim-toolbar">
-            <div class="step-tabs" role="tablist" aria-label="全流程 6 步推演阶段">
+            <div class="step-tabs" role="tablist" aria-label="全流程 6 步推演阶段" data-i18n-aria="stepTabsAria">
               <button type="button" class="step-tab" role="tab" data-step="0" aria-selected="true">
-                <span class="step-num mono">S1</span><span>单源分发与注入</span>
+                <span class="step-num mono">S1</span><span data-i18n="stepTab0">单源分发与注入</span>
               </button>
               <button type="button" class="step-tab" role="tab" data-step="1" aria-selected="false">
-                <span class="step-num mono">S2</span><span>主导拆单与向量召回</span>
+                <span class="step-num mono">S2</span><span data-i18n="stepTab1">主导拆单与向量召回</span>
               </button>
               <button type="button" class="step-tab" role="tab" data-step="2" aria-selected="false">
-                <span class="step-num mono">S3</span><span>Worktree 隔离与防火墙</span>
+                <span class="step-num mono">S3</span><span data-i18n="stepTab2">Worktree 隔离与防火墙</span>
               </button>
               <button type="button" class="step-tab" role="tab" data-step="3" aria-selected="false">
-                <span class="step-num mono">S4</span><span>踩坑分流与阳性对照</span>
+                <span class="step-num mono">S4</span><span data-i18n="stepTab3">踩坑分流与阳性对照</span>
               </button>
               <button type="button" class="step-tab" role="tab" data-step="4" aria-selected="false">
-                <span class="step-num mono">S5</span><span>提交硬门禁与盲审</span>
+                <span class="step-num mono">S5</span><span data-i18n="stepTab4">提交硬门禁与盲审</span>
               </button>
               <button type="button" class="step-tab" role="tab" data-step="5" aria-selected="false">
-                <span class="step-num mono">S6</span><span>EasyTier 与 VLM 编译</span>
+                <span class="step-num mono">S6</span><span data-i18n="stepTab5">EasyTier 与 VLM 编译</span>
               </button>
             </div>
 
             <div class="transport-controls">
-              <button type="button" class="ctrl-btn" id="btn-step-prev" aria-label="上一步">
+              <button type="button" class="ctrl-btn" id="btn-step-prev" aria-label="上一步" data-i18n-aria="btnStepPrevAria">
                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
-                <span>上一步</span>
+                <span data-i18n="btnStepPrev">上一步</span>
               </button>
               <button type="button" class="ctrl-btn" id="btn-step-play" aria-pressed="false">
                 <svg class="icon" id="icon-play" viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 4 20 12 6 20 6 4" fill="currentColor" stroke="none" /></svg>
                 <span id="label-play">自动推演</span>
               </button>
-              <button type="button" class="ctrl-btn" id="btn-step-next" aria-label="下一步">
-                <span>下一步</span>
+              <button type="button" class="ctrl-btn" id="btn-step-next" aria-label="下一步" data-i18n-aria="btnStepNextAria">
+                <span data-i18n="btnStepNext">下一步</span>
                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6" /></svg>
               </button>
             </div>
@@ -2387,11 +2443,11 @@
                 Magpie 将 29 行 instructions.md 分发为 5 个宿主各自的独立实体文件（杜绝软链共指被截断为 0 字节），并通过符号链接池挂载 10 个核心 Skill；宿主插件按 CJK 1.5 tok/字预算注入全局偏好与当前 Git 仓库隔离空间 peers/&lt;actor&gt;/。
               </p>
             </div>
-            <div class="legend-bar mono" aria-label="信号线图例">
-              <span class="legend-item"><span class="legend-swatch" style="background:var(--sig-amber)"></span>主导控制 / 单源分发</span>
-              <span class="legend-item"><span class="legend-swatch" style="background:var(--sig-cyan)"></span>3072d 向量 / VLM 语义流</span>
-              <span class="legend-item"><span class="legend-swatch" style="background:var(--sig-green)"></span>门禁真绿 (exit 0)</span>
-              <span class="legend-item"><span class="legend-swatch" style="background:var(--sig-red)"></span>硬拦截 / 防火墙阻断</span>
+            <div class="legend-bar mono" aria-label="信号线图例" data-i18n-aria="legendAria">
+              <span class="legend-item"><span class="legend-swatch" style="background:var(--sig-amber)"></span><span data-i18n="legendAmber">主导控制 / 单源分发</span></span>
+              <span class="legend-item"><span class="legend-swatch" style="background:var(--sig-cyan)"></span><span data-i18n="legendCyan">3072d 向量 / VLM 语义流</span></span>
+              <span class="legend-item"><span class="legend-swatch" style="background:var(--sig-green)"></span><span data-i18n="legendGreen">门禁真绿 (exit 0)</span></span>
+              <span class="legend-item"><span class="legend-swatch" style="background:var(--sig-red)"></span><span data-i18n="legendRed">硬拦截 / 防火墙阻断</span></span>
             </div>
           </div>
 
@@ -2399,7 +2455,7 @@
           <div class="workbench-grid">
             <div class="canvas-pane">
               <div class="svg-stage">
-                <svg class="blueprint-svg" viewBox="0 0 880 680" role="group" aria-label="gate-first 五层全流程交互架构图">
+                <svg class="blueprint-svg" viewBox="0 0 880 680" role="group" aria-label="gate-first 五层全流程交互架构图" data-i18n-aria="svgBlueprintAria">
                   <defs>
                     <marker id="arrow-muted" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                       <path d="M 1 1.5 L 8.5 5 L 1 8.5 z" fill="var(--ink-muted)" />
@@ -2422,23 +2478,23 @@
                   <g aria-hidden="true">
                     <rect class="lane-rect" x="14" y="14" width="852" height="118" rx="4" />
                     <text class="lane-tag" x="28" y="36">L1 · ASSET &amp; BOOT</text>
-                    <text class="lane-title-svg" x="28" y="54">单源资产与多宿主开场层</text>
+                    <text class="lane-title-svg" x="28" y="54" data-i18n="svgLane1">单源资产与多宿主开场层</text>
 
                     <rect class="lane-rect-alt" x="14" y="146" width="852" height="118" rx="4" />
                     <text class="lane-tag" x="28" y="168">L2 · LEAD &amp; RECALL</text>
-                    <text class="lane-title-svg" x="28" y="186">唯一主导与经验召回层</text>
+                    <text class="lane-title-svg" x="28" y="186" data-i18n="svgLane2">唯一主导与经验召回层</text>
 
                     <rect class="lane-rect" x="14" y="278" width="852" height="118" rx="4" />
                     <text class="lane-tag" x="28" y="300">L3 · ISOLATED EXEC</text>
-                    <text class="lane-title-svg" x="28" y="318">Worktree 隔离与防火墙</text>
+                    <text class="lane-title-svg" x="28" y="318" data-i18n="svgLane3">Worktree 隔离与防火墙</text>
 
                     <rect class="lane-rect-alt" x="14" y="410" width="852" height="118" rx="4" />
                     <text class="lane-tag" x="28" y="432">L4 · GATE &amp; REVIEW</text>
-                    <text class="lane-title-svg" x="28" y="450">踩坑分流与提交硬拦截</text>
+                    <text class="lane-title-svg" x="28" y="450" data-i18n="svgLane4">踩坑分流与提交硬拦截</text>
 
                     <rect class="lane-rect" x="14" y="542" width="852" height="124" rx="4" />
                     <text class="lane-tag" x="28" y="564">L5 · EASYTIER &amp; VLM</text>
-                    <text class="lane-title-svg" x="28" y="582">EasyTier 内网与语义编译层</text>
+                    <text class="lane-title-svg" x="28" y="582" data-i18n="svgLane5">EasyTier 内网与语义编译层</text>
                   </g>
 
                   <!-- Base Orthogonal Signal Wires -->
@@ -2494,136 +2550,136 @@
 
                   <!-- Inline Callout Micro-Labels on Wires -->
                   <g aria-hidden="true">
-                    <rect class="wire-label-bg" x="484" y="42" width="50" height="16" />
-                    <text class="wire-label-text" x="509" y="53" text-anchor="middle">实体拷贝</text>
+                    <rect class="wire-label-bg" x="481" y="42" width="56" height="16" />
+                    <text class="wire-label-text" x="509" y="53" text-anchor="middle" data-i18n="svgWire1">实体拷贝</text>
 
-                    <rect class="wire-label-bg" x="482" y="172" width="54" height="16" />
+                    <rect class="wire-label-bg" x="481" y="172" width="56" height="16" />
                     <text class="wire-label-text" x="509" y="183" text-anchor="middle">L0→L1→L2</text>
 
                     <rect class="wire-label-bg" x="344" y="263" width="76" height="16" />
                     <text class="wire-label-text" x="382" y="274" text-anchor="middle">AGENT-TASK</text>
 
-                    <rect class="wire-label-bg" x="483" y="314" width="52" height="16" />
-                    <text class="wire-label-text" x="509" y="325" text-anchor="middle">禁写记忆</text>
+                    <rect class="wire-label-bg" x="481" y="314" width="56" height="16" />
+                    <text class="wire-label-text" x="509" y="325" text-anchor="middle" data-i18n="svgWire4">禁写记忆</text>
 
                     <rect class="wire-label-bg" x="481" y="445" width="56" height="16" />
                     <text class="wire-label-text" x="509" y="456" text-anchor="middle">exit 1 / 0</text>
 
-                    <rect class="wire-label-bg" x="482" y="579" width="54" height="16" />
-                    <text class="wire-label-text" x="509" y="590" text-anchor="middle">60s 重放</text>
+                    <rect class="wire-label-bg" x="481" y="579" width="56" height="16" />
+                    <text class="wire-label-text" x="509" y="590" text-anchor="middle" data-i18n="svgWire6">60s 重放</text>
                   </g>
 
                   <!-- ================= 10 INTERACTIVE NODES ================= -->
                   <!-- L1 Left: Magpie -->
-                  <g class="bp-node step-lit is-selected" id="svg-node-magpie" data-node="magpie" data-tier="full" data-tone="amber" tabindex="0" role="button" aria-label="节点 01: Magpie 单源资产分发器">
+                  <g class="bp-node step-lit is-selected" id="svg-node-magpie" data-node="magpie" data-tier="full" data-tone="amber" tabindex="0" role="button" aria-label="节点 01: Magpie 单源资产分发器" data-i18n-aria="svgN01Aria">
                     <rect class="node-box" x="190" y="30" width="290" height="84" />
                     <rect class="node-chip-bg node-chip-amber" x="204" y="41" width="72" height="17" />
                     <text class="node-chip-text chip-ink-amber" x="240" y="52.5" text-anchor="middle">MAGPIE SSOT</text>
                     <text class="node-sub-svg" x="466" y="52.5" text-anchor="end">N01</text>
-                    <text class="node-title-svg" x="204" y="76">Magpie 单源分发与管辖切割</text>
-                    <text class="node-sub-svg" x="204" y="96">5 宿主独立哈希块文件 · check-host-skills</text>
+                    <text class="node-title-svg" x="204" y="76" data-i18n="svgN01Title">Magpie 单源分发与管辖切割</text>
+                    <text class="node-sub-svg" x="204" y="96" data-i18n="svgN01Sub">5 宿主独立哈希块文件 · check-host-skills</text>
                   </g>
 
                   <!-- L1 Right: 5 Host Lifecycles -->
-                  <g class="bp-node step-lit" id="svg-node-hosts" data-node="hosts" data-tier="core" data-tone="amber" tabindex="0" role="button" aria-label="节点 02: 5 大宿主开场注入与生命周期">
+                  <g class="bp-node step-lit" id="svg-node-hosts" data-node="hosts" data-tier="core" data-tone="amber" tabindex="0" role="button" aria-label="节点 02: 5 大宿主开场注入与生命周期" data-i18n-aria="svgN02Aria">
                     <rect class="node-box" x="540" y="30" width="298" height="84" />
-                    <rect class="node-chip-bg node-chip-core" x="554" y="41" width="96" height="17" />
-                    <text class="node-chip-text chip-ink-core" x="602" y="52.5" text-anchor="middle">5 HOSTS + URI GUARD</text>
+                    <rect class="node-chip-bg node-chip-core" x="554" y="41" width="118" height="17" />
+                    <text class="node-chip-text chip-ink-core" x="613" y="52.5" text-anchor="middle">5 HOSTS + URI GUARD</text>
                     <text class="node-sub-svg" x="824" y="52.5" text-anchor="end">N02</text>
-                    <text class="node-title-svg" x="554" y="76">5 宿主挂载、URI Guard 与注入</text>
-                    <text class="node-sub-svg" x="554" y="96">CJK 1.5 tok/字预算 · Claude/DSH 拦 viking://</text>
+                    <text class="node-title-svg" x="554" y="76" data-i18n="svgN02Title">5 宿主挂载、URI Guard 与注入</text>
+                    <text class="node-sub-svg" x="554" y="96" data-i18n="svgN02Sub">CJK 1.5 tok/字预算 · Claude/DSH 拦 viking://</text>
                   </g>
 
                   <!-- L2 Left: Lead Session -->
-                  <g class="bp-node" id="svg-node-lead" data-node="lead" data-tier="core" data-tone="amber" tabindex="0" role="button" aria-label="节点 03: 唯一主导会话">
+                  <g class="bp-node" id="svg-node-lead" data-node="lead" data-tier="core" data-tone="amber" tabindex="0" role="button" aria-label="节点 03: 唯一主导会话" data-i18n-aria="svgN03Aria">
                     <rect class="node-box" x="190" y="162" width="290" height="86" />
                     <rect class="node-chip-bg node-chip-core" x="204" y="173" width="76" height="17" />
                     <text class="node-chip-text chip-ink-core" x="242" y="184.5" text-anchor="middle">MINIMAL CORE</text>
                     <text class="node-sub-svg" x="466" y="184.5" text-anchor="end">N03</text>
-                    <text class="node-title-svg" x="204" y="208">唯一主导会话（Lead Orchestrator）</text>
-                    <text class="node-sub-svg" x="204" y="228">只对齐/拆单/审查/合并 · 签发 AGENT-TASK</text>
+                    <text class="node-title-svg" x="204" y="208" data-i18n="svgN03Title">唯一主导会话（Lead Orchestrator）</text>
+                    <text class="node-sub-svg" x="204" y="228" data-i18n="svgN03Sub">只对齐/拆单/审查/合并 · 签发 AGENT-TASK</text>
                   </g>
 
                   <!-- L2 Right: Gemini 3072d Recall -->
-                  <g class="bp-node" id="svg-node-recall" data-node="recall" data-tier="full" data-tone="cyan" tabindex="0" role="button" aria-label="节点 04: Gemini 3072维向量经验召回">
+                  <g class="bp-node" id="svg-node-recall" data-node="recall" data-tier="full" data-tone="cyan" tabindex="0" role="button" aria-label="节点 04: Gemini 3072维向量经验召回" data-i18n-aria="svgN04Aria">
                     <rect class="node-box" x="540" y="162" width="298" height="86" />
                     <rect class="node-chip-bg node-chip-full" x="554" y="173" width="102" height="17" />
                     <text class="node-chip-text chip-ink-full" x="605" y="184.5" text-anchor="middle">GEMINI 3072d VEC</text>
                     <text class="node-sub-svg" x="824" y="184.5" text-anchor="end">N04</text>
-                    <text class="node-title-svg" x="554" y="208">OpenViking 经验向量检索</text>
-                    <text class="node-sub-svg" x="554" y="228">gemini-embedding-2 · 强制 read L2 原文</text>
+                    <text class="node-title-svg" x="554" y="208" data-i18n="svgN04Title">OpenViking 经验向量检索</text>
+                    <text class="node-sub-svg" x="554" y="228" data-i18n="svgN04Sub">gemini-embedding-2 · 强制 read L2 原文</text>
                   </g>
 
                   <!-- L3 Left: Git Worktree Isolation -->
-                  <g class="bp-node" id="svg-node-worktree" data-node="worktree" data-tier="core" data-tone="amber" tabindex="0" role="button" aria-label="节点 05: Git Worktree 物理隔离执行舱">
+                  <g class="bp-node" id="svg-node-worktree" data-node="worktree" data-tier="core" data-tone="amber" tabindex="0" role="button" aria-label="节点 05: Git Worktree 物理隔离执行舱" data-i18n-aria="svgN05Aria">
                     <rect class="node-box" x="190" y="294" width="290" height="86" />
                     <rect class="node-chip-bg node-chip-core" x="204" y="305" width="76" height="17" />
                     <text class="node-chip-text chip-ink-core" x="242" y="316.5" text-anchor="middle">MINIMAL CORE</text>
                     <text class="node-sub-svg" x="466" y="316.5" text-anchor="end">N05</text>
-                    <text class="node-title-svg" x="204" y="340">Git Worktree 并行隔离执行舱</text>
-                    <text class="node-sub-svg" x="204" y="360">独立分支写隔离 · ToolParts 12,000 字采集</text>
+                    <text class="node-title-svg" x="204" y="340" data-i18n="svgN05Title">Git Worktree 并行隔离执行舱</text>
+                    <text class="node-sub-svg" x="204" y="360" data-i18n="svgN05Sub">独立分支写隔离 · ToolParts 12,000 字采集</text>
                   </g>
 
                   <!-- L3 Right: Subagent Memory Firewall -->
-                  <g class="bp-node" id="svg-node-firewall" data-node="firewall" data-tier="full" data-tone="red" tabindex="0" role="button" aria-label="节点 06: 子代理共享记忆防火墙">
+                  <g class="bp-node" id="svg-node-firewall" data-node="firewall" data-tier="full" data-tone="red" tabindex="0" role="button" aria-label="节点 06: 子代理共享记忆防火墙" data-i18n-aria="svgN06Aria">
                     <rect class="node-box" x="540" y="294" width="298" height="86" />
                     <rect class="node-chip-bg node-chip-full" x="554" y="305" width="106" height="17" />
                     <text class="node-chip-text chip-ink-full" x="607" y="316.5" text-anchor="middle">MEMORY FIREWALL</text>
                     <text class="node-sub-svg" x="824" y="316.5" text-anchor="end">N06</text>
-                    <text class="node-title-svg" x="554" y="340">子代理记忆回写硬防火墙</text>
-                    <text class="node-sub-svg" x="554" y="360">skipSubagentSessions: true · 只回传证据</text>
+                    <text class="node-title-svg" x="554" y="340" data-i18n="svgN06Title">子代理记忆回写硬防火墙</text>
+                    <text class="node-sub-svg" x="554" y="360" data-i18n="svgN06Sub">skipSubagentSessions: true · 只回传证据</text>
                   </g>
 
                   <!-- L4 Left: pit-to-gate & Positive Control -->
-                  <g class="bp-node" id="svg-node-pittogate" data-node="pittogate" data-tier="core" data-tone="red" tabindex="0" role="button" aria-label="节点 07: pit-to-gate 踩坑分流与阳性对照">
+                  <g class="bp-node" id="svg-node-pittogate" data-node="pittogate" data-tier="core" data-tone="red" tabindex="0" role="button" aria-label="节点 07: pit-to-gate 踩坑分流与阳性对照" data-i18n-aria="svgN07Aria">
                     <rect class="node-box" x="190" y="426" width="290" height="86" />
                     <rect class="node-chip-bg node-chip-core" x="204" y="437" width="76" height="17" />
                     <text class="node-chip-text chip-ink-core" x="242" y="448.5" text-anchor="middle">MINIMAL CORE</text>
                     <text class="node-sub-svg" x="466" y="448.5" text-anchor="end">N07</text>
-                    <text class="node-title-svg" x="204" y="472">pit-to-gate 三路分流与阳性对照</text>
-                    <text class="node-sub-svg" x="204" y="492">门禁 / Skill / 记忆 · 坏例退 1 → 合法例退 0</text>
+                    <text class="node-title-svg" x="204" y="472" data-i18n="svgN07Title">pit-to-gate 三路分流与阳性对照</text>
+                    <text class="node-sub-svg" x="204" y="492" data-i18n="svgN07Sub">门禁 / Skill / 记忆 · 坏例退 1 → 合法例退 0</text>
                   </g>
 
                   <!-- L4 Right: pre-commit + defect-review -->
-                  <g class="bp-node" id="svg-node-precommit" data-node="precommit" data-tier="core" data-tone="green" tabindex="0" role="button" aria-label="节点 08: pre-commit 硬拦截与独立盲审">
+                  <g class="bp-node" id="svg-node-precommit" data-node="precommit" data-tier="core" data-tone="green" tabindex="0" role="button" aria-label="节点 08: pre-commit 硬拦截与独立盲审" data-i18n-aria="svgN08Aria">
                     <rect class="node-box" x="540" y="426" width="298" height="86" />
                     <rect class="node-chip-bg node-chip-core" x="554" y="437" width="92" height="17" />
                     <text class="node-chip-text chip-ink-core" x="600" y="448.5" text-anchor="middle">HARD EXIT GATE</text>
                     <text class="node-sub-svg" x="824" y="448.5" text-anchor="end">N08</text>
-                    <text class="node-title-svg" x="554" y="472">.githooks/pre-commit 与独立盲审</text>
-                    <text class="node-sub-svg" x="554" y="492">unset GIT_* · defect-review · 分层证据验收</text>
+                    <text class="node-title-svg" x="554" y="472" data-i18n="svgN08Title">.githooks/pre-commit 与独立盲审</text>
+                    <text class="node-sub-svg" x="554" y="492" data-i18n="svgN08Sub">unset GIT_* · defect-review · 分层证据验收</text>
                   </g>
 
                   <!-- L5 Left: EasyTier Virtual Mesh & Local Pending Queue -->
-                  <g class="bp-node" id="svg-node-queue" data-node="queue" data-tier="full" data-tone="cyan" tabindex="0" role="button" aria-label="节点 09: EasyTier 零公网暴露虚拟内网与单飞队列">
+                  <g class="bp-node" id="svg-node-queue" data-node="queue" data-tier="full" data-tone="cyan" tabindex="0" role="button" aria-label="节点 09: EasyTier 零公网暴露虚拟内网与单飞队列" data-i18n-aria="svgN09Aria">
                     <rect class="node-box" x="190" y="560" width="290" height="88" />
                     <rect class="node-chip-bg node-chip-full" x="204" y="571" width="114" height="17" />
                     <text class="node-chip-text chip-ink-full" x="261" y="582.5" text-anchor="middle">EASYTIER + PENDING</text>
                     <text class="node-sub-svg" x="466" y="582.5" text-anchor="end">N09</text>
-                    <text class="node-title-svg" x="204" y="606">EasyTier 虚拟内网与 60s 单飞队列</text>
-                    <text class="node-sub-svg" x="204" y="626">&lt;easytier-virtual-ip&gt;:1933 · 127.0.0.1 回环</text>
+                    <text class="node-title-svg" x="204" y="606" data-i18n="svgN09Title">EasyTier 虚拟内网与 60s 单飞队列</text>
+                    <text class="node-sub-svg" x="204" y="626" data-i18n="svgN09Sub">&lt;easytier-virtual-ip&gt;:1933 · 127.0.0.1 回环</text>
                   </g>
 
                   <!-- L5 Right: DeepSeek VLM Semantic Compiler & Systemd Ops -->
-                  <g class="bp-node" id="svg-node-vlm" data-node="vlm" data-tier="full" data-tone="cyan" tabindex="0" role="button" aria-label="节点 10: DeepSeek VLM 语义提炼与三联 systemd 运维">
+                  <g class="bp-node" id="svg-node-vlm" data-node="vlm" data-tier="full" data-tone="cyan" tabindex="0" role="button" aria-label="节点 10: DeepSeek VLM 语义提炼与三联 systemd 运维" data-i18n-aria="svgN10Aria">
                     <rect class="node-box" x="540" y="560" width="298" height="88" />
                     <rect class="node-chip-bg node-chip-full" x="554" y="571" width="122" height="17" />
                     <text class="node-chip-text chip-ink-full" x="615" y="582.5" text-anchor="middle">DEEPSEEK + SYSTEMD</text>
                     <text class="node-sub-svg" x="824" y="582.5" text-anchor="end">N10</text>
-                    <text class="node-title-svg" x="554" y="606">DeepSeek 编译与三联 systemd 自治</text>
-                    <text class="node-sub-svg" x="554" y="626">peers/* 全量 organize · 巡检自举落 resources/</text>
+                    <text class="node-title-svg" x="554" y="606" data-i18n="svgN10Title">DeepSeek 编译与三联 systemd 自治</text>
+                    <text class="node-sub-svg" x="554" y="626" data-i18n="svgN10Sub">peers/* 全量 organize · 巡检自举落 resources/</text>
                   </g>
                 </svg>
               </div>
 
               <div class="canvas-hint">
-                <span>交互提示：点击或用 Tab + Enter 选中任意节点，右侧实时检视该节点底层参数与真实踩坑复盘。</span>
+                <span data-i18n="canvasHint">交互提示：点击或用 Tab + Enter 选中任意节点，右侧实时检视该节点底层参数与真实踩坑复盘。</span>
                 <span class="mono" id="canvas-selected-indicator">INSPECTING · N01 magpie</span>
               </div>
             </div>
 
             <!-- Linked Node Inspector Panel -->
-            <aside class="inspector-pane" aria-live="polite" aria-label="节点深度解剖面板">
+            <aside class="inspector-pane" aria-live="polite" aria-label="节点深度解剖面板" data-i18n-aria="inspectorAria">
               <div class="inspector-header">
                 <div class="inspector-top-row">
                   <span class="inspector-id mono" id="ins-id">NODE N01 · LAYER 1</span>
@@ -2637,7 +2693,7 @@
                 <div class="spec-field">
                   <span class="spec-label">
                     <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    <span>工程职责与运行机制</span>
+                    <span data-i18n="insLabelDuty">工程职责与运行机制</span>
                   </span>
                   <p class="spec-text" id="ins-duty"></p>
                 </div>
@@ -2645,7 +2701,7 @@
                 <div class="spec-field">
                   <span class="spec-label">
                     <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6" /></svg>
-                    <span>真实配置参数与门禁契约</span>
+                    <span data-i18n="insLabelConfig">真实配置参数与门禁契约</span>
                   </span>
                   <pre class="code-snippet" id="ins-config"></pre>
                 </div>
@@ -2653,7 +2709,7 @@
                 <div class="incident-box">
                   <div class="incident-head">
                     <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" /></svg>
-                    <span>挡住的真实踩坑事故（Postmortem）</span>
+                    <span data-i18n="insLabelIncident">挡住的真实踩坑事故（Postmortem）</span>
                   </div>
                   <p id="ins-incident"></p>
                 </div>
@@ -2661,16 +2717,16 @@
                 <div class="spec-field">
                   <span class="spec-label">
                     <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
-                    <span>仓库内对应相对路径</span>
+                    <span data-i18n="insLabelPaths">仓库内对应相对路径</span>
                   </span>
                   <div class="path-chips mono" id="ins-paths"></div>
                 </div>
 
                 <div class="node-quick-nav">
-                  <span>支持点击左侧蓝图任意节点无缝切换</span>
+                  <span data-i18n="insQuickNavHint">支持点击左侧蓝图任意节点无缝切换</span>
                   <div>
-                    <button type="button" class="ctrl-btn" id="btn-node-prev" style="padding:3px 8px;font-size:0.74rem;">上一节点</button>
-                    <button type="button" class="ctrl-btn" id="btn-node-next" style="padding:3px 8px;font-size:0.74rem;">下一节点</button>
+                    <button type="button" class="ctrl-btn" id="btn-node-prev" style="padding:3px 8px;font-size:0.74rem;" data-i18n="btnNodePrev">上一节点</button>
+                    <button type="button" class="ctrl-btn" id="btn-node-next" style="padding:3px 8px;font-size:0.74rem;" data-i18n="btnNodeNext">下一节点</button>
                   </div>
                 </div>
               </div>
@@ -2687,8 +2743,8 @@
       <div class="shell">
         <div class="section-header">
           <div>
-            <h2 class="section-title">OpenViking v0.5.5 异构双模型、EasyTier 加密内网与工作流专属定制</h2>
-            <p class="section-desc">
+            <h2 class="section-title" data-i18n="mod3Title">OpenViking v0.5.5 异构双模型、EasyTier 加密内网与工作流专属定制</h2>
+            <p class="section-desc" data-i18n="mod3Desc">
               从底层异构双模型解耦（3072d 稠密向量 × DeepSeek 语义编译）、EasyTier 零公网暴露虚拟内网转发，到配套本工作流的 ovcli.conf 优先级、双宿主 URI Guard 与三联 systemd 自治体系一次拆透。
             </p>
           </div>
@@ -2709,25 +2765,25 @@
                 <svg class="icon icon-lg" viewBox="0 0 24 24" style="color:var(--sig-cyan)" aria-hidden="true">
                   <path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                 </svg>
-                <span>架构演进实测：向量空间与语义编译器正交解耦，零向量重算平滑迁移</span>
+                <span data-i18n="decoupleTitle">架构演进实测：向量空间与语义编译器正交解耦，零向量重算平滑迁移</span>
               </h3>
-              <p class="decouple-copy">
+              <p class="decouple-copy" data-i18n-html="decoupleCopy">
                 早期方案中 Embedding 与会话记忆提炼共用 <code>gemini-3.8-flash</code> 配额池，高频长会话收尾时易与实时向量检索争抢速率窗口。切换至 <strong><code>deepseek-v4.1-flash-1017</code> 承担全部 VLM 语义编译</strong>后，Gemini 额度 100% 专供 <code>gemini-embedding-2</code>；更关键的是，<strong>底层 3072 维稠密向量坐标只取决于 Embedding 模型</strong>，更换右侧 VLM 模型实现<strong>零索引重建、零向量重算、零停机无缝切换</strong>。
               </p>
             </div>
 
-            <div class="migration-equation mono" aria-label="双模型演进前后对比">
+            <div class="migration-equation mono" aria-label="双模型演进前后对比" data-i18n-aria="migrationAria">
               <div class="eq-row">
-                <span>早期耦合态</span>
-                <span class="eq-old">gemini-embedding-2 + gemini-3.8-flash (争抢配额)</span>
+                <span data-i18n="eqRow1Label">早期耦合态</span>
+                <span class="eq-old" data-i18n="eqRow1Val">gemini-embedding-2 + gemini-3.8-flash (争抢配额)</span>
               </div>
               <div class="eq-row">
-                <span>当前生产态</span>
+                <span data-i18n="eqRow2Label">当前生产态</span>
                 <span class="eq-new">gemini-embedding-2 × deepseek-v4.1-flash-1017</span>
               </div>
               <div class="eq-row">
-                <span>迁移重算成本</span>
-                <span style="color:var(--sig-cyan);font-weight:600;">0 条向量重算 · 3072d 索引原位复用</span>
+                <span data-i18n="eqRow3Label">迁移重算成本</span>
+                <span style="color:var(--sig-cyan);font-weight:600;" data-i18n="eqRow3Val">0 条向量重算 · 3072d 索引原位复用</span>
               </div>
             </div>
           </div>
@@ -2739,23 +2795,23 @@
               <div class="rail-head">
                 <div>
                   <div class="rail-model-name">gemini-embedding-2</div>
-                  <div class="rail-provider">稠密向量索引与高维语义检索轨 · Google 原生接口</div>
+                  <div class="rail-provider" data-i18n="rail1Provider">稠密向量索引与高维语义检索轨 · Google 原生接口</div>
                 </div>
                 <span class="rev-tag mono" style="border-color:var(--sig-cyan-border);color:var(--sig-cyan);">DENSE VECTOR RAIL</span>
               </div>
 
               <div class="spec-kv-row mono">
                 <div class="spec-kv">
-                  <div class="spec-k">向量维度</div>
+                  <div class="spec-k" data-i18n="rail1K1">向量维度</div>
                   <div class="spec-v">dimension = 3072</div>
                 </div>
                 <div class="spec-kv">
-                  <div class="spec-k">协议通道</div>
+                  <div class="spec-k" data-i18n="rail1K2">协议通道</div>
                   <div class="spec-v">Google Native API</div>
                 </div>
                 <div class="spec-kv">
-                  <div class="spec-k">跨语种对齐</div>
-                  <div class="spec-v">中文 + 英文 + 代码符号</div>
+                  <div class="spec-k" data-i18n="rail1K3">跨语种对齐</div>
+                  <div class="spec-v" data-i18n="rail1V3">中文 + 英文 + 代码符号</div>
                 </div>
               </div>
 
@@ -2763,34 +2819,34 @@
                 <div class="track-box track-active-mem">
                   <div class="track-header">
                     <code class="track-mode-code">semantic_and_vectors</code>
-                    <span class="track-scope mono">活跃结构化记忆（6 类命名空间）</span>
+                    <span class="track-scope mono" data-i18n="track1Scope">活跃结构化记忆（6 类命名空间）</span>
                   </div>
-                  <p class="track-desc">
+                  <p class="track-desc" data-i18n-html="track1Desc">
                     覆盖 <code>profile</code> / <code>preferences</code> / <code>entities</code> / <code>events</code> / <code>experiences</code> 与仓库隔离空间 <code>peers/&lt;actor&gt;/</code>。入库时既构建 3072d 向量，又触发右侧 VLM 生成 L0/L1 双层摘要。
                   </p>
                   <div class="pipeline-steps mono">
-                    <span class="pipe-step">结构化记忆载荷</span>
+                    <span class="pipe-step" data-i18n="track1P1">结构化记忆载荷</span>
                     <span class="pipe-arrow">→</span>
-                    <span class="pipe-step" style="border-color:var(--sig-cyan-border)">3072d 稠密向量</span>
+                    <span class="pipe-step" style="border-color:var(--sig-cyan-border)" data-i18n="track1P2">3072d 稠密向量</span>
                     <span class="pipe-arrow">+</span>
-                    <span class="pipe-step" style="border-color:var(--sig-amber-border)">VLM 编译 L0/L1</span>
+                    <span class="pipe-step" style="border-color:var(--sig-amber-border)" data-i18n="track1P3">VLM 编译 L0/L1</span>
                   </div>
                 </div>
 
                 <div class="track-box track-static-doc">
                   <div class="track-header">
                     <code class="track-mode-code">vectors_only</code>
-                    <span class="track-scope mono">resources/ 静态长文档归档（40+ 篇）</span>
+                    <span class="track-scope mono" data-i18n="track2Scope">resources/ 静态长文档归档（40+ 篇）</span>
                   </div>
-                  <p class="track-desc">
+                  <p class="track-desc" data-i18n-html="track2Desc">
                     本机运维手册、历史长篇调研与归档规范放入 <code>resources/</code>（从不注入开场上下文，仅按需语义召回）。显式设为<strong>仅建 3072d 向量、跳过 VLM 摘要编译</strong>，省去大批量 Token 消耗并保留原文颗粒度。
                   </p>
                   <div class="pipeline-steps mono">
-                    <span class="pipe-step">40+ 静态长文档</span>
+                    <span class="pipe-step" data-i18n="track2P1">40+ 静态长文档</span>
                     <span class="pipe-arrow">→</span>
-                    <span class="pipe-step" style="border-color:var(--sig-cyan-border)">分块 3072d 向量入库</span>
+                    <span class="pipe-step" style="border-color:var(--sig-cyan-border)" data-i18n="track2P2">分块 3072d 向量入库</span>
                     <span class="pipe-arrow">→</span>
-                    <span class="pipe-step pipe-skip">跳过 VLM 摘要 (零损耗省成本)</span>
+                    <span class="pipe-step pipe-skip" data-i18n="track2P3">跳过 VLM 摘要 (零损耗省成本)</span>
                   </div>
                 </div>
               </div>
@@ -2801,47 +2857,47 @@
               <div class="rail-head">
                 <div>
                   <div class="rail-model-name">deepseek-v4.1-flash-1017</div>
-                  <div class="rail-provider">异步记忆抽取、渐进摘要编译与去重治理轨 · OpenAI 兼容接口</div>
+                  <div class="rail-provider" data-i18n="rail2Provider">异步记忆抽取、渐进摘要编译与去重治理轨 · OpenAI 兼容接口</div>
                 </div>
                 <span class="rev-tag mono" style="border-color:var(--sig-amber-border);color:var(--sig-amber);">SEMANTIC COMPILER RAIL</span>
               </div>
 
               <div class="spec-kv-row mono">
                 <div class="spec-kv">
-                  <div class="spec-k">执行时机</div>
-                  <div class="spec-v">异步收尾 / 零阻塞</div>
+                  <div class="spec-k" data-i18n="rail2K1">执行时机</div>
+                  <div class="spec-v" data-i18n="rail2V1">异步收尾 / 零阻塞</div>
                 </div>
                 <div class="spec-kv">
-                  <div class="spec-k">协议通道</div>
+                  <div class="spec-k" data-i18n="rail2K2">协议通道</div>
                   <div class="spec-v">OpenAI-Compatible</div>
                 </div>
                 <div class="spec-kv">
-                  <div class="spec-k">周期维护</div>
-                  <div class="spec-v">每日定时 organize</div>
+                  <div class="spec-k" data-i18n="rail2K3">周期维护</div>
+                  <div class="spec-v" data-i18n="rail2V3">每日定时 organize</div>
                 </div>
               </div>
 
-              <div class="disclosure-ladder" aria-label="L0 到 L2 三级渐进披露契约">
+              <div class="disclosure-ladder" aria-label="L0 到 L2 三级渐进披露契约" data-i18n-aria="ladderAria">
                 <div class="ladder-rung">
                   <code class="rung-tag">L0 · .abstract.md</code>
-                  <p class="rung-desc">由 <code>deepseek-v4.1-flash-1017</code> 提炼的一句话高密度摘要。供 <code>find</code> / <code>search</code> 阶段极低 Token 成本扫读候选列表。</p>
+                  <p class="rung-desc" data-i18n-html="ladderL0">由 <code>deepseek-v4.1-flash-1017</code> 提炼的一句话高密度摘要。供 <code>find</code> / <code>search</code> 阶段极低 Token 成本扫读候选列表。</p>
                 </div>
                 <div class="ladder-rung">
                   <code class="rung-tag">L1 · .overview.md</code>
-                  <p class="rung-desc">结构化触发背景、关键结论与适用边界概览。主导会话据此筛出最相关的 1–3 条候选经验，过滤同名异构项目干扰。</p>
+                  <p class="rung-desc" data-i18n="ladderL1">结构化触发背景、关键结论与适用边界概览。主导会话据此筛出最相关的 1–3 条候选经验，过滤同名异构项目干扰。</p>
                 </div>
                 <div class="ladder-rung rung-enforced">
-                  <code class="rung-tag">L2 · 完整原文核实</code>
-                  <p class="rung-desc"><strong>硬性契约：摘要绝不等同于当前事实。</strong>命中候选后必须调用 <code>read</code> 展开 L2 原文核实命令、路径与失效条件，严禁只看 L0/L1 直接改代码。</p>
+                  <code class="rung-tag" data-i18n="ladderL2Tag">L2 · 完整原文核实</code>
+                  <p class="rung-desc" data-i18n-html="ladderL2"><strong>硬性契约：摘要绝不等同于当前事实。</strong>命中候选后必须调用 <code>read</code> 展开 L2 原文核实命令、路径与失效条件，严禁只看 L0/L1 直接改代码。</p>
                 </div>
               </div>
 
               <div class="track-box">
                 <div class="track-header">
-                  <code class="track-mode-code" style="color:var(--sig-green)">异步收尾与每日 organize 合并闭环</code>
-                  <span class="track-scope mono">防记忆碎片化堆积</span>
+                  <code class="track-mode-code" style="color:var(--sig-green)" data-i18n="vlmBoxTitle">异步收尾与每日 organize 合并闭环</code>
+                  <span class="track-scope mono" data-i18n="vlmBoxScope">防记忆碎片化堆积</span>
                 </div>
-                <p class="track-desc" style="margin-bottom:0;">
+                <p class="track-desc" style="margin-bottom:0;" data-i18n-html="vlmBoxDesc">
                   会话达到 <code>60,000 tokens</code> / <code>20 turns</code>、<code>PreCompact</code> 或 <code>SessionEnd</code> 时，连同截断在 <code>12,000</code> 字符内的真实 <code>ToolParts</code> 异步送入服务端抽取结构化条目；每日定时运行 <code>organize</code> 合并重复经验、覆写旧状态，不叠加冲突副本。
                 </p>
               </div>
@@ -2849,38 +2905,38 @@
           </div>
 
           <!-- EasyTier Virtual Mesh + OpenViking v0.5.5 Workflow Customizations -->
-          <div class="custom-infra-grid" aria-label="EasyTier 虚拟内网与 OpenViking 工作流专属定制">
+          <div class="custom-infra-grid" aria-label="EasyTier 虚拟内网与 OpenViking 工作流专属定制" data-i18n-aria="customInfraAria">
             <!-- Left Deck: EasyTier Zero-Public-Exposure Virtual Mesh -->
             <div class="infra-pane">
               <div class="infra-title">
-                <span>EasyTier 私有加密虚拟内网底座（淘汰脆弱 ssh -N -L 隧道）</span>
+                <span data-i18n="meshTitle">EasyTier 私有加密虚拟内网底座（淘汰脆弱 ssh -N -L 隧道）</span>
                 <span class="rev-tag mono" style="border-color:var(--sig-cyan-border);color:var(--sig-cyan);">ZERO PUBLIC EXPOSURE</span>
               </div>
 
               <div class="mesh-topology mono">
                 <div class="mesh-hop">
-                  <span class="mesh-hop-node">1. 多宿主客户端 private_mode = true</span>
-                  <span class="mesh-hop-meta">2s 静态握手 · tcp:// + wss:// 双中继冗余</span>
+                  <span class="mesh-hop-node" data-i18n="meshHop1Node">1. 多宿主客户端 private_mode = true</span>
+                  <span class="mesh-hop-meta" data-i18n="meshHop1Meta">2s 静态握手 · tcp:// + wss:// 双中继冗余</span>
                 </div>
                 <div class="mesh-hop">
-                  <span class="mesh-hop-node">2. P2P 低延迟直连 / 严苛办公网纯出站穿透</span>
-                  <span class="mesh-hop-meta">双模自适应切换 + ~/.openviking/pending/ 60s 单飞队列</span>
+                  <span class="mesh-hop-node" data-i18n="meshHop2Node">2. P2P 低延迟直连 / 严苛办公网纯出站穿透</span>
+                  <span class="mesh-hop-meta" data-i18n="meshHop2Meta">双模自适应切换 + ~/.openviking/pending/ 60s 单飞队列</span>
                 </div>
                 <div class="mesh-hop">
                   <span class="mesh-hop-node">3. easytier-core (&lt;easytier-virtual-ip&gt;%tun0:1933)</span>
-                  <span class="mesh-hop-meta">严格绑定虚拟网卡接口 · openviking-port-forward.service 10s 自愈</span>
+                  <span class="mesh-hop-meta" data-i18n="meshHop3Meta">严格绑定虚拟网卡接口 · openviking-port-forward.service 10s 自愈</span>
                 </div>
                 <div class="mesh-hop">
-                  <span class="mesh-hop-node">4. Docker 容器回环 (127.0.0.1:1933)</span>
-                  <span class="mesh-hop-meta">仅绑本机回环防 Docker 改 iptables 裸露公网</span>
+                  <span class="mesh-hop-node" data-i18n="meshHop4Node">4. Docker 容器回环 (127.0.0.1:1933)</span>
+                  <span class="mesh-hop-meta" data-i18n="meshHop4Meta">仅绑本机回环防 Docker 改 iptables 裸露公网</span>
                 </div>
               </div>
 
               <ul class="custom-spec-list">
-                <li>
+                <li data-i18n-html="meshSpec1">
                   <strong>10 秒轮询自愈与 98.6% 日志降噪：</strong>服务端配 <code>openviking-port-forward.service</code> 每 10 秒核验并自愈转发规则（防进程重启丢失内存态端口映射），并将虚拟网日志收敛至 <code>warn</code> 级，磁盘日志写入量直降 <strong><code>98.6%</code></strong>。
                 </li>
-                <li>
+                <li data-i18n-html="meshSpec2">
                   <strong>断网零阻塞闭环：</strong>客户端通过 <code>http://&lt;easytier-virtual-ip&gt;:1933</code> 通信；遇网络切换或服务端升级时自动落入本地 <code>~/.openviking/pending/</code>，由 <strong>60 秒单飞锁（single-flight）</strong>后台静默重放，前台编码零卡顿。
                 </li>
               </ul>
@@ -2889,7 +2945,7 @@
             <!-- Right Deck: OpenViking v0.5.5 Workflow-Specific Customizations -->
             <div class="infra-pane">
               <div class="infra-title">
-                <span>OpenViking v0.5.5 配套工作流专属深度定制</span>
+                <span data-i18n="ovCustomTitle">OpenViking v0.5.5 配套工作流专属深度定制</span>
                 <span class="rev-tag mono" style="border-color:var(--sig-amber-border);color:var(--sig-amber);">ovcli.conf · PLUGIN OVERRIDE</span>
               </div>
 
@@ -2909,10 +2965,10 @@
 }</pre>
 
               <ul class="custom-spec-list">
-                <li>
+                <li data-i18n-html="ovSpec1">
                   <strong>控制面优先级 + Magpie 管辖切割 + 双宿主 URI Guard：</strong><code>ovcli.conf</code> 的 <code>plugin</code> 段优先级高于单宿主本地入参，改一处全宿主同步生效；严禁 Magpie 下发裸 <code>openviking</code> MCP（防与原生插件内置桥接冲突），且 <strong>Claude Code 与 DSH 均内置 <code>URI Guard</code></strong> 拦截本地文件工具误读 <code>viking://</code>。
                 </li>
-                <li>
+                <li data-i18n-html="ovSpec2">
                   <strong>服务端三联 <code>systemd</code> 自治 + 自举巡检 + 人设对齐：</strong>① 14 天滚动 <code>backup</code>（改库前强制 <code>snapshot commit</code>）；② 定制扩展 <code>organize</code> <strong>自动遍历 <code>peers/*</code> 全量项目空间</strong>编译去重；③ 每日 <code>inspection</code> 巡检日报自举写入 <code>resources/ops/reports/</code>（平时零常驻 Token，排障按需语义召回），配齐 <code>vikingbot</code> <code>memories/soul.md</code> 中文工程人设。
                 </li>
               </ul>
@@ -2920,22 +2976,22 @@
           </div>
 
           <!-- 4 Anti-Pollution Guardrails -->
-          <div class="guardrail-matrix" aria-label="四道记忆防污染硬护栏">
+          <div class="guardrail-matrix" aria-label="四道记忆防污染硬护栏" data-i18n-aria="guardrailAria">
             <div class="guardrail-cell">
               <div class="guardrail-key mono">
                 <span class="led led-green"></span>
                 <span>OpenViking Rules = 0</span>
               </div>
-              <p class="guardrail-why">
+              <p class="guardrail-why" data-i18n-html="guardrail1Why">
                 <strong>禁用软规则语义召回。</strong>行为红线只留在仓内 <code>AGENTS.md</code> 与全局规则文件；若把硬规则塞进向量库，一旦余弦相似度漏召回就会静默失效，且造成双源漂移。
               </p>
             </div>
             <div class="guardrail-cell">
               <div class="guardrail-key mono">
                 <span class="led led-green"></span>
-                <span>viking://agent/skills = 空</span>
+                <span data-i18n="guardrail2Key">viking://agent/skills = 空</span>
               </div>
-              <p class="guardrail-why">
+              <p class="guardrail-why" data-i18n-html="guardrail2Why">
                 <strong>技能只归 Magpie 单源管理。</strong>绝不在记忆库里存第二份 Skill 副本，避免「改了本地 SKILL.md 却被记忆库旧摘要带偏」的幽灵回退。
               </p>
             </div>
@@ -2944,7 +3000,7 @@
                 <span class="led led-green"></span>
                 <span>skipSubagentSessions: true</span>
               </div>
-              <p class="guardrail-why">
+              <p class="guardrail-why" data-i18n-html="guardrail3Why">
                 <strong>子代理排错噪音零入库。</strong>并行子代理的试探命令、走不通的分支猜想一律拦截在记忆库之外，只允许唯一主导验收后沉淀真实结论。
               </p>
             </div>
@@ -2953,7 +3009,7 @@
                 <span class="led led-green"></span>
                 <span>recallPeerScope: "actor"</span>
               </div>
-              <p class="guardrail-why">
+              <p class="guardrail-why" data-i18n-html="guardrail4Why">
                 <strong>自动隔离与主动跨仓双轨互补。</strong>生命周期自动注入/捕获按 Git 仓严格锁定 <code>peers/&lt;actor&gt;/</code> 防串味；而主动显式调 MCP 检索时天然支持跨项目借鉴历史经验。
               </p>
             </div>
@@ -2969,8 +3025,8 @@
       <div class="shell">
         <div class="section-header">
           <div>
-            <h2 class="section-title">门禁阳性对照交互实验室</h2>
-            <p class="section-desc">
+            <h2 class="section-title" data-i18n="mod4Title">门禁阳性对照交互实验室</h2>
+            <p class="section-desc" data-i18n="mod4Desc">
               切换 4 条真实工程门禁，并在每条门禁下亲手对比「只打警告退 0 的反面教材」「注入违规触发 exit 1 的阳性对照」与「修复归档后 exit 0 真绿」。
             </p>
           </div>
@@ -2983,22 +3039,22 @@
 
         <div class="blueprint-frame">
           <!-- 4 Gate Tabs -->
-          <div class="lab-tabs" role="tablist" aria-label="4 条真实门禁实验切换">
+          <div class="lab-tabs" role="tablist" aria-label="4 条真实门禁实验切换" data-i18n-aria="labTabsAria">
             <button type="button" class="lab-tab" role="tab" data-gate="0" aria-selected="true">
               <span class="lab-tab-id mono">GATE 01 · META CAP</span>
-              <span class="lab-tab-name">state-log-cap 元门禁</span>
+              <span class="lab-tab-name" data-i18n="gateTab0">state-log-cap 元门禁</span>
             </button>
             <button type="button" class="lab-tab" role="tab" data-gate="1" aria-selected="false">
               <span class="lab-tab-id mono">GATE 02 · ARCHIVE LINKS</span>
-              <span class="lab-tab-name">doc-links 归档断链门禁</span>
+              <span class="lab-tab-name" data-i18n="gateTab1">doc-links 归档断链门禁</span>
             </button>
             <button type="button" class="lab-tab" role="tab" data-gate="2" aria-selected="false">
               <span class="lab-tab-id mono">GATE 03 · BIDIRECTIONAL</span>
-              <span class="lab-tab-name">secret-shapes 双向白名单门禁</span>
+              <span class="lab-tab-name" data-i18n="gateTab2">secret-shapes 双向白名单门禁</span>
             </button>
             <button type="button" class="lab-tab" role="tab" data-gate="3" aria-selected="false">
               <span class="lab-tab-id mono">GATE 04 · PORTABILITY</span>
-              <span class="lab-tab-name">host-neutral 宿主中立门禁</span>
+              <span class="lab-tab-name" data-i18n="gateTab3">host-neutral 宿主中立门禁</span>
             </button>
           </div>
 
@@ -3006,15 +3062,15 @@
             <!-- Left Terminal Simulator -->
             <div class="terminal-column">
               <div class="state-switcher-bar">
-                <div class="state-btn-group" role="group" aria-label="门禁运行状态切换">
+                <div class="state-btn-group" role="group" aria-label="门禁运行状态切换" data-i18n-aria="stateGroupAria">
                   <button type="button" class="state-btn" data-state="warn" aria-pressed="false">
-                    <span>状态 A · 反面教材 (只打警告退 0)</span>
+                    <span data-i18n="stateBtnWarn">状态 A · 反面教材 (只打警告退 0)</span>
                   </button>
                   <button type="button" class="state-btn" data-state="fail" aria-pressed="true">
-                    <span>状态 B · 阳性对照 (注入违规退 1)</span>
+                    <span data-i18n="stateBtnFail">状态 B · 阳性对照 (注入违规退 1)</span>
                   </button>
                   <button type="button" class="state-btn" data-state="pass" aria-pressed="false">
-                    <span>状态 C · 修复复检 (真绿退 0)</span>
+                    <span data-i18n="stateBtnPass">状态 C · 修复复检 (真绿退 0)</span>
                   </button>
                 </div>
                 <span class="exit-badge badge-fail mono" id="lab-exit-badge">EXIT 1 · BLOCKED</span>
@@ -3037,15 +3093,15 @@
 
               <div class="analysis-grid">
                 <div class="analysis-item">
-                  <div class="analysis-item-label">被戳破的「假绿」形态</div>
+                  <div class="analysis-item-label" data-i18n="labLabelFakeGreen">被戳破的「假绿」形态</div>
                   <div class="analysis-item-val" id="lab-fake-green"></div>
                 </div>
                 <div class="analysis-item">
-                  <div class="analysis-item-label">单一真值源与同源断言设计</div>
+                  <div class="analysis-item-label" data-i18n="labLabelSsot">单一真值源与同源断言设计</div>
                   <div class="analysis-item-val" id="lab-ssot-rule"></div>
                 </div>
                 <div class="analysis-item">
-                  <div class="analysis-item-label">真实入口阳性对照步骤</div>
+                  <div class="analysis-item-label" data-i18n="labLabelPos">真实入口阳性对照步骤</div>
                   <div class="analysis-item-val" id="lab-pos-control"></div>
                 </div>
               </div>
@@ -3064,8 +3120,8 @@
       <div class="shell">
         <div class="section-header">
           <div>
-            <h2 class="section-title">4 + 6 自持技能体系与推荐上游生态速查矩阵</h2>
-            <p class="section-desc">
+            <h2 class="section-title" data-i18n="mod5Title">4 + 6 自持技能体系与推荐上游生态速查矩阵</h2>
+            <p class="section-desc" data-i18n="mod5Desc">
               不重新发明通用轮子：4 个治理核心立规矩，6 个实战工程手册挡具体大坑，审美与基础设施直接组合经过验证的开源上游。点击任意条目展开触发判据与真实事故档案。
             </p>
           </div>
@@ -3076,11 +3132,11 @@
 
         <div class="blueprint-frame">
           <div class="filter-toolbar">
-            <div class="filter-pills" role="group" aria-label="技能与生态分类筛选">
-              <button type="button" class="filter-btn" data-cat="all" aria-pressed="true">全部 (10 + 4)</button>
-              <button type="button" class="filter-btn" data-cat="core" aria-pressed="false">方法论治理核心 (4)</button>
-              <button type="button" class="filter-btn" data-cat="playbook" aria-pressed="false">实战工程手册 (6)</button>
-              <button type="button" class="filter-btn" data-cat="upstream" aria-pressed="false">推荐上游搭配 (4)</button>
+            <div class="filter-pills" role="group" aria-label="技能与生态分类筛选" data-i18n-aria="filterPillsAria">
+              <button type="button" class="filter-btn" data-cat="all" aria-pressed="true" data-i18n="filterAll">全部 (10 + 4)</button>
+              <button type="button" class="filter-btn" data-cat="core" aria-pressed="false" data-i18n="filterCore">方法论治理核心 (4)</button>
+              <button type="button" class="filter-btn" data-cat="playbook" aria-pressed="false" data-i18n="filterPlaybook">实战工程手册 (6)</button>
+              <button type="button" class="filter-btn" data-cat="upstream" aria-pressed="false" data-i18n="filterUpstream">推荐上游搭配 (4)</button>
             </div>
 
             <div class="search-wrap">
@@ -3088,12 +3144,12 @@
                 <circle cx="11" cy="11" r="7" />
                 <path d="M20 20l-3.5-3.5" />
               </svg>
-              <input type="search" class="skill-search" id="skill-search-input" placeholder="筛选技能名、路径或事故词…" aria-label="搜索技能与生态条目" />
+              <input type="search" class="skill-search" id="skill-search-input" placeholder="筛选技能名、路径或事故词…" aria-label="搜索技能与生态条目" data-i18n-placeholder="searchPlaceholder" data-i18n-aria="searchAria" />
             </div>
           </div>
 
           <div class="skill-ledger" id="skill-ledger-list"></div>
-          <div class="empty-state" id="skill-empty-state">未匹配到符合当前筛选条件的条目，请清空关键词或切换分类重试。</div>
+          <div class="empty-state" id="skill-empty-state" data-i18n="emptyState">未匹配到符合当前筛选条件的条目，请清空关键词或切换分类重试。</div>
         </div>
       </div>
     </section>
@@ -3103,7 +3159,7 @@
     <div class="shell">
       <div class="footer-plate">
         <div class="footer-top-row">
-          <div>
+          <div data-i18n-html="footerTagline">
             <strong style="color:var(--ink)">gate-first</strong> · 可验证的多会话 Agent 工程治理与门禁自增长蓝图 · 零外部框架自包含单页
           </div>
           <div class="mono">
@@ -3164,9 +3220,420 @@
       'use strict';
 
       /* ----------------------------------------------------------------------
-         1. DATA DICTIONARY — 6 Lifecycle Steps & 10 Architecture Nodes
+         0. BILINGUAL DICTIONARY (ZH / EN) — Static DOM, SVG & UI Strings
          ---------------------------------------------------------------------- */
-      var STEPS = [
+      var UI_STR = {
+        zh: {
+          htmlLang: 'zh-CN',
+          docTitle: 'gate-first · 全流程交互式架构蓝图与门禁自增长系统',
+          metaDesc: '不靠提示词赌 AI 自觉：责任隔离 + 门禁自增长（含阳性对照） + 异构双模型分层记忆契约（gemini-embedding-2 × deepseek-v4.1-flash-1017）全流程交互式工程蓝图。',
+          themeToDark: '深色蓝图',
+          themeToLight: '档案图纸',
+          ledgerMinimal: '最小闭环基座聚焦',
+          ledgerFull: '生产全栈已点亮',
+          filterMinimal: 'ACTIVE VIEW · 3-MIN MINIMAL LOOP (5 CORE NODES HIGHLIGHTED, ENHANCED LAYER DIMMED)',
+          filterFull: 'ACTIVE VIEW · FULL PRODUCTION STACK (10/10 NODES LIT)',
+          playStart: '自动推演',
+          playPause: '暂停推演',
+          drawerTrigger: '触发条件与适用边界',
+          drawerIncident: '解决的典型真实事故',
+          drawerPath: '仓内相对路径 / 上游协议',
+          countShowing: function (shown, total) { return 'SHOWING ' + shown + ' / ' + total + ' ENTRIES'; }
+        },
+        en: {
+          htmlLang: 'en',
+          docTitle: 'gate-first · Interactive Architecture Blueprint & Self-Growing Gates',
+          metaDesc: 'Stop betting on prompt compliance: single-lead isolation, self-growing exit-1 gates with positive controls, and heterogeneous dual-model memory (gemini-embedding-2 x deepseek-v4.1-flash-1017).',
+          themeToDark: 'Blueprint Dark',
+          themeToLight: 'Paper Light',
+          ledgerMinimal: 'Minimal Core Focused',
+          ledgerFull: 'Full Stack Lit',
+          filterMinimal: 'ACTIVE VIEW · 3-MIN MINIMAL LOOP (5 CORE NODES LIT, ENHANCED LAYER DIMMED)',
+          filterFull: 'ACTIVE VIEW · FULL PRODUCTION STACK (10/10 NODES LIT)',
+          playStart: 'Auto-Play',
+          playPause: 'Pause',
+          drawerTrigger: 'Trigger Boundary & Scope',
+          drawerIncident: 'Production Incidents Blocked',
+          drawerPath: 'Repo Path / Upstream License',
+          countShowing: function (shown, total) { return 'SHOWING ' + shown + ' / ' + total + ' ENTRIES'; }
+        }
+      };
+
+      var I18N_DOM = {
+        zh: {
+          skipLink: '跳至主图纸内容',
+          brandAria: 'gate-first 架构蓝图首页',
+          navAria: '核心模块导航',
+          navBlueprint: '五层全景推演',
+          navDualModel: '异构双模型记忆',
+          navGateLab: '阳性对照实验室',
+          navSkillMatrix: '4+6 技能矩阵',
+          modeSwitchAria: '架构层级全局滤镜',
+          modeMinimal: '3 分钟最小闭环',
+          modeFull: '生产全栈 (+Magpie+EasyTier+OV)',
+          langSwitchAria: '切换界面语言',
+          ghAria: 'GitHub 仓库',
+          themeAria: '切换深浅图纸主题',
+          heroTitle: '踩过一次坑，<br />就长出一个下次<span class="em-red">会变红</span>的<span class="em-amber">门禁</span>',
+          heroLead: '提示词写十遍「请注意不要犯错」，不如在真实提交入口挂一条违规即退 <code>exit 1</code> 的脚本。<strong>gate-first</strong> 不赌 AI 自觉，而是用<strong>唯一主导责任隔离</strong>、<strong>带阳性对照的门禁自增长</strong>与<strong>异构双模型分层记忆契约</strong>，让每一次返工都沉淀为机器可复验的工程护栏。',
+          axiom1Title: '责任物理隔离',
+          axiom1Desc: '唯一主导只对齐、拆单、审查与合并；写者在独立 <code>git worktree</code> 施工，子代理禁写共享记忆。',
+          axiom2Title: '阳性对照防假绿',
+          axiom2Desc: '只打黄字退 <code>0</code> 不是门禁。新门禁必须向真实入口注入违规确认 <code>exit 1</code>，再恢复确认 <code>exit 0</code>。',
+          axiom3Title: '异构双模型记忆',
+          axiom3Desc: '<code>gemini-embedding-2</code> 专司 3072d 稠密召回，<code>deepseek-v4.1-flash-1017</code> 异步编译 L0/L1 摘要，零重算解耦。',
+          ledgerAria: '架构分层对照清单',
+          ledgerTitle: '渐进采用契约（点击顶部切换滤镜对比）',
+          tierATitle: 'Layer A · 3 分钟最小闭环（常驻基座）',
+          tierABadge: 'Git + Node.js 零外部依赖',
+          tierALi1: '仓内脚手架 <code>scaffold/init-project.mjs</code> + 记忆模板 <code>memory/templates/STATE.md</code>',
+          tierALi2: '<code>.githooks/pre-commit</code> → <code>scripts/check-all.mjs</code>（POSIX LF、<code>unset GIT_*</code>、缺环境退 <code>1</code>）',
+          tierALi3: '<code>gates/PROTOCOL.md</code> 阳性对照协议 + <code>pit-to-gate</code> / <code>defect-review</code>',
+          tierBTitle: 'Layer B · 作者生产全栈（多宿主 + 加密内网 + 记忆引擎）',
+          tierBLi1: '<strong>Magpie 单源</strong>：29 行独立普通文件分发 5 宿主 + 严禁下发裸 <code>openviking</code> MCP 防冲突',
+          tierBLi2: '<strong>EasyTier 虚拟内网</strong>：容器仅绑 <code>127.0.0.1:1933</code>，<code>&lt;easytier-virtual-ip&gt;%tun0</code> 10s 自愈转发',
+          tierBLi3: '<strong>OpenViking v0.5.5</strong>：<code>gemini-embedding-2</code> (3072d) × <code>deepseek-v4.1-flash-1017</code> + 三联 <code>systemd</code>',
+          mod2Title: '五层全景交互式架构与 6 步信号推演',
+          mod2Desc: '使用播放控制器观察单次研发任务从「开场资产注入」到「异步记忆编译」的完整控制流；点击画布中任意架构节点，右侧解剖面板即刻调出其真实参数、踩坑事故复盘与仓内路径。',
+          stepTabsAria: '全流程 6 步推演阶段',
+          stepTab0: '单源分发与注入',
+          stepTab1: '主导拆单与向量召回',
+          stepTab2: 'Worktree 隔离与防火墙',
+          stepTab3: '踩坑分流与阳性对照',
+          stepTab4: '提交硬门禁与盲审',
+          stepTab5: 'EasyTier 与 VLM 编译',
+          btnStepPrevAria: '上一步',
+          btnStepPrev: '上一步',
+          btnStepNextAria: '下一步',
+          btnStepNext: '下一步',
+          legendAria: '信号线图例',
+          legendAmber: '主导控制 / 单源分发',
+          legendCyan: '3072d 向量 / VLM 语义流',
+          legendGreen: '门禁真绿 (exit 0)',
+          legendRed: '硬拦截 / 防火墙阻断',
+          svgBlueprintAria: 'gate-first 五层全流程交互架构图',
+          svgLane1: '单源资产与多宿主开场层',
+          svgLane2: '唯一主导与经验召回层',
+          svgLane3: 'Worktree 隔离与防火墙',
+          svgLane4: '踩坑分流与提交硬拦截',
+          svgLane5: 'EasyTier 内网与语义编译层',
+          svgWire1: '实体拷贝',
+          svgWire4: '禁写记忆',
+          svgWire6: '60s 重放',
+          svgN01Aria: '节点 01: Magpie 单源资产分发器',
+          svgN01Title: 'Magpie 单源分发与管辖切割',
+          svgN01Sub: '5 宿主独立哈希块文件 · check-host-skills',
+          svgN02Aria: '节点 02: 5 大宿主开场注入与生命周期',
+          svgN02Title: '5 宿主挂载、URI Guard 与注入',
+          svgN02Sub: 'CJK 1.5 tok/字预算 · Claude/DSH 拦 viking://',
+          svgN03Aria: '节点 03: 唯一主导会话',
+          svgN03Title: '唯一主导会话（Lead Orchestrator）',
+          svgN03Sub: '只对齐/拆单/审查/合并 · 签发 AGENT-TASK',
+          svgN04Aria: '节点 04: Gemini 3072维向量经验召回',
+          svgN04Title: 'OpenViking 经验向量检索',
+          svgN04Sub: 'gemini-embedding-2 · 强制 read L2 原文',
+          svgN05Aria: '节点 05: Git Worktree 物理隔离执行舱',
+          svgN05Title: 'Git Worktree 并行隔离执行舱',
+          svgN05Sub: '独立分支写隔离 · ToolParts 12,000 字采集',
+          svgN06Aria: '节点 06: 子代理共享记忆防火墙',
+          svgN06Title: '子代理记忆回写硬防火墙',
+          svgN06Sub: 'skipSubagentSessions: true · 只回传证据',
+          svgN07Aria: '节点 07: pit-to-gate 踩坑分流与阳性对照',
+          svgN07Title: 'pit-to-gate 三路分流与阳性对照',
+          svgN07Sub: '门禁 / Skill / 记忆 · 坏例退 1 → 合法例退 0',
+          svgN08Aria: '节点 08: pre-commit 硬拦截与独立盲审',
+          svgN08Title: '.githooks/pre-commit 与独立盲审',
+          svgN08Sub: 'unset GIT_* · defect-review · 分层证据验收',
+          svgN09Aria: '节点 09: EasyTier 零公网暴露虚拟内网与单飞队列',
+          svgN09Title: 'EasyTier 虚拟内网与 60s 单飞队列',
+          svgN09Sub: '<easytier-virtual-ip>:1933 · 127.0.0.1 回环',
+          svgN10Aria: '节点 10: DeepSeek VLM 语义提炼与三联 systemd 运维',
+          svgN10Title: 'DeepSeek 编译与三联 systemd 自治',
+          svgN10Sub: 'peers/* 全量 organize · 巡检自举落 resources/',
+          canvasHint: '交互提示：点击或用 Tab + Enter 选中任意节点，右侧实时检视该节点底层参数与真实踩坑复盘。',
+          inspectorAria: '节点深度解剖面板',
+          insLabelDuty: '工程职责与运行机制',
+          insLabelConfig: '真实配置参数与门禁契约',
+          insLabelIncident: '挡住的真实踩坑事故（Postmortem）',
+          insLabelPaths: '仓库内对应相对路径',
+          insQuickNavHint: '支持点击左侧蓝图任意节点无缝切换',
+          btnNodePrev: '上一节点',
+          btnNodeNext: '下一节点',
+          mod3Title: 'OpenViking v0.5.5 异构双模型、EasyTier 加密内网与工作流专属定制',
+          mod3Desc: '从底层异构双模型解耦（3072d 稠密向量 × DeepSeek 语义编译）、EasyTier 零公网暴露虚拟内网转发，到配套本工作流的 ovcli.conf 优先级、双宿主 URI Guard 与三联 systemd 自治体系一次拆透。',
+          decoupleTitle: '架构演进实测：向量空间与语义编译器正交解耦，零向量重算平滑迁移',
+          decoupleCopy: '早期方案中 Embedding 与会话记忆提炼共用 <code>gemini-3.8-flash</code> 配额池，高频长会话收尾时易与实时向量检索争抢速率窗口。切换至 <strong><code>deepseek-v4.1-flash-1017</code> 承担全部 VLM 语义编译</strong>后，Gemini 额度 100% 专供 <code>gemini-embedding-2</code>；更关键的是，<strong>底层 3072 维稠密向量坐标只取决于 Embedding 模型</strong>，更换右侧 VLM 模型实现<strong>零索引重建、零向量重算、零停机无缝切换</strong>。',
+          migrationAria: '双模型演进前后对比',
+          eqRow1Label: '早期耦合态',
+          eqRow1Val: 'gemini-embedding-2 + gemini-3.8-flash (争抢配额)',
+          eqRow2Label: '当前生产态',
+          eqRow3Label: '迁移重算成本',
+          eqRow3Val: '0 条向量重算 · 3072d 索引原位复用',
+          rail1Provider: '稠密向量索引与高维语义检索轨 · Google 原生接口',
+          rail1K1: '向量维度',
+          rail1K2: '协议通道',
+          rail1K3: '跨语种对齐',
+          rail1V3: '中文 + 英文 + 代码符号',
+          track1Scope: '活跃结构化记忆（6 类命名空间）',
+          track1Desc: '覆盖 <code>profile</code> / <code>preferences</code> / <code>entities</code> / <code>events</code> / <code>experiences</code> 与仓库隔离空间 <code>peers/&lt;actor&gt;/</code>。入库时既构建 3072d 向量，又触发右侧 VLM 生成 L0/L1 双层摘要。',
+          track1P1: '结构化记忆载荷',
+          track1P2: '3072d 稠密向量',
+          track1P3: 'VLM 编译 L0/L1',
+          track2Scope: 'resources/ 静态长文档归档（40+ 篇）',
+          track2Desc: '本机运维手册、历史长篇调研与归档规范放入 <code>resources/</code>（从不注入开场上下文，仅按需语义召回）。显式设为<strong>仅建 3072d 向量、跳过 VLM 摘要编译</strong>，省去大批量 Token 消耗并保留原文颗粒度。',
+          track2P1: '40+ 静态长文档',
+          track2P2: '分块 3072d 向量入库',
+          track2P3: '跳过 VLM 摘要 (零损耗省成本)',
+          rail2Provider: '异步记忆抽取、渐进摘要编译与去重治理轨 · OpenAI 兼容接口',
+          rail2K1: '执行时机',
+          rail2V1: '异步收尾 / 零阻塞',
+          rail2K2: '协议通道',
+          rail2K3: '周期维护',
+          rail2V3: '每日定时 organize',
+          ladderAria: 'L0 到 L2 三级渐进披露契约',
+          ladderL0: '由 <code>deepseek-v4.1-flash-1017</code> 提炼的一句话高密度摘要。供 <code>find</code> / <code>search</code> 阶段极低 Token 成本扫读候选列表。',
+          ladderL1: '结构化触发背景、关键结论与适用边界概览。主导会话据此筛出最相关的 1–3 条候选经验，过滤同名异构项目干扰。',
+          ladderL2Tag: 'L2 · 完整原文核实',
+          ladderL2: '<strong>硬性契约：摘要绝不等同于当前事实。</strong>命中候选后必须调用 <code>read</code> 展开 L2 原文核实命令、路径与失效条件，严禁只看 L0/L1 直接改代码。',
+          vlmBoxTitle: '异步收尾与每日 organize 合并闭环',
+          vlmBoxScope: '防记忆碎片化堆积',
+          vlmBoxDesc: '会话达到 <code>60,000 tokens</code> / <code>20 turns</code>、<code>PreCompact</code> 或 <code>SessionEnd</code> 时，连同截断在 <code>12,000</code> 字符内的真实 <code>ToolParts</code> 异步送入服务端抽取结构化条目；每日定时运行 <code>organize</code> 合并重复经验、覆写旧状态，不叠加冲突副本。',
+          customInfraAria: 'EasyTier 虚拟内网与 OpenViking 工作流专属定制',
+          meshTitle: 'EasyTier 私有加密虚拟内网底座（淘汰脆弱 ssh -N -L 隧道）',
+          meshHop1Node: '1. 多宿主客户端 private_mode = true',
+          meshHop1Meta: '2s 静态握手 · tcp:// + wss:// 双中继冗余',
+          meshHop2Node: '2. P2P 低延迟直连 / 严苛办公网纯出站穿透',
+          meshHop2Meta: '双模自适应切换 + ~/.openviking/pending/ 60s 单飞队列',
+          meshHop3Meta: '严格绑定虚拟网卡接口 · openviking-port-forward.service 10s 自愈',
+          meshHop4Node: '4. Docker 容器回环 (127.0.0.1:1933)',
+          meshHop4Meta: '仅绑本机回环防 Docker 改 iptables 裸露公网',
+          meshSpec1: '<strong>10 秒轮询自愈与 98.6% 日志降噪：</strong>服务端配 <code>openviking-port-forward.service</code> 每 10 秒核验并自愈转发规则（防进程重启丢失内存态端口映射），并将虚拟网日志收敛至 <code>warn</code> 级，磁盘日志写入量直降 <strong><code>98.6%</code></strong>。',
+          meshSpec2: '<strong>断网零阻塞闭环：</strong>客户端通过 <code>http://&lt;easytier-virtual-ip&gt;:1933</code> 通信；遇网络切换或服务端升级时自动落入本地 <code>~/.openviking/pending/</code>，由 <strong>60 秒单飞锁（single-flight）</strong>后台静默重放，前台编码零卡顿。',
+          ovCustomTitle: 'OpenViking v0.5.5 配套工作流专属深度定制',
+          ovSpec1: '<strong>控制面优先级 + Magpie 管辖切割 + 双宿主 URI Guard：</strong><code>ovcli.conf</code> 的 <code>plugin</code> 段优先级高于单宿主本地入参，改一处全宿主同步生效；严禁 Magpie 下发裸 <code>openviking</code> MCP（防与原生插件内置桥接冲突），且 <strong>Claude Code 与 DSH 均内置 <code>URI Guard</code></strong> 拦截本地文件工具误读 <code>viking://</code>。',
+          ovSpec2: '<strong>服务端三联 <code>systemd</code> 自治 + 自举巡检 + 人设对齐：</strong>① 14 天滚动 <code>backup</code>（改库前强制 <code>snapshot commit</code>）；② 定制扩展 <code>organize</code> <strong>自动遍历 <code>peers/*</code> 全量项目空间</strong>编译去重；③ 每日 <code>inspection</code> 巡检日报自举写入 <code>resources/ops/reports/</code>（平时零常驻 Token，排障按需语义召回），配齐 <code>vikingbot</code> <code>memories/soul.md</code> 中文工程人设。',
+          guardrailAria: '四道记忆防污染硬护栏',
+          guardrail1Why: '<strong>禁用软规则语义召回。</strong>行为红线只留在仓内 <code>AGENTS.md</code> 与全局规则文件；若把硬规则塞进向量库，一旦余弦相似度漏召回就会静默失效，且造成双源漂移。',
+          guardrail2Key: 'viking://agent/skills = 空',
+          guardrail2Why: '<strong>技能只归 Magpie 单源管理。</strong>绝不在记忆库里存第二份 Skill 副本，避免「改了本地 SKILL.md 却被记忆库旧摘要带偏」的幽灵回退。',
+          guardrail3Why: '<strong>子代理排错噪音零入库。</strong>并行子代理的试探命令、走不通的分支猜想一律拦截在记忆库之外，只允许唯一主导验收后沉淀真实结论。',
+          guardrail4Why: '<strong>自动隔离与主动跨仓双轨互补。</strong>生命周期自动注入/捕获按 Git 仓严格锁定 <code>peers/&lt;actor&gt;/</code> 防串味；而主动显式调 MCP 检索时天然支持跨项目借鉴历史经验。',
+          mod4Title: '门禁阳性对照交互实验室',
+          mod4Desc: '切换 4 条真实工程门禁，并在每条门禁下亲手对比「只打警告退 0 的反面教材」「注入违规触发 exit 1 的阳性对照」与「修复归档后 exit 0 真绿」。',
+          labTabsAria: '4 条真实门禁实验切换',
+          gateTab0: 'state-log-cap 元门禁',
+          gateTab1: 'doc-links 归档断链门禁',
+          gateTab2: 'secret-shapes 双向白名单门禁',
+          gateTab3: 'host-neutral 宿主中立门禁',
+          stateGroupAria: '门禁运行状态切换',
+          stateBtnWarn: '状态 A · 反面教材 (只打警告退 0)',
+          stateBtnFail: '状态 B · 阳性对照 (注入违规退 1)',
+          stateBtnPass: '状态 C · 修复复检 (真绿退 0)',
+          labLabelFakeGreen: '被戳破的「假绿」形态',
+          labLabelSsot: '单一真值源与同源断言设计',
+          labLabelPos: '真实入口阳性对照步骤',
+          mod5Title: '4 + 6 自持技能体系与推荐上游生态速查矩阵',
+          mod5Desc: '不重新发明通用轮子：4 个治理核心立规矩，6 个实战工程手册挡具体大坑，审美与基础设施直接组合经过验证的开源上游。点击任意条目展开触发判据与真实事故档案。',
+          filterPillsAria: '技能与生态分类筛选',
+          filterAll: '全部 (10 + 4)',
+          filterCore: '方法论治理核心 (4)',
+          filterPlaybook: '实战工程手册 (6)',
+          filterUpstream: '推荐上游搭配 (4)',
+          searchPlaceholder: '筛选技能名、路径或事故词…',
+          searchAria: '搜索技能与生态条目',
+          emptyState: '未匹配到符合当前筛选条件的条目，请清空关键词或切换分类重试。',
+          footerTagline: '<strong style="color:var(--ink)">gate-first</strong> · 可验证的多会话 Agent 工程治理与门禁自增长蓝图 · 零外部框架自包含单页'
+        },
+        en: {
+          skipLink: 'Skip to main blueprint',
+          brandAria: 'gate-first architecture blueprint home',
+          navAria: 'Primary sections',
+          navBlueprint: 'Blueprint',
+          navDualModel: 'Dual-Model',
+          navGateLab: 'Gate Lab',
+          navSkillMatrix: 'Skill Matrix',
+          modeSwitchAria: 'Architecture layer filter',
+          modeMinimal: '3-Min Minimal (Git+Node)',
+          modeFull: 'Production Stack (+Magpie+EasyTier+OV)',
+          langSwitchAria: 'Switch interface language',
+          ghAria: 'GitHub repository',
+          themeAria: 'Toggle dark and light blueprint theme',
+          heroTitle: 'Hit a failure once,<br />grow a <span class="em-amber">gate</span> that turns <span class="em-red">red</span> next time.',
+          heroLead: 'Writing "please don\'t make this mistake" ten times in a system prompt loses every time to a single <code>exit 1</code> hook wired to the real commit path. <strong>gate-first</strong> never bets on agent willpower—it pairs <strong>single-lead physical isolation</strong>, <strong>self-growing gates verified by positive controls</strong>, and a <strong>heterogeneous dual-model memory contract</strong> so every incident hardens into machine-checkable proof.',
+          axiom1Title: 'Physical Isolation',
+          axiom1Desc: 'One Lead owns alignment, scoping, review, and merges; writers run in isolated <code>git worktree</code> pods and subagents never write shared memory.',
+          axiom2Title: 'Positive Controls',
+          axiom2Desc: 'A warning that exits <code>0</code> is not a gate. Every new gate must fail red (<code>exit 1</code>) on an injected violation before returning green (<code>exit 0</code>).',
+          axiom3Title: 'Dual-Model Memory',
+          axiom3Desc: '<code>gemini-embedding-2</code> drives 3072d dense recall while <code>deepseek-v4.1-flash-1017</code> compiles L0/L1 abstracts asynchronously—zero re-indexing on swap.',
+          ledgerAria: 'Progressive adoption stack ledger',
+          ledgerTitle: 'Progressive Adoption Contract (toggle top filter)',
+          tierATitle: 'Layer A · 3-Min Minimal Loop (Core Base)',
+          tierABadge: 'Git + Node.js · Zero Deps',
+          tierALi1: 'In-repo scaffolder <code>scaffold/init-project.mjs</code> + handoff template <code>memory/templates/STATE.md</code>',
+          tierALi2: '<code>.githooks/pre-commit</code> → <code>scripts/check-all.mjs</code> (POSIX LF, <code>unset GIT_*</code>, fail-closed <code>exit 1</code>)',
+          tierALi3: '<code>gates/PROTOCOL.md</code> positive-control protocol + <code>pit-to-gate</code> &amp; <code>defect-review</code>',
+          tierBTitle: 'Layer B · Production Stack (Multi-Host + Mesh + Memory)',
+          tierBLi1: '<strong>Magpie SSOT</strong>: fans out 29-line plain files to 5 hosts; blocks raw <code>openviking</code> MCP to avoid bridge clashes',
+          tierBLi2: '<strong>EasyTier Mesh</strong>: container bound strictly to <code>127.0.0.1:1933</code>, forwarded via <code>&lt;easytier-virtual-ip&gt;%tun0</code> with 10s self-healing',
+          tierBLi3: '<strong>OpenViking v0.5.5</strong>: <code>gemini-embedding-2</code> (3072d) × <code>deepseek-v4.1-flash-1017</code> + 3-timer <code>systemd</code> ops',
+          mod2Title: 'Five-Layer Interactive Blueprint & 6-Step Signal Walkthrough',
+          mod2Desc: 'Step through a single engineering task from deterministic boot injection to asynchronous memory compilation. Click any node on the canvas to inspect its live config contract, production postmortem, and repository paths.',
+          stepTabsAria: '6 lifecycle walkthrough steps',
+          stepTab0: 'SSOT & Boot',
+          stepTab1: 'Lead & Recall',
+          stepTab2: 'Worktree & Guard',
+          stepTab3: 'Pit-to-Gate',
+          stepTab4: 'Commit & Review',
+          stepTab5: 'Mesh & VLM Sync',
+          btnStepPrevAria: 'Previous step',
+          btnStepPrev: 'Prev',
+          btnStepNextAria: 'Next step',
+          btnStepNext: 'Next',
+          legendAria: 'Signal wire legend',
+          legendAmber: 'Lead Control / SSOT',
+          legendCyan: '3072d Vector / VLM Flow',
+          legendGreen: 'Verified Green (exit 0)',
+          legendRed: 'Hard Block / Firewall',
+          svgBlueprintAria: 'gate-first five-layer interactive architecture blueprint',
+          svgLane1: 'SSOT Assets & Host Boot',
+          svgLane2: 'Single Lead & Vec Recall',
+          svgLane3: 'Worktree & Mem Firewall',
+          svgLane4: 'Pit-to-Gate & Hard Exit',
+          svgLane5: 'EasyTier & VLM Compiler',
+          svgWire1: 'FILE COPY',
+          svgWire4: 'NO WRITE',
+          svgWire6: '60s REPLAY',
+          svgN01Aria: 'Node 01: Magpie SSOT asset distributor',
+          svgN01Title: 'Magpie SSOT & Scope Split',
+          svgN01Sub: '5 host plain files · check-host-skills',
+          svgN02Aria: 'Node 02: 5 hosts, URI Guard, and boot injection',
+          svgN02Title: '5 Hosts, URI Guard & Boot Inject',
+          svgN02Sub: 'CJK 1.5 tok budget · blocks raw viking://',
+          svgN03Aria: 'Node 03: Single Lead orchestrator session',
+          svgN03Title: 'Single Lead Orchestrator',
+          svgN03Sub: 'Align, scope, review, merge · AGENT-TASK',
+          svgN04Aria: 'Node 04: OpenViking Gemini 3072d vector recall',
+          svgN04Title: 'OpenViking Vector Recall (3072d)',
+          svgN04Sub: 'gemini-embedding-2 · mandatory L2 read',
+          svgN05Aria: 'Node 05: Git worktree isolated execution pods',
+          svgN05Title: 'Git Worktree Execution Pods',
+          svgN05Sub: 'Isolated branches · 12,000-char ToolParts',
+          svgN06Aria: 'Node 06: Subagent shared memory firewall',
+          svgN06Title: 'Subagent Memory Firewall',
+          svgN06Sub: 'skipSubagentSessions: true · receipts only',
+          svgN07Aria: 'Node 07: pit-to-gate routing and positive controls',
+          svgN07Title: 'pit-to-gate & Positive Controls',
+          svgN07Sub: 'Gate/Skill/Doc · bad exit 1 -> good exit 0',
+          svgN08Aria: 'Node 08: pre-commit hard exit gate and blind review',
+          svgN08Title: '.githooks/pre-commit & Blind Review',
+          svgN08Sub: 'unset GIT_* · defect-review · tiered proof',
+          svgN09Aria: 'Node 09: EasyTier private mesh and 60s single-flight queue',
+          svgN09Title: 'EasyTier Mesh & 60s Replay Queue',
+          svgN09Sub: '<easytier-virtual-ip>:1933 -> 127.0.0.1',
+          svgN10Aria: 'Node 10: DeepSeek semantic compiler and systemd ops',
+          svgN10Title: 'DeepSeek Compiler & systemd Ops',
+          svgN10Sub: 'peers/* organize · reports -> resources/',
+          canvasHint: 'Tip: click any node (or Tab + Enter) to inspect its live config contract and production postmortem.',
+          inspectorAria: 'Node architecture inspector',
+          insLabelDuty: 'Engineering Role & Runtime Mechanism',
+          insLabelConfig: 'Production Config & Gate Contract',
+          insLabelIncident: 'Production Incident Prevented (Postmortem)',
+          insLabelPaths: 'Repository Relative Paths',
+          insQuickNavHint: 'Click any node on the blueprint to inspect',
+          btnNodePrev: 'Prev Node',
+          btnNodeNext: 'Next Node',
+          mod3Title: 'OpenViking v0.5.5 Dual-Model Engine, EasyTier Mesh & Workflow Customizations',
+          mod3Desc: 'End-to-end breakdown of the orthogonal dual-model split (3072d dense vectors x DeepSeek semantic compilation), EasyTier zero-public-exposure mesh forwarding, nested ovcli.conf overrides, dual-host URI Guard, and 3-timer systemd operations.',
+          decoupleTitle: 'Production Migration: Orthogonal Vector Space & Semantic Compiler — Zero Re-Indexing',
+          decoupleCopy: 'Early setups shared one <code>gemini-3.8-flash</code> quota pool across both embeddings and session extraction, causing rate-limit contention whenever long sessions closed during live recall. Offloading all VLM compilation to <strong><code>deepseek-v4.1-flash-1017</code></strong> reserves 100% of Gemini quota for <code>gemini-embedding-2</code>. Crucially, <strong>3072-dim dense vector coordinates depend solely on the embedding model</strong>—swapping the VLM requires <strong>zero index rebuilds, zero vector recomputation, and zero downtime</strong>.',
+          migrationAria: 'Dual-model migration comparison',
+          eqRow1Label: 'Legacy Coupled',
+          eqRow1Val: 'gemini-embedding-2 + gemini-3.8-flash (quota contention)',
+          eqRow2Label: 'Current Production',
+          eqRow3Label: 'Migration Cost',
+          eqRow3Val: '0 vectors recomputed · 3072d index reused in place',
+          rail1Provider: 'Dense Vector Index & Semantic Recall Rail · Google Native API',
+          rail1K1: 'Dimensions',
+          rail1K2: 'Protocol',
+          rail1K3: 'Cross-Lingual',
+          rail1V3: 'ZH + EN + Code Symbols',
+          track1Scope: 'Active Structured Memory (6 namespaces)',
+          track1Desc: 'Covers <code>profile</code>, <code>preferences</code>, <code>entities</code>, <code>events</code>, <code>experiences</code>, and repo-scoped <code>peers/&lt;actor&gt;/</code>. Ingestion builds 3072d dense vectors and triggers the VLM rail to compile L0/L1 abstracts.',
+          track1P1: 'Structured Payload',
+          track1P2: '3072d Dense Vector',
+          track1P3: 'VLM Compiles L0/L1',
+          track2Scope: 'resources/ Static Long-Form Archives (40+ docs)',
+          track2Desc: 'Machine runbooks, long-form research, and archived specs live under <code>resources/</code> (never auto-injected at boot—semantic recall only). Configured explicitly as <strong>3072d vectors only, skipping VLM summarization</strong> to eliminate bulk token burn while preserving exact wording.',
+          track2P1: '40+ Static Docs',
+          track2P2: 'Chunked 3072d Vectors',
+          track2P3: 'Skip VLM Summary (zero overhead)',
+          rail2Provider: 'Async Extraction & Summary Compiler · OpenAI-Compatible',
+          rail2K1: 'Execution',
+          rail2V1: 'Async Close / Non-Blocking',
+          rail2K2: 'Protocol',
+          rail2K3: 'Maintenance',
+          rail2V3: 'Daily Scheduled organize',
+          ladderAria: 'L0 to L2 progressive disclosure contract',
+          ladderL0: 'One-line high-density abstract compiled by <code>deepseek-v4.1-flash-1017</code> for ultra-low-token candidate scanning during <code>find</code> / <code>search</code>.',
+          ladderL1: 'Structured trigger context, key conclusions, and applicability boundaries. The Lead filters down to the top 1–3 candidates and rejects cross-repo lookalikes.',
+          ladderL2Tag: 'L2 · Full Source Verify',
+          ladderL2: '<strong>Hard contract: an abstract is never current truth.</strong> After matching a candidate, agents must call <code>read</code> to verify the full L2 body, commands, and invalidation clauses before touching code.',
+          vlmBoxTitle: 'Async Closeout & Daily organize Dedup Loop',
+          vlmBoxScope: 'Prevents memory fragmentation',
+          vlmBoxDesc: 'When a session crosses <code>60,000 tokens</code> or <code>20 turns</code>, or fires <code>PreCompact</code> / <code>SessionEnd</code>, real <code>ToolParts</code> truncated safely at <code>12,000</code> chars ship asynchronously for structured extraction; daily <code>organize</code> merges duplicates and overwrites stale state in place instead of stacking conflicting copies.',
+          customInfraAria: 'EasyTier encrypted mesh and OpenViking workflow customizations',
+          meshTitle: 'EasyTier Private Encrypted Mesh (Replaces Fragile ssh -N -L)',
+          meshHop1Node: '1. Multi-Host Client private_mode = true',
+          meshHop1Meta: '2s static join · tcp:// + wss:// dual relay',
+          meshHop2Node: '2. Low-Latency P2P / Strict Outbound-Only Fallback',
+          meshHop2Meta: 'Adaptive dual-mode + ~/.openviking/pending/ 60s single-flight',
+          meshHop3Meta: 'Strict TUN bind · openviking-port-forward.service 10s self-healing',
+          meshHop4Node: '4. Docker Loopback (127.0.0.1:1933)',
+          meshHop4Meta: 'Loopback-only bind blocks Docker iptables public exposure',
+          meshSpec1: '<strong>10s Self-Healing &amp; 98.6% Log Drop:</strong> Server-side <code>openviking-port-forward.service</code> reconciles forwarding rules every 10s (recovering in-memory mappings after restarts), while clamping mesh logs to <code>warn</code> cuts disk log writes by <strong><code>98.6%</code></strong>.',
+          meshSpec2: '<strong>Zero-Block Offline Loop:</strong> Clients talk to <code>http://&lt;easytier-virtual-ip&gt;:1933</code>; network switches or server upgrades spill into local <code>~/.openviking/pending/</code> and replay via a <strong>60s single-flight queue</strong> with zero editor lag.',
+          ovCustomTitle: 'OpenViking v0.5.5 Workflow-Specific Customizations',
+          ovSpec1: '<strong>Control-Plane Precedence + Magpie Split + Dual-Host URI Guard:</strong> The <code>plugin</code> block in <code>ovcli.conf</code> overrides per-host flags so one edit syncs all hosts; Magpie is forbidden from shipping raw <code>openviking</code> MCP (preventing bridge clashes), and both <strong>Claude Code and DSH enforce <code>URI Guard</code></strong> to block local file tools from reading <code>viking://</code>.',
+          ovSpec2: '<strong>3-Timer <code>systemd</code> Ops + Self-Logged Health + Persona Sync:</strong> (1) 14-day rolling <code>backup</code> (mandatory <code>snapshot commit</code> before schema writes); (2) custom <code>organize</code> enumerating <strong>all <code>peers/*</code> project spaces</strong> for dedup; (3) daily <code>inspection</code> reports self-archived into <code>resources/ops/reports/</code> (zero boot tokens, recalled on demand), paired with <code>vikingbot</code> <code>memories/soul.md</code> engineering persona.',
+          guardrailAria: 'Four anti-pollution memory guardrails',
+          guardrail1Why: '<strong>Disable fuzzy semantic rules.</strong> Hard behavioral constraints belong strictly in repo <code>AGENTS.md</code> and global instruction files; storing rules in a vector store risks silent cosine-similarity misses and two-source drift.',
+          guardrail2Key: 'viking://agent/skills = empty',
+          guardrail2Why: '<strong>Magpie is the sole skill SSOT.</strong> Never store a second copy of skills inside the memory engine—preventing ghost regressions where an outdated memory summary overrides an updated local <code>SKILL.md</code>.',
+          guardrail3Why: '<strong>Zero subagent noise in long-term memory.</strong> Exploratory commands and dead-end hypotheses from parallel subagents stay out of the memory store; only verified conclusions from the single Lead persist.',
+          guardrail4Why: '<strong>Scoped auto-isolation + cross-repo explicit lookup.</strong> Automatic boot injection and capture lock strictly to the current Git repo\'s <code>peers/&lt;actor&gt;/</code> to prevent bleed, while explicit MCP queries search experiences across repos freely.',
+          mod4Title: 'Interactive Gate & Positive-Control Lab',
+          mod4Desc: 'Switch across 4 real production gates and inspect the exact contrast between an exit-0 warning anti-pattern, an injected exit-1 positive control, and a verified exit-0 green pass.',
+          labTabsAria: '4 production gate tabs',
+          gateTab0: 'state-log-cap Meta Gate',
+          gateTab1: 'doc-links Archive Gate',
+          gateTab2: 'secret-shapes Bidirectional Gate',
+          gateTab3: 'host-neutral Portability Gate',
+          stateGroupAria: 'Gate execution state toggle',
+          stateBtnWarn: 'State A · Warn (Exit 0)',
+          stateBtnFail: 'State B · Positive Control (Exit 1)',
+          stateBtnPass: 'State C · Verified Green (Exit 0)',
+          labLabelFakeGreen: 'The "Fake Green" Failure Mode Exposed',
+          labLabelSsot: 'Single Source of Truth & Parity Assertion',
+          labLabelPos: 'Real-Entry Positive-Control Procedure',
+          mod5Title: '4 + 6 Self-Owned Skills & Recommended Upstream Ecosystem',
+          mod5Desc: 'Zero reinvention: 4 governance cores set the rules, 6 lifecycle playbooks block concrete production hazards, and UI craft plus memory infrastructure pair directly with battle-tested open-source upstreams. Click any row to expand its trigger boundary and incident dossier.',
+          filterPillsAria: 'Filter skills and ecosystem by category',
+          filterAll: 'All (10 + 4)',
+          filterCore: 'Governance Cores (4)',
+          filterPlaybook: 'Lifecycle Playbooks (6)',
+          filterUpstream: 'Upstream Companions (4)',
+          searchPlaceholder: 'Filter by skill name, path, or incident…',
+          searchAria: 'Search skills and ecosystem entries',
+          emptyState: 'No entries match the current filter. Clear the search query or switch category.',
+          footerTagline: '<strong style="color:var(--ink)">gate-first</strong> · Verifiable multi-session agent governance &amp; self-growing gate blueprint · Zero-framework standalone sheet'
+        }
+      };
+
+      /* ----------------------------------------------------------------------
+         1. DATA DICTIONARY — 6 Lifecycle Steps & 10 Architecture Nodes (ZH)
+         ---------------------------------------------------------------------- */
+      var STEPS_ZH = [
         {
           heading: 'Step 1 · 资产单源分发、Magpie 管辖切割与开场注入',
           desc: 'Magpie 将 29 行 instructions.md 生成为 5 个宿主各自带哈希块的独立普通文件（根治 3 宿主软链共指 ~/.agents/AGENTS.md 踩踏成 0 字节的事故），严禁下发裸 openviking MCP 防冲突，并用 check-host-skills.mjs 跟随校验符号链接池；Claude Code 与 DSH 双宿主内置 URI Guard 并按 CJK 1.5 tok/字预算注入全局画像与 peers/<actor>/。',
@@ -3210,7 +3677,7 @@
         'firewall', 'pittogate', 'precommit', 'queue', 'vlm'
       ];
 
-      var NODE_DETAILS = {
+      var NODE_DETAILS_ZH = {
         magpie: {
           id: 'NODE N01 · LAYER 1',
           tier: 'full',
@@ -3326,7 +3793,7 @@
       /* ----------------------------------------------------------------------
          2. DATA DICTIONARY — 4 Real Gates × 3 Execution States (Module 4)
          ---------------------------------------------------------------------- */
-      var GATES_LAB = [
+      var GATES_LAB_ZH = [
         {
           title: '01 · state-log-cap 状态入口膨胀元门禁',
           cmdTitle: '.githooks/pre-commit → node gates/examples/01-state-log-cap/check-state-log.mjs',
@@ -3490,7 +3957,7 @@
       /* ----------------------------------------------------------------------
          3. DATA DICTIONARY — 4 + 6 Self-Owned Skills + 4 Upstream Ecosystem
          ---------------------------------------------------------------------- */
-      var SKILLS_DATA = [
+      var SKILLS_DATA_ZH = [
         {
           idx: '01',
           name: 'lead-orchestration',
@@ -3634,9 +4101,471 @@
       ];
 
       /* ----------------------------------------------------------------------
-         4. STATE & DOM CONTROLLERS
+         3B. ENGLISH ENGINEERING DATA DICTIONARY (Steps, Nodes, Gates, Skills)
+         ---------------------------------------------------------------------- */
+      var STEPS_EN = [
+        {
+          heading: 'Step 1 · Single-Source Distribution, Magpie Scope Split & Boot Injection',
+          desc: 'Magpie fans out the 29-line instructions.md into 5 independent hash-delimited plain files (eliminating the 0-byte wipe caused by 3 hosts symlinking to one shared ~/.agents/AGENTS.md relay), forbids shipping raw openviking MCP to prevent bridge clashes, and validates the skill symlink pool via check-host-skills.mjs. Claude Code and DSH enforce URI Guard and deterministically inject user profile + repo-scoped peers/<actor>/ within a CJK 1.5 tok/char budget.',
+          nodes: ['magpie', 'hosts'],
+          focusNode: 'magpie'
+        },
+        {
+          heading: 'Step 2 · Single-Lead Task Scoping & Gemini 3072d Vector Recall',
+          desc: 'The single Lead session (scoping, dispatching, reviewing, and merging only—never editing feature code inline) queries viking://~/memories/experiences via ov-experience-memory. gemini-embedding-2 (Google native, dimension = 3072) retrieves candidates, screens 1–3 matches via L0 (.abstract.md) and L1 (.overview.md), mandates full L2 read verification, and issues an AGENT-TASK ticket with disjoint write directories.',
+          nodes: ['lead', 'recall'],
+          focusNode: 'recall'
+        },
+        {
+          heading: 'Step 3 · Isolated Worktree Execution & Subagent Memory Firewall',
+          desc: 'Parallel writers execute in dedicated git worktree checkouts and feature branches. ovcli.conf sets plugin.skipSubagentSessions: true at control-plane priority across all hosts, hard-blocking subagents from writing to shared memory (they return verifiable receipts to the Lead only), while capturing real ToolParts truncated safely at captureToolMaxChars: 12000.',
+          nodes: ['worktree', 'firewall'],
+          focusNode: 'firewall'
+        },
+        {
+          heading: 'Step 4 · Incident Routing (pit-to-gate) & Positive-Control Verification',
+          desc: 'After any real defect or user correction, pit-to-gate routes the lesson by three strict buckets (binary-checkable -> exit-1 machine gate; reusable evidence loop -> Skill; repo context -> doc/memory). Every new gate extracts a single source of truth (e.g., HEADING and LINE_LIMIT in state-section.mjs) and proves a real positive control: inject violation -> confirm exit 1 red -> restore clean input -> confirm exit 0 green.',
+          nodes: ['pittogate', 'precommit'],
+          focusNode: 'pittogate'
+        },
+        {
+          heading: 'Step 5 · Pre-Commit Hard Exit Gate, Blind Review & Tiered Receipts',
+          desc: 'Every commit passes through #!/bin/sh .githooks/pre-commit (Git index mode 100755, pure LF with zero \\r bytes, explicit unset of 6 GIT_* variables to prevent cross-repo pollution, fail-closed exit 1 if Node or gate script is missing). High-risk diffs undergo context-stripped defect-review, and the Lead audits EVIDENCE-REPORT separating verified / unverified / not-run.',
+          nodes: ['precommit', 'lead'],
+          focusNode: 'precommit'
+        },
+        {
+          heading: 'Step 6 · EasyTier Mesh Transport, DeepSeek Compilation & 3-Timer systemd Ops',
+          desc: 'When a session crosses commitTokenThreshold: 60000 or commitTurnThreshold: 20, or fires PreCompact / SessionEnd, transcripts ship asynchronously across the EasyTier encrypted mesh (<easytier-virtual-ip>:1933 -> loopback 127.0.0.1:1933, spilling to ~/.openviking/pending/ 60s single-flight queue when offline). Server-side deepseek-v4.1-flash-1017 extracts memories while 3 systemd timers run 14-day backups, full peers/* organize dedup, and self-logged health reports into resources/ops/reports/.',
+          nodes: ['queue', 'vlm', 'recall'],
+          focusNode: 'queue'
+        }
+      ];
+
+      var NODE_DETAILS_EN = {
+        magpie: {
+          id: 'NODE N01 · LAYER 1',
+          tier: 'full',
+          tierLabel: 'Magpie Full-Stack Layer',
+          title: 'Magpie SSOT Distribution & Jurisdiction Split',
+          sub: '5 independent hash-block plain files · blocks raw openviking MCP · check-host-skills symlink truth',
+          duty: 'Distributes the 29-line global prompt contract into independent plain files with managed hash blocks for Claude Code, Codex, DSH, OpenCode, and Antigravity; explicitly forbids Magpie from provisioning raw openviking MCP (avoiding clashes with native lifecycle plugin bridges); verifies every host skill symlink target via check-host-skills.mjs.',
+          config: '// skills/skill-maintenance/scripts/check-host-skills.mjs\nconst st = fs.lstatSync(skillPath);\nif (st.isSymbolicLink()) {\n  // Must follow target with statSync: dangling symlinks pass lstatSync but throw ENOENT here\n  fs.statSync(skillPath);\n}',
+          incident: 'Three hosts previously symlinked their global rule files to one shared relay (~/.agents/AGENTS.md); sequential distributor writes truncated the shared file down to a 0-byte wipe. Another skill consolidation left 33 dangling symlinks that naive existence checks reported green. Fixed permanently via independent plain-file fan-out plus check-host-skills.mjs.',
+          paths: ['skills/skill-maintenance/scripts/check-host-skills.mjs', 'prompts/instructions.template.md', 'prompts/README.md', 'docs/REFERENCE-STACK.md']
+        },
+        hosts: {
+          id: 'NODE N02 · LAYER 1',
+          tier: 'core',
+          tierLabel: 'Minimal Core + Host Plugins',
+          title: '5 Host Mounts, Dual-Host URI Guard & Boot Injection',
+          sub: 'Claude 9 Hooks + DSH native plugin enforce URI Guard · CJK 1.5 tok/char budget',
+          duty: 'In the 3-minute minimal loop, hosts read in-repo AGENTS.md and docs/STATE.md directly. In the full stack, both Claude Code (9 lifecycle hooks) and DSH native plugins enforce URI Guard (immediately blocking local file tools from reading viking:// virtual URIs) and inject global profile + repo-scoped peers/<actor>/ at SessionStart within a CJK 1.5 tok/char budget.',
+          config: '// ~/.openviking/ovcli.conf (plugin block overrides per-host flags across all hosts)\n{\n  "url": "http://<easytier-virtual-ip>:1933",\n  "api_key": "<redacted-user-key>",\n  "account": "default",\n  "user": "default",\n  "plugin": {\n    "recallPeerScope": "actor",\n    "skipSubagentSessions": true\n  }\n}',
+          incident: 'Models occasionally passed viking://~/memories/... to local ReadFile tools, burning turns in cascading file-not-found loops. Enforcing URI Guard at the lifecycle layer in both Claude Code and DSH dropped those wasted retries to zero.',
+          paths: ['memory/CONTRACT.md', 'gates/hooks/stop-hook-example.mjs', 'skills/lead-orchestration/references/host-adapters.md', 'docs/REFERENCE-STACK.md']
+        },
+        lead: {
+          id: 'NODE N03 · LAYER 2',
+          tier: 'core',
+          tierLabel: '3-Min Minimal Loop Core',
+          title: 'Single Lead Orchestrator Session',
+          sub: 'Owns alignment, scoping, dispatch, review, and merges—never edits feature code inline',
+          duty: 'Establishes one accountable owner per task: reads the current-action section of docs/STATE.md first, applies spawn-vs-inline triage, dispatches AGENT-TASK tickets declaring observable deliverables, failure signals, and physically disjoint write directories, and verifies raw exit codes plus tiered evidence ("self-report != verification").',
+          config: '# AGENT-TASK Required 4-Part Contract (Multi-Module Isolation Example)\n1. Allowed Write Scope : src/billing/ (physically disjoint from parallel worktree src/auth/)\n2. Observable Output   : idempotent billing settlement + positive/negative unit tests\n3. Hard Failure Signal : duplicate charge exits 0 / pre-commit gate fails\n4. Tiered Proof Bar    : separate Verified / Pending / Not-Run with raw exit codes',
+          incident: 'The moment a Lead edits "just two lines" of feature code inline, it loses independent review objectivity and collides with background workers in the working tree. Locking the Lead strictly to orchestration and verification slashed parallel rework.',
+          paths: ['skills/lead-orchestration/SKILL.md', 'scaffold/init-project.mjs', 'scripts/check-all.mjs']
+        },
+        recall: {
+          id: 'NODE N04 · LAYER 2',
+          tier: 'full',
+          tierLabel: 'OpenViking Full-Stack Layer',
+          title: 'OpenViking Vector Recall (Gemini 3072d)',
+          sub: 'gemini-embedding-2 dense retrieval · scoped auto-isolation + cross-repo explicit lookup',
+          duty: 'Automatic lifecycle injection locks strictly to the current Git repo via recallPeerScope: "actor" to prevent cross-repo bleed, while explicit MCP queries against viking://~/memories/experiences freely borrow proven fixes across projects. gemini-embedding-2 (3072d) narrows candidates via L0/L1 before mandatory L2 read verification.',
+          config: '// Recall contract: actor-scoped auto-inject + cross-repo explicit MCP lookup\n1. find({ uri: "viking://~/memories/experiences", query, limit: 5 }) -> scan L0/L1\n2. Pick 1-3 exact file URIs matching current stack premises (skip abstract sidecars)\n3. read({ uri: candidateUri }) -> mandatory L2 full-body verification before acting',
+          incident: 'A past session applied a historical build fix solely from a one-line L0 abstract, missing the L2 caveat "only applies to multi-package monorepos." Requiring full L2 read verification before touching code eliminated out-of-context misfires.',
+          paths: ['memory/CONTRACT.md', 'docs/REFERENCE-STACK.md', 'skills/lead-orchestration/SKILL.md']
+        },
+        worktree: {
+          id: 'NODE N05 · LAYER 3',
+          tier: 'core',
+          tierLabel: '3-Min Minimal Loop Core',
+          title: 'Git Worktree Isolated Execution Pods',
+          sub: 'Dedicated worktree + branch per parallel writer · captureToolMaxChars: 12000',
+          duty: 'One writer per directory at any instant. Whenever two or more non-overlapping modules run in parallel, each executor works in its own git worktree and branch, passes local pre-commit hooks independently, and hands off to the single Lead for merging. Meanwhile ovcli.conf captures real tool call results truncated safely at 12,000 characters.',
+          config: '# Physical writer isolation (replaces fragile verbal "who commits first" deals)\ngit worktree add ../wt-billing -b feat/billing-idempotency\n\n// ovcli.conf -> plugin tool-trace capture settings\n"captureToolResults": true,\n"captureToolMaxChars": 12000',
+          incident: 'Earlier parallel sessions shared one working tree under a verbal "whoever finishes first commits" rule—every gate scan swept up the other session\'s half-written files, deadlocking both agents in permanent red.',
+          paths: ['skills/lead-orchestration/SKILL.md', 'skills/git-branch-worktree-cleanup/SKILL.md', 'docs/REFERENCE-STACK.md']
+        },
+        firewall: {
+          id: 'NODE N06 · LAYER 3',
+          tier: 'full',
+          tierLabel: 'OpenViking Full-Stack Layer',
+          title: 'Subagent Shared-Memory Hard Firewall',
+          sub: 'plugin.skipSubagentSessions: true · control-plane enforcement across all hosts',
+          duty: 'Subagents and independent reviewers generate noisy exploratory grep runs and half-baked diagnostic paths. Because the nested plugin block in ovcli.conf outranks per-host CLI flags, setting skipSubagentSessions: true once blocks all subagent memory capture and commits across every host—subagents report receipts only to the Lead.',
+          config: '// ~/.openviking/ovcli.conf (v0.5.5 nested schema)\n{\n  "url": "http://<easytier-virtual-ip>:1933",\n  "api_key": "<redacted-user-key>",\n  "account": "default",\n  "user": "default",\n  "plugin": {\n    "recallPeerScope": "actor",\n    "skipSubagentSessions": true\n  }\n}',
+          incident: 'Before enabling subagent filtering, dispatching 4 parallel debugging subagents auto-extracted 4 unverified intermediate guesses into long-term experience memory—poisoning the next day\'s recall with contradictory claims.',
+          paths: ['memory/CONTRACT.md', 'docs/REFERENCE-STACK.md', 'skills/lead-orchestration/SKILL.md']
+        },
+        pittogate: {
+          id: 'NODE N07 · LAYER 4',
+          tier: 'core',
+          tierLabel: '3-Min Minimal Loop Core',
+          title: 'pit-to-gate Three-Way Routing & Positive Controls',
+          sub: 'Binary check -> Gate / Reusable loop -> Skill / Context -> Doc · bad exit 1 -> good exit 0',
+          duty: 'After every real defect or user correction, routes the safeguard into the exact right carrier. Machine gates extract a single threshold source of truth (such as HEADING and LINE_LIMIT in state-section.mjs) and prove a positive control at the real execution entry (inject violation -> exit 1 -> restore -> exit 0) to kill tautological fake greens.',
+          config: '// gates/examples/01-state-log-cap/check-state-log.mjs\nimport { HEADING, LINE_LIMIT, readCurrentAction } from "./state-section.mjs";\nconst section = readCurrentAction(content); // tracks "## 当前动作" (120-line hard cap)\nif (section.lineCount > LINE_LIMIT) {\n  console.error(`[FAIL] docs/STATE.md ${HEADING}: ${section.lineCount} > ${LINE_LIMIT}`);\n  process.exitCode = 1;\n}',
+          incident: 'A margin-guard unit test once back-calculated cost via "price / 1.4 / 7.2" and asserted profit margin—setting markup to 0 still passed green (tautological loop). Requiring a temporary revert to the buggy state to turn the new test red caught it immediately.',
+          paths: ['gates/PROTOCOL.md', 'skills/pit-to-gate/SKILL.md', 'gates/examples/01-state-log-cap/state-section.mjs', 'gates/examples/01-state-log-cap/test-positive-control.mjs']
+        },
+        precommit: {
+          id: 'NODE N08 · LAYER 4',
+          tier: 'core',
+          tierLabel: '3-Min Minimal Loop Core',
+          title: '.githooks/pre-commit Hard Exit Gate & Blind Review',
+          sub: '#!/bin/sh · 100755 + pure LF · unset 6 GIT_* vars · defect-review blind audit',
+          duty: 'Every commit runs .githooks/pre-commit: #!/bin/sh shebang, Git index executable bit 100755, zero CR (\\r) bytes, explicit unset of 6 GIT_* environment variables so temp-repo positive controls never corrupt the parent index, and fail-closed exit 1 whenever Node or the gate script is missing. High-risk diffs add context-stripped defect-review.',
+          config: '#!/bin/sh\n# .githooks/pre-commit & gates/hooks/pre-commit (mode 100755, pure LF)\nunset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE \\\n      GIT_PREFIX GIT_OBJECT_DIRECTORY GIT_COMMON_DIR\ncommand -v node >/dev/null 2>&1 || { echo "[BLOCK] node missing" >&2; exit 1; }\nexec node scripts/check-all.mjs',
+          incident: 'When a pre-commit hook invoked subprocess git worktree or temp-repo positive-control tests, inherited GIT_DIR / GIT_INDEX_FILE / GIT_PREFIX variables caused child git commands to mutate the host repo object store. Explicitly unsetting all 6 variables closed the leak.',
+          paths: ['.githooks/pre-commit', 'gates/hooks/pre-commit', 'gates/hooks/stop-hook-example.mjs', 'scripts/check-all.mjs']
+        },
+        queue: {
+          id: 'NODE N09 · LAYER 5',
+          tier: 'full',
+          tierLabel: 'EasyTier + OpenViking Layer',
+          title: 'EasyTier Encrypted Mesh & 60s Single-Flight Queue',
+          sub: 'private_mode=true 2s join · <easytier-virtual-ip>%tun0:1933 -> 127.0.0.1:1933',
+          duty: 'Replaces fragile ssh -N -L tunnels: the server container binds strictly to 127.0.0.1:1933 (stopping Docker iptables rules from exposing port 1933 publicly), easytier-core forwards <easytier-virtual-ip>%tun0:1933 guarded by openviking-port-forward.service (10s self-healing + warn-level tuning cutting logs by 98.6%), and clients support P2P / outbound-only fallback plus a local ~/.openviking/pending/ 60s single-flight replay queue.',
+          config: '// ~/.openviking/ovcli.conf (v0.5.5 thresholds & private mesh endpoint)\n{\n  "url": "http://<easytier-virtual-ip>:1933",\n  "api_key": "<redacted-user-key>",\n  "account": "default",\n  "user": "default",\n  "plugin": {\n    "commitTokenThreshold": 60000,\n    "commitTurnThreshold": 20,\n    "captureToolResults": true,\n    "captureToolMaxChars": 12000\n  }\n}',
+          incident: 'Legacy ssh -N -L tunnels regularly left zombie half-open sockets after laptop sleep or Wi-Fi roaming, while direct Docker port publishing bypassed host firewalls onto the public internet. Switching to EasyTier TUN binding + 10s self-healing + local pending queue solved both.',
+          paths: ['docs/REFERENCE-STACK.md', 'memory/CONTRACT.md']
+        },
+        vlm: {
+          id: 'NODE N10 · LAYER 5',
+          tier: 'full',
+          tierLabel: 'OpenViking Full-Stack Layer',
+          title: 'DeepSeek Semantic Compiler & 3-Timer systemd Ops',
+          sub: 'deepseek-v4.1-flash-1017 · full peers/* organize · health reports -> resources/',
+          duty: 'deepseek-v4.1-flash-1017 extracts structured memories and compiles L0/L1 summaries asynchronously. Three server-side systemd timers automate upkeep: (1) 14-day rolling backup (mandatory snapshot commit before schema edits); (2) custom organize enumerating all peers/* repo spaces for dedup; (3) daily inspection reports self-archived into resources/ops/reports/ (zero boot tokens, recalled on demand), paired with vikingbot memories/soul.md.',
+          config: '# Server-side 3-timer systemd autonomous operations loop\n1. openviking-backup.timer     -> pre-write snapshot commit + 14-day rolling archive\n2. openviking-organize.timer   -> deepseek-v4.1-flash-1017 dedups across all peers/*\n3. openviking-inspection.timer -> self-logs daily health into viking://resources/ops/reports/',
+          incident: 'Scanning only the default workspace during organize let dozens of repo-scoped peers/<actor>/ namespaces accumulate duplicate fragments, while injecting ops health reports at boot wasted context tokens. Enumerating peers/* plus routing reports into resources/ fixed both cleanly.',
+          paths: ['docs/REFERENCE-STACK.md', 'memory/CONTRACT.md']
+        }
+      };
+
+      var GATES_LAB_EN = [
+        {
+          title: '01 · state-log-cap Session Handoff Cap Meta-Gate',
+          cmdTitle: '.githooks/pre-commit → node gates/examples/01-state-log-cap/check-state-log.mjs',
+          summary: 'The active handoff section ("## 当前动作") in docs/STATE.md is read at the start of every session. If a 120-line cap exists only as prose or prints an exit-0 yellow warning, the file balloons within weeks and quietly drains every session\'s context budget.',
+          fakeGreen: 'Real incident: the status script detected overflow two weeks early and printed yellow warnings (while three separate docs hardcoded 120 lines), yet exited 0 every single time. docs/STATE.md grew to 569 lines (4.7x limit), dumping 104 KB into every new session while CI stayed green.',
+          ssotRule: 'state-section.mjs exports the sole HEADING ("## 当前动作"), LINE_LIMIT (120), and readCurrentAction parser. Both the human reader and check-state-log.mjs import it, and test-positive-control.mjs asserts byte-identical line counts across both.',
+          posControl: 'Run test-positive-control.mjs to inject >120 lines into a fixture or docs/STATE.md -> confirm check-state-log.mjs exits 1 -> archive finished milestones into docs/archive/ with a pointer link -> re-run and verify exit 0.',
+          paths: ['gates/examples/01-state-log-cap/check-state-log.mjs', 'gates/examples/01-state-log-cap/state-section.mjs', 'gates/examples/01-state-log-cap/test-positive-control.mjs', 'docs/STATE.md'],
+          states: {
+            warn: {
+              badge: 'EXIT 0 · FAKE GREEN (ANTI-PATTERN)',
+              cls: 'badge-warn',
+              html: '<span class="t-cmd">$ node scripts/legacy-status-reader.mjs</span>\n' +
+                    '<span class="t-dim">[info] reading section "## 当前动作" from docs/STATE.md</span>\n' +
+                    '<span class="t-warn">[WARN] docs/STATE.md has grown to 569 lines (104.2 KB), recommended <= 120 lines.</span>\n' +
+                    '<span class="t-warn">[WARN] Consider moving completed items to docs/archive/ when convenient.</span>\n' +
+                    '<span class="t-dim">[info] reader hardcoded 120, another script hardcoded 150 (threshold drift)</span>\n' +
+                    '<span class="t-ok">Process exited with code 0 (commit allowed -- untouched for 2 full weeks!)</span>'
+            },
+            fail: {
+              badge: 'EXIT 1 · BLOCKED (POSITIVE CONTROL)',
+              cls: 'badge-fail',
+              html: '<span class="t-cmd">$ node gates/examples/01-state-log-cap/test-positive-control.mjs</span>\n' +
+                    '<span class="t-dim">› importing { HEADING, LINE_LIMIT, readCurrentAction } from "./state-section.mjs"</span>\n' +
+                    '<span class="t-cyan">[check] SSOT parity: reader(HEADING="## 当前动作") === gate(LINE_LIMIT=120) ✓</span>\n' +
+                    '<span class="t-err">[GATE FAIL] docs/STATE.md section "## 当前动作": 569 lines (104.2 KB) > LINE_LIMIT 120 (+449).</span>\n' +
+                    '<span class="t-dim">  Fix: archive finished milestones into docs/archive/ and leave a pointer link in docs/STATE.md.</span>\n' +
+                    '<span class="t-err">check-state-log blocked commit (exit code 1).</span>'
+            },
+            pass: {
+              badge: 'EXIT 0 · VERIFIED (TRUE GREEN)',
+              cls: 'badge-pass',
+              html: '<span class="t-cmd">$ node gates/examples/01-state-log-cap/check-state-log.mjs</span>\n' +
+                    '<span class="t-cyan">[check] SSOT parity via state-section.mjs: HEADING="## 当前动作", LINE_LIMIT=120 ✓</span>\n' +
+                    '<span class="t-ok">[PASS] docs/STATE.md ("## 当前动作"): 54 lines <= 120 lines.</span>\n' +
+                    '<span class="t-ok">[PASS] test-positive-control.mjs verified red (exit 1) -> green (exit 0) loop.</span>\n' +
+                    '<span class="t-ok">Gate 01 passed (exit code 0).</span>'
+            }
+          }
+        },
+        {
+          title: '02 · doc-links Archive Relative-Link & GFM #anchor Gate',
+          cmdTitle: '.githooks/pre-commit → node gates/examples/02-doc-links/check-doc-links.mjs',
+          summary: 'Scans every Markdown relative link and GitHub GFM #anchor slug across the repository, while pre-checking .git reachability on external sibling-repo links—stopping zero-diff archive link rot and clean-CI false alarms.',
+          fakeGreen: 'Real incident: archiving STATE.md from docs/ into docs/archive/ without editing a single character shifted its base directory by one level, silently breaking 4 relative links. Naive absolute-path scans then triggered 53 false failures on shallow CI runners lacking sibling repos.',
+          ssotRule: 'check-doc-links.mjs resolves every relative target strictly from its containing file\'s dirname, verifies #anchor fragments against GFM heading slugs, and probes .git reachability before flagging external repo paths—separating real internal breaks from unmounted external roots.',
+          posControl: 'Run test-positive-control.mjs to synthesize an archived doc with unadjusted ../ depth plus a broken #bad-anchor -> confirm exact file:line diagnostics and exit 1 -> fix paths and anchors -> re-run for exit 0.',
+          paths: ['gates/examples/02-doc-links/check-doc-links.mjs', 'gates/examples/02-doc-links/test-positive-control.mjs', 'skills/docs-drift-audit/SKILL.md'],
+          states: {
+            warn: {
+              badge: 'EXIT 0 · FAKE GREEN (ANTI-PATTERN)',
+              cls: 'badge-warn',
+              html: '<span class="t-cmd">$ node scripts/naive-link-grep.mjs</span>\n' +
+                    '<span class="t-dim">[info] moved docs/STATE.md -> docs/archive/2026-09-state.md (body unchanged)</span>\n' +
+                    '<span class="t-warn">[WARN] basename "REFERENCE-STACK.md" exists somewhere in repo (skipping relative dirname math)</span>\n' +
+                    '<span class="t-warn">[WARN] #anchor fragments ignored; CI missing sibling repo caused 53 noisy warnings (exit 0)</span>\n' +
+                    '<span class="t-ok">Process exited with code 0 (4 relative links &amp; anchors in archived doc silently 404!)</span>'
+            },
+            fail: {
+              badge: 'EXIT 1 · BLOCKED (POSITIVE CONTROL)',
+              cls: 'badge-fail',
+              html: '<span class="t-cmd">$ node gates/examples/02-doc-links/check-doc-links.mjs</span>\n' +
+                    '<span class="t-dim">› scanning all markdown relative links, GFM #anchors &amp; external baseline reachability...</span>\n' +
+                    '<span class="t-err">[GATE FAIL] Broken relative link at docs/archive/2026-09-state.md:18 (4 broken after archive move)</span>\n' +
+                    '<span class="t-dim">  Link     : [Production Stack](./REFERENCE-STACK.md#dual-model-architecture)</span>\n' +
+                    '<span class="t-dim">  Resolved : docs/archive/REFERENCE-STACK.md (ENOENT -- base shifted by 1 directory level)</span>\n' +
+                    '<span class="t-err">[GATE FAIL] Missing GFM heading anchor at README.md:64 -> "#non-existent-section-anchor"</span>\n' +
+                    '<span class="t-err">check-doc-links failed (exit code 1).</span>'
+            },
+            pass: {
+              badge: 'EXIT 0 · VERIFIED (TRUE GREEN)',
+              cls: 'badge-pass',
+              html: '<span class="t-cmd">$ node gates/examples/02-doc-links/check-doc-links.mjs</span>\n' +
+                    '<span class="t-cyan">[check] external repo baseline precheck: skip unreachable external root cleanly (0 false positives) ✓</span>\n' +
+                    '<span class="t-ok">[PASS] All repo-internal Markdown relative paths resolved from each file dirname.</span>\n' +
+                    '<span class="t-ok">[PASS] All GitHub GFM #anchor heading slugs matched target headings.</span>\n' +
+                    '<span class="t-ok">Gate 02 passed (exit code 0).</span>'
+            }
+          }
+        },
+        {
+          title: '03 · secret-shapes Credential Shapes & Bidirectional Allowlist Gate',
+          cmdTitle: '.githooks/pre-commit → node gates/examples/03-secret-shapes/check-secret-shapes.mjs',
+          summary: 'Uses git ls-files -z --cached --others --exclude-standard to scan tracked and newly created unstaged non-binary files (including .env.local and extensionless configs), blocking high-confidence secret shapes and failing on stale allowlist exemptions.',
+          fakeGreen: 'Scanning only git diff --cached completely misses brand-new unstaged config files in the working tree; meanwhile ordinary allowlists for doc placeholders linger forever as zombie exemptions after the example string is deleted.',
+          ssotRule: 'Matches three high-signal shapes—openai-style-key (sk-...), bearer-token (Bearer ...), and jwt (eyJ...). Every ALLOWED test literal requires a non-empty reason AND >=1 active occurrence; 0 hits exits 1 to force pruning dead exemptions.',
+          posControl: 'Run test-positive-control.mjs with both an unlisted sk-/Bearer/eyJ secret shape and an unused stale ALLOWED literal -> verify both fail with exit 1 -> remove both -> re-run for exit 0.',
+          paths: ['gates/examples/03-secret-shapes/check-secret-shapes.mjs', 'gates/examples/03-secret-shapes/test-positive-control.mjs', 'scripts/check-no-private-leak.mjs'],
+          states: {
+            warn: {
+              badge: 'EXIT 0 · FAKE GREEN (ANTI-PATTERN)',
+              cls: 'badge-warn',
+              html: '<span class="t-cmd">$ git diff --cached | grep "API_KEY" || true</span>\n' +
+                    '<span class="t-dim">[info] untracked local file debug.conf not staged -> completely skipped by diff --cached!</span>\n' +
+                    '<span class="t-warn">[WARN] ALLOWED placeholder token removed from docs 3 weeks ago, exemption still active</span>\n' +
+                    '<span class="t-ok">Process exited with code 0 (both unstaged secret &amp; zombie allowlist slipped through!)</span>'
+            },
+            fail: {
+              badge: 'EXIT 1 · BLOCKED (POSITIVE CONTROL)',
+              cls: 'badge-fail',
+              html: '<span class="t-cmd">$ node gates/examples/03-secret-shapes/check-secret-shapes.mjs</span>\n' +
+                    '<span class="t-dim">› scanning git ls-files -z --cached --others --exclude-standard (non-binary)...</span>\n' +
+                    '<span class="t-err">[GATE FAIL] Unallowed credential shape [bearer-token] in untracked test-auth.conf:7</span>\n' +
+                    '<span class="t-dim">  Matched shape : openai-style-key / bearer-token / jwt must never live in plain files.</span>\n' +
+                    '<span class="t-err">[GATE FAIL] Stale ALLOWED literal never seen in scanned files (reason: "old demo jwt")</span>\n' +
+                    '<span class="t-dim">  Fix           : remove dead literal from ALLOWED map to keep exemptions minimal.</span>\n' +
+                    '<span class="t-err">check-secret-shapes blocked commit (exit code 1).</span>'
+            },
+            pass: {
+              badge: 'EXIT 0 · VERIFIED (TRUE GREEN)',
+              cls: 'badge-pass',
+              html: '<span class="t-cmd">$ node gates/examples/03-secret-shapes/check-secret-shapes.mjs &amp;&amp; node scripts/check-no-private-leak.mjs</span>\n' +
+                    '<span class="t-cyan">[check] scanned cached + untracked non-binary files for openai-style-key, bearer-token, jwt ✓</span>\n' +
+                    '<span class="t-cyan">[check] bidirectional ALLOWED audit: every exempted test literal has non-empty reason &amp; >=1 hit ✓</span>\n' +
+                    '<span class="t-ok">[PASS] Zero unallowed credential shapes, zero private leaks, zero stale ALLOWED entries.</span>\n' +
+                    '<span class="t-ok">Gate 03 passed (exit code 0).</span>'
+            }
+          }
+        },
+        {
+          title: '04 · host-neutral Skill Portability Gate',
+          cmdTitle: 'scripts/check-all.mjs → node skills/skill-maintenance/scripts/check-host-neutral.mjs',
+          summary: 'Scans every text file across all 10 core workflow skills under skills/, forbidding single-host or OS-locked concepts inside generic skill procedures so every skill works cleanly across Claude Code, Codex, DSH, OpenCode, and Antigravity.',
+          fakeGreen: 'Writing host-bound terms like Stop hook, PowerShell, mnemon, Memory Spaces, or WorkBuddy directly into a generic SKILL.md works fine on the author\'s primary host—then stalls immediately for readers on another agent host or OS.',
+          ssotRule: 'check-host-neutral.mjs scans all 10 directories under skills/ for host-bound terms. The sole exempted file in the repository is the centralized adapter table at skills/lead-orchestration/references/host-adapters.md.',
+          posControl: 'Run check-host-neutral.mjs --self-test (injecting synthetic Stop hook / WorkBuddy terms into a non-exempt skill copy) -> confirm exit 1 diagnostics -> move host specifics into host-adapters.md -> re-run for exit 0.',
+          paths: ['skills/skill-maintenance/scripts/check-host-neutral.mjs', 'skills/lead-orchestration/references/host-adapters.md', 'scripts/check-all.mjs'],
+          states: {
+            warn: {
+              badge: 'EXIT 0 · FAKE GREEN (ANTI-PATTERN)',
+              cls: 'badge-warn',
+              html: '<span class="t-cmd">$ node scripts/naive-skill-lint.mjs</span>\n' +
+                    '<span class="t-dim">[info] YAML frontmatter valid across 10 skills</span>\n' +
+                    '<span class="t-warn">[WARN] skills/pit-to-gate/SKILL.md mentions "Stop hook" &amp; "PowerShell" in generic workflow</span>\n' +
+                    '<span class="t-ok">Process exited with code 0 (host-proprietary terms leaked into generic core skill!)</span>'
+            },
+            fail: {
+              badge: 'EXIT 1 · BLOCKED (POSITIVE CONTROL)',
+              cls: 'badge-fail',
+              html: '<span class="t-cmd">$ node skills/skill-maintenance/scripts/check-host-neutral.mjs</span>\n' +
+                    '<span class="t-dim">› scanning all text files under skills/ (10 core skills)...</span>\n' +
+                    '<span class="t-err">[GATE FAIL] Host-specific term "Stop hook" found in skills/pit-to-gate/SKILL.md:44</span>\n' +
+                    '<span class="t-err">[GATE FAIL] Host-specific term "WorkBuddy" / "mnemon" found outside exempted adapter file!</span>\n' +
+                    '<span class="t-dim">  Only exempted file : skills/lead-orchestration/references/host-adapters.md</span>\n' +
+                    '<span class="t-dim">  Fix                : use host-neutral capability wording in SKILL.md and map host specifics in host-adapters.md.</span>\n' +
+                    '<span class="t-err">check-host-neutral failed (exit code 1).</span>'
+            },
+            pass: {
+              badge: 'EXIT 0 · VERIFIED (10/10 NEUTRAL)',
+              cls: 'badge-pass',
+              html: '<span class="t-cmd">$ node skills/skill-maintenance/scripts/check-host-neutral.mjs --self-test &amp;&amp; node skills/skill-maintenance/scripts/check-host-neutral.mjs</span>\n' +
+                    '<span class="t-cyan">[check] positive-control --self-test caught synthetic host-bound terms (Stop hook / PowerShell / mnemon) ✓</span>\n' +
+                    '<span class="t-cyan">[check] sole exemption boundary verified: skills/lead-orchestration/references/host-adapters.md ✓</span>\n' +
+                    '<span class="t-ok">[PASS] All 10 skills under skills/ are 100% host-neutral.</span>\n' +
+                    '<span class="t-ok">Gate 04 passed (exit code 0).</span>'
+            }
+          }
+        }
+      ];
+
+      var SKILLS_DATA_EN = [
+        {
+          idx: '01',
+          name: 'lead-orchestration',
+          cat: 'core',
+          catLabel: 'Governance Core',
+          brief: 'Master workflow charter: single-lead scoping & merging, spawn-vs-inline triage, two-phase git worktree isolation, and tiered evidence verification.',
+          trigger: 'Entry point before coding, config edits, test runs, or Git operations; mandatory for multi-session parallelism, task dispatch, or repo scaffolding.',
+          incident: 'Blocks verbal commit locks causing half-written edits to trip another session\'s gate, Lead self-edits eroding review neutrality, and treating agent prose as verified proof.',
+          path: 'skills/lead-orchestration/SKILL.md · scaffold/init-project.mjs'
+        },
+        {
+          idx: '02',
+          name: 'pit-to-gate',
+          cat: 'core',
+          catLabel: 'Governance Core',
+          brief: 'Incident-to-gate compiler: routes real defects and repeated rework into exit-1 machine gates, reusable skills, or project docs with mandatory positive controls.',
+          trigger: 'Triggered after fixing a defect, receiving a workflow correction, or seeing a recurring failure; updates existing enforcement carriers instead of piling up prompt rules.',
+          incident: 'Blocks exit-0 warning caps letting STATE.md grow to 569 lines / 104 KB, tautological tests derived from the implementation itself, and handler-bypass fake unit tests.',
+          path: 'skills/pit-to-gate/SKILL.md · gates/PROTOCOL.md'
+        },
+        {
+          idx: '03',
+          name: 'defect-review',
+          cat: 'core',
+          catLabel: 'Governance Core',
+          brief: 'Read-only blind defect review: strips author bias, diffs against true git merge-base, and ranks demonstrable regressions P0–P3 apart from style opinions.',
+          trigger: 'Invoked before release, on high-risk auth/billing/migration diffs, cross-repo contract changes, or whenever an author cannot neutrally audit their own work.',
+          incident: 'Blocks branch-tip diffs misattributing unsynced upstream changes to the current PR and prevents subjective style nits from diluting real P0/P1 bugs.',
+          path: 'skills/defect-review/SKILL.md'
+        },
+        {
+          idx: '04',
+          name: 'project-orientation',
+          cat: 'core',
+          catLabel: 'Governance Core',
+          brief: 'Unfamiliar repo onboarding & interrupted handoff recovery: maps source-of-truth docs, builds an executable feature map, and separates code vs test vs live status.',
+          trigger: 'Used when picking up a new repository, resuming stalled work, or reconciling conflicting status docs; skipped for small continuous-context edits.',
+          incident: 'Blocks trusting stale docs as live production truth and stops shallow smoke tests that assert a root container while serving a 404 fallback shell.',
+          path: 'skills/project-orientation/SKILL.md'
+        },
+        {
+          idx: '05',
+          name: 'audit-fix-loop',
+          cat: 'playbook',
+          catLabel: 'Lifecycle Playbook',
+          brief: 'Closed-loop remediation for external P0–P2 audits: falsifies broken premises first -> writes minimal failing test -> fixes -> runs revert-based positive control.',
+          trigger: 'Used when handed an external audit checklist, security scan, or another AI\'s review items to resolve one by one (use diagnosing-bugs for ad-hoc runtime bugs).',
+          incident: 'Blocks blindly breaking intentional behavior from hallucinated AI reviews, line-number drift edits, and environment quota/cooldown errors masquerading as code bugs.',
+          path: 'skills/audit-fix-loop/SKILL.md'
+        },
+        {
+          idx: '06',
+          name: 'docs-drift-audit',
+          cat: 'playbook',
+          catLabel: 'Lifecycle Playbook',
+          brief: 'Four-class documentation drift audit: catches obsolete-premise TODOs, dangling references, stale counts/commands, and broken relative links after archiving.',
+          trigger: 'Invoked when cleaning, archiving, or auditing repository documentation for drift against live code and operational reality.',
+          incident: 'Blocks marking discontinued tasks as "completed", deleting still-referenced docs instead of recovering from git history, and batch-breaking ../ links during archive moves.',
+          path: 'skills/docs-drift-audit/SKILL.md'
+        },
+        {
+          idx: '07',
+          name: 'release-and-verify',
+          cat: 'playbook',
+          catLabel: 'Lifecycle Playbook',
+          brief: 'Push & true remote CI verification: checks scope & auth -> validates artifact freshness -> pushes asynchronously -> reads real per-job CI conclusions independently.',
+          trigger: 'Invoked on git push, release-branch packaging, deployment, or closing an iteration where remote pipeline truth must be confirmed.',
+          incident: 'Blocks declaring victory right after pushing 58 commits while remote CI failed an hour later, and stops silently shipping stale dist artifacts after a blocked cleanup.',
+          path: 'skills/release-and-verify/SKILL.md'
+        },
+        {
+          idx: '08',
+          name: 'git-branch-worktree-cleanup',
+          cat: 'playbook',
+          catLabel: 'Lifecycle Playbook',
+          brief: 'Zero-loss branch & worktree convergence to main: quantifies unmerged commits, guards 4 irreversible hazards, backs up before deletion, and verifies via git ls-remote.',
+          trigger: 'Used when stale local/remote branches and leftover worktrees accumulate and need safe cleanup down to the main branch.',
+          incident: 'Blocks trusting stale git branch -r counts over git ls-remote, wiping unique gitignored files in worktrees, and deleting main repo deps through symlinked node_modules.',
+          path: 'skills/git-branch-worktree-cleanup/SKILL.md'
+        },
+        {
+          idx: '09',
+          name: 'retire-dead-subsystem',
+          cat: 'playbook',
+          catLabel: 'Lifecycle Playbook',
+          brief: 'Clean subsystem excision: detaches hard CI/build edges first, then traces reverse import graphs to purge dead scripts without harming shared consumers.',
+          trigger: 'Used when decommissioning a legacy integration, obsolete tool channel, or retired script/snapshot cluster.',
+          incident: 'Blocks filename-glob sweeps that missed 4 unprefixed scripts while nearly deleting a shared canvas measurement helper still imported by 2 live pipelines.',
+          path: 'skills/retire-dead-subsystem/SKILL.md'
+        },
+        {
+          idx: '10',
+          name: 'skill-maintenance',
+          cat: 'playbook',
+          catLabel: 'Lifecycle Playbook',
+          brief: 'Local skill asset governance: resolves trigger overlaps, copy drift, 33 dangling symlink audits via fs.statSync, dependency closure, and host neutrality.',
+          trigger: 'Used when adding or refactoring local skills, resolving competing triggers, or auditing cross-host registrations and symlink health.',
+          incident: 'Blocks misjudging ownership from agent_created flags, 33 dangling symlinks passing naive checks, and editing vendor plugin caches that vanish on upgrade.',
+          path: 'skills/skill-maintenance/SKILL.md · check-host-skills.mjs · check-host-neutral.mjs'
+        },
+        {
+          idx: 'U1',
+          name: 'mattpocock/skills',
+          cat: 'upstream',
+          catLabel: 'Upstream · MIT',
+          brief: 'Curated software-engineering suite: hypothesis-driven diagnosing-bugs, domain-modeling, pre-plan grilling, handoffs, and writing-for-agents.',
+          trigger: 'Paired directly for complex root-cause diagnosis, interface/ADR modeling, pre-plan design stress testing, and concise agent documentation.',
+          incident: 'Avoids reinventing core software craft inside gate-first; MIT-licensed upstream mounted via Magpie alongside gate-first enforcement.',
+          path: 'Upstream GitHub · mattpocock/skills (MIT License)'
+        },
+        {
+          idx: 'U2',
+          name: 'leonxlnx/taste-skill',
+          cat: 'upstream',
+          catLabel: 'Upstream · MIT',
+          brief: 'Anti-slop frontend visual architecture (design-taste-frontend): one narrative per screen, authentic product UI craft, and browser-verified finish gates.',
+          trigger: 'Used when building company sites, developer-tool landing pages, or dashboards from scratch without generic AI template aesthetics.',
+          incident: 'Systematically blocks equal-height 3-column filler cards, cheap gradient headlines, and broken placeholders via verifiable structural constraints.',
+          path: 'Upstream GitHub · leonxlnx/taste-skill (MIT License)'
+        },
+        {
+          idx: 'U3',
+          name: 'pbakaus/impeccable',
+          cat: 'upstream',
+          catLabel: 'Upstream · Apache-2.0',
+          brief: 'UI craft-floor and polish toolkit covering WCAG contrast, typographic hierarchy, custom browser chrome surfaces, and accessibility hardening.',
+          trigger: 'Used for UX critique, hierarchy tightening, dark/light theme calibration, and final craft-floor verification (this blueprint strictly follows its craft rules).',
+          incident: 'Blocks muted gray text dropping below 4.5:1 contrast, decorative eyebrow pill clutter above headings, and unstyled scrollbars or missing focus rings.',
+          path: 'Upstream GitHub · pbakaus/impeccable (Apache-2.0 License)'
+        },
+        {
+          idx: 'U4',
+          name: 'volcengine/openviking',
+          cat: 'upstream',
+          catLabel: 'Upstream · Apache-2.0',
+          brief: 'Filesystem-like tiered context and long-term memory backend for agents (viking:// URIs, L0/L1/L2 progressive disclosure, and pluggable heterogeneous models).',
+          trigger: 'Adopted when graduating from the 3-minute minimal loop to multi-session, multi-repo semantic experience recall and automated session extraction.',
+          incident: 'Replaces opaque flat vector dumps with inspectable URI trees and L0/L1/L2 disclosure, running plug-and-play with gemini-embedding-2 x deepseek-v4.1-flash-1017.',
+          path: 'Upstream GitHub · volcengine/openviking (Apache-2.0 License)'
+        }
+      ];
+
+      /* ----------------------------------------------------------------------
+         4. STATE & BILINGUAL DOM CONTROLLERS
          ---------------------------------------------------------------------- */
       var rootEl = document.documentElement;
+      var currentLang = 'zh';
+      var currentTheme = 'dark';
+      var currentStackMode = 'full';
       var currentStep = 0;
       var selectedNode = 'magpie';
       var playTimer = null;
@@ -3645,6 +4574,12 @@
       var currentSkillCat = 'all';
       var openSkillId = '01';
 
+      function getSteps() { return currentLang === 'en' ? STEPS_EN : STEPS_ZH; }
+      function getNodeDetails() { return currentLang === 'en' ? NODE_DETAILS_EN : NODE_DETAILS_ZH; }
+      function getGatesLab() { return currentLang === 'en' ? GATES_LAB_EN : GATES_LAB_ZH; }
+      function getSkillsData() { return currentLang === 'en' ? SKILLS_DATA_EN : SKILLS_DATA_ZH; }
+      function getUi() { return UI_STR[currentLang]; }
+
       function safeGetStorage(key) {
         try { return window.localStorage.getItem(key); } catch (e) { return null; }
       }
@@ -3652,26 +4587,64 @@
         try { window.localStorage.setItem(key, val); } catch (e) { /* file:// sandbox safe */ }
       }
 
+      function normalizeLang(raw) {
+        if (!raw) return '';
+        var s = String(raw).trim().toLowerCase();
+        if (s === 'en' || s.indexOf('en-') === 0 || s.indexOf('en_') === 0) return 'en';
+        if (s === 'zh' || s.indexOf('zh-') === 0 || s.indexOf('zh_') === 0) return 'zh';
+        return '';
+      }
+
+      function resolveInitialLang() {
+        try {
+          if (typeof URLSearchParams === 'function') {
+            var params = new URLSearchParams(window.location.search);
+            var qLang = normalizeLang(params.get('lang'));
+            if (qLang) return qLang;
+          }
+        } catch (e) { /* safe fallback */ }
+
+        var stored = normalizeLang(safeGetStorage('gate-first-lang'));
+        if (stored) return stored;
+
+        var navLang = '';
+        try { navLang = navigator.language || navigator.userLanguage || ''; } catch (e) { navLang = ''; }
+        return /^zh(?:[-_]|$)/i.test(navLang) ? 'zh' : 'en';
+      }
+
+      function syncLangQueryParam(lang) {
+        try {
+          if (window.location.protocol === 'file:' || !window.history || !window.history.replaceState) return;
+          var url = new URL(window.location.href);
+          url.searchParams.set('lang', lang);
+          window.history.replaceState(null, '', url.pathname + url.search + url.hash);
+        } catch (e) { /* ignore sandbox history errors */ }
+      }
+
       /* --- Theme Switcher --- */
       var btnTheme = document.getElementById('btn-theme-toggle');
       var themeLabel = document.getElementById('theme-label');
 
-      function applyTheme(theme) {
+      function applyTheme(theme, persist) {
         var isLight = theme === 'light';
-        rootEl.setAttribute('data-theme', isLight ? 'light' : 'dark');
+        currentTheme = isLight ? 'light' : 'dark';
+        rootEl.setAttribute('data-theme', currentTheme);
         btnTheme.setAttribute('aria-pressed', isLight ? 'true' : 'false');
-        themeLabel.textContent = isLight ? '深色蓝图' : '档案图纸';
-        safeSetStorage('gf-theme', isLight ? 'light' : 'dark');
+        var ui = getUi();
+        themeLabel.textContent = isLight ? ui.themeToDark : ui.themeToLight;
+        if (persist !== false) {
+          safeSetStorage('gf-theme', currentTheme);
+        }
       }
 
       var savedTheme = safeGetStorage('gf-theme');
       if (savedTheme === 'light' || savedTheme === 'dark') {
-        applyTheme(savedTheme);
+        currentTheme = savedTheme;
       }
 
       btnTheme.addEventListener('click', function () {
-        var next = rootEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-        applyTheme(next);
+        var next = currentTheme === 'light' ? 'dark' : 'light';
+        applyTheme(next, true);
       });
 
       /* --- Minimal Loop vs Full Stack Mode Filter --- */
@@ -3682,13 +4655,13 @@
 
       function applyStackMode(mode) {
         var isMin = mode === 'minimal';
-        rootEl.setAttribute('data-stack', isMin ? 'minimal' : 'full');
+        currentStackMode = isMin ? 'minimal' : 'full';
+        rootEl.setAttribute('data-stack', currentStackMode);
         btnMinimal.setAttribute('aria-pressed', isMin ? 'true' : 'false');
         btnFull.setAttribute('aria-pressed', isMin ? 'false' : 'true');
-        filterReadout.textContent = isMin
-          ? 'ACTIVE VIEW · 3-MIN MINIMAL LOOP (5 CORE NODES HIGHLIGHTED, ENHANCED LAYER DIMMED)'
-          : 'ACTIVE VIEW · FULL PRODUCTION STACK (10/10 NODES LIT)';
-        ledgerBadge.textContent = isMin ? '最小闭环基座聚焦' : '生产全栈已点亮';
+        var ui = getUi();
+        filterReadout.textContent = isMin ? ui.filterMinimal : ui.filterFull;
+        ledgerBadge.textContent = isMin ? ui.ledgerMinimal : ui.ledgerFull;
       }
 
       btnMinimal.addEventListener('click', function () { applyStackMode('minimal'); });
@@ -3706,9 +4679,10 @@
       var canvasSelectedIndicator = document.getElementById('canvas-selected-indicator');
 
       function selectNode(nodeKey) {
-        if (!NODE_DETAILS[nodeKey]) return;
+        var details = getNodeDetails();
+        if (!details[nodeKey]) return;
         selectedNode = nodeKey;
-        var d = NODE_DETAILS[nodeKey];
+        var d = details[nodeKey];
 
         insId.textContent = d.id;
         insTier.textContent = d.tierLabel;
@@ -3786,8 +4760,9 @@
       var iconPlay = document.getElementById('icon-play');
 
       function applyStep(stepIdx, syncFocusNode) {
-        currentStep = (stepIdx + STEPS.length) % STEPS.length;
-        var s = STEPS[currentStep];
+        var steps = getSteps();
+        currentStep = (stepIdx + steps.length) % steps.length;
+        var s = steps[currentStep];
 
         simHeading.textContent = s.heading;
         simDesc.textContent = s.desc;
@@ -3812,24 +4787,30 @@
         }
       }
 
+      function syncPlayButtonUI() {
+        var isPlaying = !!playTimer;
+        var ui = getUi();
+        btnPlay.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
+        labelPlay.textContent = isPlaying ? ui.playPause : ui.playStart;
+        iconPlay.innerHTML = isPlaying
+          ? '<rect x="6" y="5" width="4" height="14" fill="currentColor" stroke="none" /><rect x="14" y="5" width="4" height="14" fill="currentColor" stroke="none" />'
+          : '<polygon points="6 4 20 12 6 20 6 4" fill="currentColor" stroke="none" />';
+      }
+
       function stopAutoPlay() {
         if (playTimer) {
           window.clearInterval(playTimer);
           playTimer = null;
         }
-        btnPlay.setAttribute('aria-pressed', 'false');
-        labelPlay.textContent = '自动推演';
-        iconPlay.innerHTML = '<polygon points="6 4 20 12 6 20 6 4" fill="currentColor" stroke="none" />';
+        syncPlayButtonUI();
       }
 
       function startAutoPlay() {
         stopAutoPlay();
-        btnPlay.setAttribute('aria-pressed', 'true');
-        labelPlay.textContent = '暂停推演';
-        iconPlay.innerHTML = '<rect x="6" y="5" width="4" height="14" fill="currentColor" stroke="none" /><rect x="14" y="5" width="4" height="14" fill="currentColor" stroke="none" />';
         playTimer = window.setInterval(function () {
           applyStep(currentStep + 1, true);
         }, 5200);
+        syncPlayButtonUI();
       }
 
       for (var st = 0; st < stepTabEls.length; st++) {
@@ -3882,7 +4863,8 @@
       var labPaths = document.getElementById('lab-paths');
 
       function renderGateLab() {
-        var g = GATES_LAB[currentGate];
+        var gates = getGatesLab();
+        var g = gates[currentGate];
         var stObj = g.states[currentGateState];
 
         for (var i = 0; i < labTabs.length; i++) {
@@ -3958,11 +4940,13 @@
       }
 
       function renderSkills() {
+        var skills = getSkillsData();
+        var ui = getUi();
         var query = (searchInput.value || '').trim().toLowerCase();
         var filtered = [];
 
-        for (var i = 0; i < SKILLS_DATA.length; i++) {
-          var item = SKILLS_DATA[i];
+        for (var i = 0; i < skills.length; i++) {
+          var item = skills[i];
           var catOk = currentSkillCat === 'all' || item.cat === currentSkillCat;
           if (!catOk) continue;
           if (query) {
@@ -3972,7 +4956,7 @@
           filtered.push(item);
         }
 
-        countReadout.textContent = 'SHOWING ' + filtered.length + ' / ' + SKILLS_DATA.length + ' ENTRIES';
+        countReadout.textContent = ui.countShowing(filtered.length, skills.length);
 
         if (filtered.length === 0) {
           ledgerList.innerHTML = '';
@@ -3998,15 +4982,15 @@
             '<div class="skill-drawer">' +
               '<div class="drawer-grid">' +
                 '<div>' +
-                  '<div class="drawer-col-label">触发条件与适用边界</div>' +
+                  '<div class="drawer-col-label">' + escapeHtml(ui.drawerTrigger) + '</div>' +
                   '<div class="drawer-col-text">' + escapeHtml(s.trigger) + '</div>' +
                 '</div>' +
                 '<div>' +
-                  '<div class="drawer-col-label">解决的典型真实事故</div>' +
+                  '<div class="drawer-col-label">' + escapeHtml(ui.drawerIncident) + '</div>' +
                   '<div class="drawer-col-text">' + escapeHtml(s.incident) + '</div>' +
                 '</div>' +
                 '<div>' +
-                  '<div class="drawer-col-label">仓内相对路径 / 上游协议</div>' +
+                  '<div class="drawer-col-label">' + escapeHtml(ui.drawerPath) + '</div>' +
                   '<div class="drawer-col-text mono" style="font-size:0.78rem;">' + escapeHtml(s.path) + '</div>' +
                 '</div>' +
               '</div>' +
@@ -4045,10 +5029,83 @@
         renderSkills();
       });
 
+      /* --- Bilingual Switcher Engine (Zero-Reload, State-Preserving) --- */
+      var btnLangZh = document.getElementById('btn-lang-zh');
+      var btnLangEn = document.getElementById('btn-lang-en');
+      var metaDescEl = document.querySelector('meta[name="description"]');
+
+      function applyLanguage(lang, opts) {
+        opts = opts || {};
+        currentLang = (lang === 'en') ? 'en' : 'zh';
+        var dict = I18N_DOM[currentLang];
+        var ui = getUi();
+
+        rootEl.setAttribute('lang', ui.htmlLang);
+        rootEl.setAttribute('data-lang', currentLang);
+        document.title = ui.docTitle;
+        if (metaDescEl) {
+          metaDescEl.setAttribute('content', ui.metaDesc);
+        }
+
+        btnLangZh.setAttribute('aria-pressed', currentLang === 'zh' ? 'true' : 'false');
+        btnLangEn.setAttribute('aria-pressed', currentLang === 'en' ? 'true' : 'false');
+
+        var textEls = document.querySelectorAll('[data-i18n]');
+        for (var a = 0; a < textEls.length; a++) {
+          var k1 = textEls[a].getAttribute('data-i18n');
+          if (Object.prototype.hasOwnProperty.call(dict, k1)) {
+            textEls[a].textContent = dict[k1];
+          }
+        }
+
+        var htmlEls = document.querySelectorAll('[data-i18n-html]');
+        for (var b = 0; b < htmlEls.length; b++) {
+          var k2 = htmlEls[b].getAttribute('data-i18n-html');
+          if (Object.prototype.hasOwnProperty.call(dict, k2)) {
+            htmlEls[b].innerHTML = dict[k2];
+          }
+        }
+
+        var ariaEls = document.querySelectorAll('[data-i18n-aria]');
+        for (var c = 0; c < ariaEls.length; c++) {
+          var k3 = ariaEls[c].getAttribute('data-i18n-aria');
+          if (Object.prototype.hasOwnProperty.call(dict, k3)) {
+            ariaEls[c].setAttribute('aria-label', dict[k3]);
+          }
+        }
+
+        var phEls = document.querySelectorAll('[data-i18n-placeholder]');
+        for (var d = 0; d < phEls.length; d++) {
+          var k4 = phEls[d].getAttribute('data-i18n-placeholder');
+          if (Object.prototype.hasOwnProperty.call(dict, k4)) {
+            phEls[d].setAttribute('placeholder', dict[k4]);
+          }
+        }
+
+        if (opts.persist) {
+          safeSetStorage('gate-first-lang', currentLang);
+          syncLangQueryParam(currentLang);
+        }
+
+        /* Re-render all dynamic components while preserving active user state */
+        applyTheme(currentTheme, false);
+        applyStackMode(currentStackMode);
+        syncPlayButtonUI();
+        applyStep(currentStep, false);
+        selectNode(selectedNode);
+        renderGateLab();
+        renderSkills();
+      }
+
+      btnLangZh.addEventListener('click', function () {
+        applyLanguage('zh', { persist: true });
+      });
+      btnLangEn.addEventListener('click', function () {
+        applyLanguage('en', { persist: true });
+      });
+
       /* --- Initial Render --- */
-      applyStep(0, true);
-      renderGateLab();
-      renderSkills();
+      applyLanguage(resolveInitialLang(), { persist: false });
     })();
   </script>
 </body>
