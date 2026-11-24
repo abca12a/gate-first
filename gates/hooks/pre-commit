@@ -1,0 +1,49 @@
+#!/bin/sh
+# 跨宿主提交前门禁参考模板（POSIX /bin/sh，必须保持 LF 换行）
+#
+# 为什么主门禁挂在 Git 而不是单一宿主：
+#   不同编码宿主的生命周期钩子格式各异，部分轻量 CLI 甚至没有钩子机制。
+#   挂在 Git 的 core.hooksPath 上，不管是哪个 Agent 还是人类提交，都走同一道确定性关卡。
+#
+# 启用命令（每个仓库克隆后执行一次）：
+#   git config --local core.hooksPath .githooks
+#
+# ⚠️ 换行符硬约束：
+#   本文件必须在 .gitattributes 中钉死 `text eol=lf`。若检出为 CRLF，首行变成 `#!/bin/sh\r`，
+#   Linux / macOS 内核按 shebang 查找 `/bin/sh\r` 会直接报 bad interpreter。
+#   Windows 的 MSYS sh 会容忍 CR，本机提交试跑测不出这个坑，必须用字节检查确认 `\r` 计数为 0。
+
+# 1. 剥离外层 Git 注入的仓库定位变量：
+#    门禁内部的阳性对照常在临时目录 `git init` 建子仓跑测试；若继承了外层 GIT_DIR / GIT_INDEX_FILE，
+#    子进程里的 git 命令会误指回主仓库并造成假失败或污染索引。
+unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_PREFIX GIT_OBJECT_DIRECTORY GIT_COMMON_DIR
+
+GATE_SCRIPT="${GATE_SCRIPT:-scripts/check-all.mjs}"
+
+# 2. 缺门禁脚本或缺 Node 运行时一律 exit 1 阻断，严禁静默放行：
+#    协作规则约定「已走提交钩子的同套检查不手动重跑」。若缺环境时退 0，等于把「根本没验」伪装成「验过且全绿」。
+if [ ! -f "$GATE_SCRIPT" ]; then
+  echo "提交被拦下：找不到门禁入口 $GATE_SCRIPT（当前工作目录 $(pwd)）。" >&2
+  echo "请核对 core.hooksPath 配置或门禁脚本路径；确需应急绕过请显式使用 git commit --no-verify 并在提交说明记录原因。" >&2
+  exit 1
+fi
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "提交被拦下：PATH 中找不到 node 运行时 —— 门禁未执行，不能记为通过。" >&2
+  echo "请配置好 Node.js (>= 20) 后再提交；临时绕过请使用 git commit --no-verify 并写明补验计划。" >&2
+  exit 1
+fi
+
+# 3. 覆盖范围与合并边界说明：
+#    - 本钩子验证当前工作树状态（已暂存 + 未暂存 + 未被忽略的新文件），分块暂存（git add -p）时范围比索引略宽，偏安全侧。
+#    - Git 的 `git merge --no-ff` 走的是 `pre-merge-commit` 而非 `pre-commit`；合并分支后请手动补跑一次门禁入口。
+echo "[pre-commit] 正在执行仓库门禁：node $GATE_SCRIPT"
+node "$GATE_SCRIPT"
+status=$?
+if [ "$status" -ne 0 ]; then
+  echo "" >&2
+  echo "[pre-commit] 提交被拦下：门禁未通过（退出码 $status）。请修复上方报告的问题后再提交。" >&2
+  exit 1
+fi
+
+exit 0

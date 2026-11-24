@@ -1,0 +1,41 @@
+{
+  "name": "gate-first",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Cross-host AI engineering workflow: ~30-line global prompt contract, 10 host-neutral workflow skills, self-growing deterministic Git gates with positive controls, and backend-agnostic memory architecture.",
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "han",
+    "url": "https://dimilinks.com/"
+  },
+  "homepage": "https://abca12a.github.io/gate-first/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abca12a/gate-first.git"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "test": "node scripts/check-all.mjs",
+    "check": "node scripts/check-all.mjs",
+    "check:gates": "node gates/examples/01-state-log-cap/test-positive-control.mjs && node gates/examples/02-doc-links/test-positive-control.mjs && node gates/examples/03-secret-shapes/test-positive-control.mjs && node gates/hooks/stop-hook-example.mjs --self-test",
+    "check:skills": "node skills/skill-maintenance/scripts/validate-skill.mjs --self-test && node skills/skill-maintenance/scripts/check-host-neutral.mjs && node skills/skill-maintenance/scripts/check-skill-deps.mjs && node skills/lead-orchestration/scripts/check-worker-workspace.mjs --self-test",
+    "check:docs": "node gates/examples/01-state-log-cap/check-state-log.mjs && node gates/examples/02-doc-links/check-doc-links.mjs",
+    "check:privacy": "node scripts/check-no-private-leak.mjs",
+    "scaffold": "node scaffold/init-project.mjs",
+    "hooks:install": "node -e \"const fs=require('node:fs'),{spawnSync}=require('node:child_process');const hooks=['.githooks/pre-commit','gates/hooks/pre-commit','skills/lead-orchestration/templates/githooks/pre-commit'];for(const h of hooks){try{fs.chmodSync(h,0o755)}catch{}const s=spawnSync('git',['ls-files','--stage','--',h],{encoding:'utf8'});if(s.stdout&&s.stdout.trim())spawnSync('git',['update-index','--chmod=+x',h],{stdio:'inherit'})}const r=spawnSync('git',['config','--local','core.hooksPath','.githooks'],{stdio:'inherit'});process.exit(r.status??1)\""
+  },
+  "keywords": [
+    "ai-agents",
+    "coding-agents",
+    "git-hooks",
+    "agent-skills",
+    "claude-code",
+    "codex",
+    "openviking",
+    "easytier",
+    "engineering-governance"
+  ]
+}

@@ -1,0 +1,4055 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark" data-stack="full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <title>gate-first · 全流程交互式架构蓝图与门禁自增长系统</title>
+  <meta name="description" content="不靠提示词赌 AI 自觉：责任隔离 + 门禁自增长（含阳性对照） + 异构双模型分层记忆契约（gemini-embedding-2 × deepseek-v4.1-flash-1017）全流程交互式工程蓝图。" />
+  <meta name="author" content="han" />
+  <link rel="canonical" href="https://abca12a.github.io/gate-first/" />
+  <meta property="og:title" content="gate-first · 全流程交互式架构蓝图与门禁自增长系统" />
+  <meta property="og:description" content="不靠提示词赌 AI 自觉：责任隔离 + 门禁自增长（含阳性对照） + 异构双模型分层记忆契约（gemini-embedding-2 × deepseek-v4.1-flash-1017）全流程交互式工程蓝图。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://abca12a.github.io/gate-first/" />
+  <meta property="og:site_name" content="gate-first" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="gate-first · 全流程交互式架构蓝图与门禁自增长系统" />
+  <meta name="twitter:description" content="踩过一次坑，就长出一个下次会变红的门禁：多宿主责任隔离 + 门禁自增长 + EasyTier × OpenViking 异构双模型记忆架构。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <style>
+    /* ==========================================================================
+       1. DESIGN TOKENS — Precision Systems Blueprint (Obsidian & Archival Paper)
+          Warm Graphite & Amber-Cyan Signal Palette / Contrast >= 4.5:1 Verified
+       ========================================================================== */
+    :root,
+    [data-theme="dark"] {
+      --bg-canvas: #0B0D10;
+      --bg-sheet: #11151A;
+      --bg-elevated: #161B22;
+      --bg-hover: #1C222B;
+      --bg-well: #080A0D;
+      --grid-line: rgba(236, 234, 228, 0.045);
+      --line: rgba(236, 234, 228, 0.11);
+      --line-strong: rgba(236, 234, 228, 0.22);
+      --ink: #ECEAE4;
+      --ink-secondary: #9BA1A8;
+      --ink-muted: #7F8892;
+
+      --sig-amber: #E0823A;
+      --sig-amber-soft: rgba(224, 130, 58, 0.13);
+      --sig-amber-border: rgba(224, 130, 58, 0.42);
+
+      --sig-green: #29A373;
+      --sig-green-soft: rgba(41, 163, 115, 0.13);
+      --sig-green-border: rgba(41, 163, 115, 0.42);
+
+      --sig-red: #E5484D;
+      --sig-red-soft: rgba(229, 72, 77, 0.14);
+      --sig-red-border: rgba(229, 72, 77, 0.46);
+
+      --sig-cyan: #3B9EFF;
+      --sig-cyan-soft: rgba(59, 158, 255, 0.13);
+      --sig-cyan-border: rgba(59, 158, 255, 0.42);
+
+      --shadow-float: 0 16px 38px -12px rgba(0, 0, 0, 0.62);
+      --shadow-subtle: 0 6px 18px -6px rgba(0, 0, 0, 0.42);
+      --header-bg: rgba(11, 13, 16, 0.88);
+
+      --term-bg: #080A0D;
+      --term-ink: #E6E4DD;
+      --term-muted: #8B939E;
+      --term-border: rgba(236, 234, 228, 0.14);
+
+      --scrollbar-track: #0B0D10;
+      --scrollbar-thumb: #2A313C;
+      --scrollbar-thumb-hover: #3D4756;
+    }
+
+    [data-theme="light"] {
+      --bg-canvas: #F5F2EB;
+      --bg-sheet: #FCFBF8;
+      --bg-elevated: #EFECE3;
+      --bg-hover: #E6E1D5;
+      --bg-well: #EAE6DC;
+      --grid-line: rgba(20, 23, 28, 0.048);
+      --line: rgba(20, 23, 28, 0.13);
+      --line-strong: rgba(20, 23, 28, 0.26);
+      --ink: #14171C;
+      --ink-secondary: #434952;
+      --ink-muted: #565E68;
+
+      --sig-amber: #B35612;
+      --sig-amber-soft: rgba(179, 86, 18, 0.10);
+      --sig-amber-border: rgba(179, 86, 18, 0.38);
+
+      --sig-green: #14754F;
+      --sig-green-soft: rgba(20, 117, 79, 0.10);
+      --sig-green-border: rgba(20, 117, 79, 0.38);
+
+      --sig-red: #C2252D;
+      --sig-red-soft: rgba(194, 37, 45, 0.10);
+      --sig-red-border: rgba(194, 37, 45, 0.38);
+
+      --sig-cyan: #0D63B8;
+      --sig-cyan-soft: rgba(13, 99, 184, 0.10);
+      --sig-cyan-border: rgba(13, 99, 184, 0.38);
+
+      --shadow-float: 0 16px 36px -14px rgba(20, 23, 28, 0.16);
+      --shadow-subtle: 0 6px 16px -6px rgba(20, 23, 28, 0.10);
+      --header-bg: rgba(245, 242, 235, 0.90);
+
+      --term-bg: #12151B;
+      --term-ink: #ECEAE4;
+      --term-muted: #98A0AA;
+      --term-border: rgba(20, 23, 28, 0.24);
+
+      --scrollbar-track: #EFECE3;
+      --scrollbar-thumb: #C2BDB0;
+      --scrollbar-thumb-hover: #9E9889;
+    }
+
+    /* ==========================================================================
+       2. BROWSER SURFACES & TYPOGRAPHY FLOOR
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+      -webkit-text-size-adjust: 100%;
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--scrollbar-track);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+      border: 2px solid var(--scrollbar-track);
+      border-radius: 5px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--scrollbar-thumb-hover);
+    }
+
+    ::selection {
+      background: var(--sig-amber);
+      color: #0B0D10;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--sig-amber);
+      outline-offset: 2px;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'IBM Plex Sans SC', 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei UI', system-ui, sans-serif;
+      background-color: var(--bg-canvas);
+      background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: 32px 32px;
+      background-position: top center;
+      color: var(--ink);
+      line-height: 1.62;
+      caret-color: var(--sig-amber);
+      overflow-x: hidden;
+      font-variant-numeric: tabular-nums;
+      transition: background-color 0.24s cubic-bezier(0.16, 1, 0.3, 1), color 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    code, pre, kbd, .mono {
+      font-family: 'JetBrains Mono', 'Cascadia Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+      font-variant-numeric: tabular-nums;
+    }
+
+    a {
+      color: inherit;
+      text-underline-offset: 0.24em;
+      text-decoration-thickness: 1px;
+    }
+
+    h1, h2, h3, h4 {
+      margin: 0;
+      font-family: 'Space Grotesk', 'IBM Plex Sans SC', 'PingFang SC', 'Microsoft YaHei UI', sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.22;
+      text-wrap: balance;
+      color: var(--ink);
+    }
+
+    p {
+      margin: 0;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: -100px;
+      left: 16px;
+      z-index: 1000;
+      padding: 10px 16px;
+      background: var(--sig-amber);
+      color: #0B0D10;
+      font-weight: 600;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: top 0.18s ease;
+    }
+    .skip-link:focus {
+      top: 12px;
+    }
+
+    .icon {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      flex-shrink: 0;
+    }
+    .icon-lg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* ==========================================================================
+       3. LAYOUT SHELL & TOP CONTROL CONSOLE
+       ========================================================================== */
+    .shell {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--header-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-family: 'Space Grotesk', monospace;
+      font-weight: 700;
+      font-size: 1.08rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--sig-amber-border);
+      background: var(--sig-amber-soft);
+      color: var(--sig-amber);
+      border-radius: 4px;
+    }
+
+    .rev-tag {
+      font-size: 0.74rem;
+      padding: 2px 7px;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      color: var(--ink-secondary);
+      background: var(--bg-sheet);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.86rem;
+      color: var(--ink-secondary);
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: color 0.16s ease, background-color 0.16s ease;
+    }
+    .nav-links a:hover {
+      color: var(--ink);
+      background: var(--bg-elevated);
+    }
+
+    .console-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .quick-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mode-switch {
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg-sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      padding: 2px;
+      gap: 2px;
+    }
+
+    .mode-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 9px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      border-radius: 3px;
+      color: var(--ink-secondary);
+      transition: background-color 0.18s cubic-bezier(0.16, 1, 0.3, 1), color 0.18s ease;
+      white-space: nowrap;
+    }
+    .mode-btn:hover {
+      color: var(--ink);
+    }
+    .mode-btn[aria-pressed="true"] {
+      background: var(--bg-elevated);
+      color: var(--ink);
+      box-shadow: inset 0 0 0 1px var(--sig-amber-border);
+    }
+    .mode-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--ink-muted);
+    }
+    .mode-btn[data-mode="minimal"][aria-pressed="true"] .mode-dot {
+      background: var(--sig-green);
+    }
+    .mode-btn[data-mode="full"][aria-pressed="true"] .mode-dot {
+      background: var(--sig-amber);
+    }
+
+    .theme-btn,
+    .gh-top-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border: 1px solid var(--line-strong);
+      background: var(--bg-sheet);
+      border-radius: 5px;
+      font-size: 0.79rem;
+      font-weight: 500;
+      color: var(--ink-secondary);
+      text-decoration: none;
+      transition: border-color 0.16s ease, color 0.16s ease, background-color 0.16s ease;
+      white-space: nowrap;
+    }
+    .gh-top-link {
+      padding: 6px 9px;
+    }
+    .theme-btn:hover,
+    .gh-top-link:hover {
+      color: var(--ink);
+      border-color: var(--sig-amber-border);
+      background: var(--bg-elevated);
+    }
+
+    /* ==========================================================================
+       4. HERO THESIS SHEET & STACK COMPARISON BEAM
+       ========================================================================== */
+    .hero-section {
+      padding: 44px 0 36px;
+    }
+
+    .blueprint-frame {
+      position: relative;
+      background: var(--bg-sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    /* Blueprint corner registration marks */
+    .blueprint-frame::before,
+    .blueprint-frame::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      pointer-events: none;
+    }
+    .blueprint-frame::before {
+      top: -1px;
+      left: -1px;
+      border-top: 2px solid var(--sig-amber);
+      border-left: 2px solid var(--sig-amber);
+    }
+    .blueprint-frame::after {
+      bottom: -1px;
+      right: -1px;
+      border-bottom: 2px solid var(--sig-amber);
+      border-right: 2px solid var(--sig-amber);
+    }
+
+    .frame-statusbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 9px 20px;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-elevated);
+      font-size: 0.78rem;
+      color: var(--ink-secondary);
+      flex-wrap: wrap;
+    }
+
+    .status-cluster {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .led {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .led-green { background: var(--sig-green); }
+    .led-amber { background: var(--sig-amber); }
+    .led-cyan { background: var(--sig-cyan); }
+    .led-red { background: var(--sig-red); }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.22fr 0.98fr;
+      gap: 0;
+    }
+
+    .hero-main {
+      padding: 36px 36px 34px;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .hero-title {
+      font-size: clamp(1.75rem, 3.1vw, 2.68rem);
+      letter-spacing: -0.032em;
+      line-height: 1.2;
+      max-width: 24ch;
+    }
+
+    .hero-title .em-amber {
+      color: var(--sig-amber);
+    }
+    .hero-title .em-red {
+      color: var(--sig-red);
+    }
+
+    .hero-lead {
+      margin-top: 18px;
+      font-size: 1.02rem;
+      color: var(--ink-secondary);
+      max-width: 66ch;
+      line-height: 1.7;
+    }
+
+    .hero-lead strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .axiom-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--bg-canvas);
+    }
+
+    .axiom-cell {
+      padding: 14px 16px;
+      border-right: 1px solid var(--line);
+    }
+    .axiom-cell:last-child {
+      border-right: none;
+    }
+    .axiom-head {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 5px;
+    }
+    .axiom-desc {
+      font-size: 0.8rem;
+      color: var(--ink-secondary);
+      line-height: 1.5;
+    }
+
+    /* Right side of Hero: Live Stack Scope Ledger */
+    .hero-ledger {
+      padding: 28px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+      background: var(--bg-canvas);
+    }
+
+    .ledger-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .ledger-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .ledger-state {
+      font-size: 0.78rem;
+      padding: 2px 8px;
+      border-radius: 3px;
+      border: 1px solid var(--sig-amber-border);
+      background: var(--sig-amber-soft);
+      color: var(--sig-amber);
+    }
+    [data-stack="minimal"] .ledger-state {
+      border-color: var(--sig-green-border);
+      background: var(--sig-green-soft);
+      color: var(--sig-green);
+    }
+
+    .tier-block {
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--bg-sheet);
+      transition: opacity 0.22s ease, border-color 0.22s ease, background-color 0.22s ease;
+    }
+
+    .tier-block.tier-core {
+      border-color: var(--sig-green-border);
+    }
+
+    .tier-block.tier-enhanced {
+      border-color: var(--sig-amber-border);
+    }
+
+    [data-stack="minimal"] .tier-block.tier-enhanced {
+      opacity: 0.48;
+      border-style: dashed;
+      border-color: var(--line-strong);
+    }
+
+    .tier-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .tier-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tier-badge {
+      font-size: 0.72rem;
+      padding: 2px 7px;
+      border-radius: 3px;
+      border: 1px solid var(--line-strong);
+      color: var(--ink-secondary);
+    }
+
+    .tier-items {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--ink-secondary);
+    }
+    .tier-items li {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .tier-items li::before {
+      content: "›";
+      color: var(--sig-amber);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .tier-block.tier-core .tier-items li::before {
+      color: var(--sig-green);
+    }
+    .tier-items code {
+      font-size: 0.77rem;
+      color: var(--ink);
+      background: var(--bg-elevated);
+      padding: 1px 5px;
+      border-radius: 3px;
+      border: 1px solid var(--line);
+    }
+
+    /* ==========================================================================
+       5. SECTION HEADINGS (No Eyebrows / Kickers — Heading Carries Its Weight)
+       ========================================================================== */
+    .hero-main,
+    .hero-ledger,
+    .canvas-pane,
+    .inspector-pane,
+    .model-rail,
+    .terminal-column,
+    .lab-analysis,
+    .spec-field {
+      min-width: 0;
+    }
+
+    .tier-items code,
+    .path-chip {
+      word-break: break-word;
+    }
+
+    .section-block {
+      padding: 56px 0 28px;
+      scroll-margin-top: 74px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      font-size: clamp(1.45rem, 2.3vw, 1.95rem);
+      margin-bottom: 8px;
+    }
+
+    .section-desc {
+      font-size: 0.95rem;
+      color: var(--ink-secondary);
+      max-width: 70ch;
+    }
+
+    .section-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: var(--ink-secondary);
+      flex-wrap: wrap;
+    }
+
+    /* ==========================================================================
+       6. MODULE 2 — 5-LAYER INTERACTIVE BLUEPRINT & 6-STEP SIMULATOR
+       ========================================================================== */
+    .sim-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-elevated);
+      flex-wrap: wrap;
+    }
+
+    .step-tabs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .step-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 11px;
+      border: 1px solid var(--line);
+      background: var(--bg-sheet);
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: var(--ink-secondary);
+      transition: border-color 0.16s ease, color 0.16s ease, background-color 0.16s ease;
+    }
+    .step-tab:hover {
+      color: var(--ink);
+      border-color: var(--line-strong);
+    }
+    .step-tab[aria-selected="true"] {
+      color: var(--ink);
+      background: var(--sig-amber-soft);
+      border-color: var(--sig-amber);
+      font-weight: 600;
+    }
+    .step-num {
+      font-size: 0.73rem;
+      color: var(--sig-amber);
+      font-weight: 600;
+    }
+
+    .transport-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ctrl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 11px;
+      border: 1px solid var(--line-strong);
+      background: var(--bg-sheet);
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ink);
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+    .ctrl-btn:hover {
+      background: var(--bg-hover);
+    }
+    .ctrl-btn[aria-pressed="true"] {
+      border-color: var(--sig-amber);
+      background: var(--sig-amber-soft);
+      color: var(--sig-amber);
+    }
+
+    .step-banner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-canvas);
+      flex-wrap: wrap;
+    }
+
+    .step-banner-main {
+      max-width: 74ch;
+    }
+    .step-banner-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .step-banner-copy {
+      font-size: 0.88rem;
+      color: var(--ink-secondary);
+      line-height: 1.6;
+    }
+
+    .legend-bar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.76rem;
+      color: var(--ink-secondary);
+      flex-wrap: wrap;
+      align-self: center;
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend-swatch {
+      width: 12px;
+      height: 3px;
+      border-radius: 1px;
+    }
+
+    /* Blueprint Split Workspace */
+    .workbench-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.34fr) minmax(340px, 0.96fr);
+      align-items: stretch;
+    }
+
+    .canvas-pane {
+      padding: 18px;
+      border-right: 1px solid var(--line);
+      background: var(--bg-sheet);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .svg-stage {
+      width: 100%;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--bg-canvas);
+    }
+
+    .blueprint-svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      user-select: none;
+    }
+
+    /* SVG Blueprint Styling */
+    .lane-rect {
+      fill: var(--bg-sheet);
+      stroke: var(--line);
+      stroke-width: 1;
+    }
+    .lane-rect-alt {
+      fill: var(--bg-canvas);
+      stroke: var(--line);
+      stroke-width: 1;
+    }
+    .lane-tag {
+      fill: var(--ink-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .lane-title-svg {
+      fill: var(--ink-secondary);
+      font-family: 'IBM Plex Sans SC', sans-serif;
+      font-size: 11.5px;
+      font-weight: 500;
+    }
+
+    /* Signal Wires */
+    .wire-base {
+      fill: none;
+      stroke: var(--line-strong);
+      stroke-width: 1.5;
+      transition: opacity 0.25s ease, stroke 0.25s ease;
+    }
+    .wire-pulse {
+      fill: none;
+      stroke-width: 2.4;
+      stroke-dasharray: 8 10;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.24s ease;
+    }
+    .wire-pulse.active {
+      opacity: 1;
+      animation: wireFlow 1.15s linear infinite;
+    }
+    .wire-amber { stroke: var(--sig-amber); }
+    .wire-cyan  { stroke: var(--sig-cyan); }
+    .wire-green { stroke: var(--sig-green); }
+    .wire-red   { stroke: var(--sig-red); }
+
+    @keyframes wireFlow {
+      from { stroke-dashoffset: 36; }
+      to   { stroke-dashoffset: 0; }
+    }
+
+    .wire-label-bg {
+      fill: var(--bg-elevated);
+      stroke: var(--line);
+      stroke-width: 1;
+      rx: 3;
+    }
+    .wire-label-text {
+      fill: var(--ink-secondary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.8px;
+    }
+
+    /* Interactive SVG Nodes */
+    .bp-node {
+      cursor: pointer;
+      outline: none;
+      transition: opacity 0.24s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .bp-node .node-box {
+      fill: var(--bg-elevated);
+      stroke: var(--line-strong);
+      stroke-width: 1.3;
+      rx: 5;
+      transition: stroke 0.18s ease, stroke-width 0.18s ease, fill 0.18s ease;
+    }
+    .bp-node:hover .node-box,
+    .bp-node:focus-visible .node-box {
+      stroke: var(--sig-amber);
+      fill: var(--bg-hover);
+    }
+    .bp-node.step-lit .node-box {
+      stroke: var(--sig-amber);
+      stroke-width: 1.8;
+    }
+    .bp-node.step-lit[data-tone="cyan"] .node-box {
+      stroke: var(--sig-cyan);
+    }
+    .bp-node.step-lit[data-tone="green"] .node-box {
+      stroke: var(--sig-green);
+    }
+    .bp-node.step-lit[data-tone="red"] .node-box {
+      stroke: var(--sig-red);
+    }
+    .bp-node.is-selected .node-box {
+      stroke-width: 2.4;
+      stroke: var(--sig-amber);
+      fill: var(--bg-hover);
+    }
+    .bp-node.is-selected[data-tone="cyan"] .node-box {
+      stroke: var(--sig-cyan);
+    }
+    .bp-node.is-selected[data-tone="green"] .node-box {
+      stroke: var(--sig-green);
+    }
+
+    /* Stack Filter Dimming when Minimal Mode is selected */
+    [data-stack="minimal"] .bp-node[data-tier="full"] {
+      opacity: 0.32;
+    }
+    [data-stack="minimal"] .bp-node[data-tier="full"] .node-box {
+      stroke-dasharray: 4 3;
+    }
+    [data-stack="minimal"] .bp-node[data-tier="full"].is-selected {
+      opacity: 0.92;
+    }
+    [data-stack="minimal"] .wire-fullstack {
+      opacity: 0.22;
+      stroke-dasharray: 3 4;
+    }
+
+    .node-title-svg {
+      fill: var(--ink);
+      font-family: 'IBM Plex Sans SC', 'Space Grotesk', sans-serif;
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+    .node-sub-svg {
+      fill: var(--ink-secondary);
+      font-family: 'JetBrains Mono', 'IBM Plex Sans SC', monospace;
+      font-size: 10.2px;
+    }
+    .node-chip-bg {
+      rx: 2.5;
+      stroke-width: 1;
+    }
+    .node-chip-core {
+      fill: var(--sig-green-soft);
+      stroke: var(--sig-green-border);
+    }
+    .node-chip-full {
+      fill: var(--sig-cyan-soft);
+      stroke: var(--sig-cyan-border);
+    }
+    .node-chip-amber {
+      fill: var(--sig-amber-soft);
+      stroke: var(--sig-amber-border);
+    }
+    .node-chip-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.2px;
+      font-weight: 600;
+    }
+    .chip-ink-core { fill: var(--sig-green); }
+    .chip-ink-full { fill: var(--sig-cyan); }
+    .chip-ink-amber { fill: var(--sig-amber); }
+
+    .canvas-hint {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.78rem;
+      color: var(--ink-secondary);
+      flex-wrap: wrap;
+    }
+
+    /* Right Inspector Panel */
+    .inspector-pane {
+      background: var(--bg-canvas);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .inspector-header {
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-sheet);
+    }
+
+    .inspector-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .inspector-id {
+      font-size: 0.75rem;
+      color: var(--ink-secondary);
+    }
+
+    .inspector-tier-badge {
+      font-size: 0.73rem;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-weight: 600;
+      border: 1px solid var(--sig-green-border);
+      background: var(--sig-green-soft);
+      color: var(--sig-green);
+    }
+    .inspector-tier-badge.is-full {
+      border-color: var(--sig-cyan-border);
+      background: var(--sig-cyan-soft);
+      color: var(--sig-cyan);
+    }
+
+    .inspector-title {
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+    .inspector-sub {
+      font-size: 0.84rem;
+      color: var(--ink-secondary);
+    }
+
+    .inspector-body {
+      padding: 18px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .spec-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .spec-label {
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--ink-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .spec-text {
+      font-size: 0.87rem;
+      color: var(--ink);
+      line-height: 1.62;
+    }
+
+    .code-snippet {
+      margin: 0;
+      padding: 12px 14px;
+      background: var(--term-bg);
+      color: var(--term-ink);
+      border: 1px solid var(--term-border);
+      border-radius: 4px;
+      font-size: 0.77rem;
+      line-height: 1.55;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    .incident-box {
+      padding: 12px 14px;
+      border: 1px solid var(--sig-red-border);
+      background: var(--sig-red-soft);
+      border-radius: 4px;
+      font-size: 0.84rem;
+      line-height: 1.58;
+      color: var(--ink);
+    }
+    .incident-head {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      color: var(--sig-red);
+      font-size: 0.79rem;
+      margin-bottom: 4px;
+    }
+
+    .path-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .path-chip {
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 3px;
+      background: var(--bg-sheet);
+      border: 1px solid var(--line-strong);
+      color: var(--ink);
+    }
+
+    .node-quick-nav {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.77rem;
+      color: var(--ink-secondary);
+    }
+
+    /* ==========================================================================
+       7. MODULE 3 — OPENVIKING HETEROGENEOUS DUAL-MODEL ARCHITECTURE
+       ========================================================================== */
+    .decouple-banner {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-elevated);
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .decouple-title {
+      font-size: 1.04rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .decouple-copy {
+      font-size: 0.87rem;
+      color: var(--ink-secondary);
+      line-height: 1.62;
+    }
+    .decouple-copy strong {
+      color: var(--ink);
+    }
+
+    .migration-equation {
+      padding: 12px 16px;
+      background: var(--bg-sheet);
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      font-size: 0.78rem;
+      display: grid;
+      gap: 8px;
+    }
+    .eq-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .eq-row:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .eq-old {
+      color: var(--ink-secondary);
+      text-decoration: line-through;
+    }
+    .eq-new {
+      color: var(--sig-green);
+      font-weight: 600;
+    }
+
+    .dual-rail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line);
+    }
+
+    .model-rail {
+      padding: 26px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .model-rail:first-child {
+      border-right: 1px solid var(--line);
+    }
+
+    .rail-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+      flex-wrap: wrap;
+    }
+
+    .rail-model-name {
+      font-size: 1.22rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .rail-cyan .rail-model-name { color: var(--sig-cyan); }
+    .rail-amber .rail-model-name { color: var(--sig-amber); }
+
+    .rail-provider {
+      font-size: 0.83rem;
+      color: var(--ink-secondary);
+    }
+
+    .spec-kv-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--bg-canvas);
+    }
+    .spec-kv {
+      padding: 10px 12px;
+      border-right: 1px solid var(--line);
+    }
+    .spec-kv:last-child {
+      border-right: none;
+    }
+    .spec-k {
+      font-size: 0.72rem;
+      color: var(--ink-secondary);
+      margin-bottom: 2px;
+    }
+    .spec-v {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    /* Interactive Ingestion Track Switch inside Left Rail */
+    .track-compare {
+      display: grid;
+      gap: 10px;
+    }
+
+    .track-box {
+      padding: 14px 16px;
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      background: var(--bg-canvas);
+    }
+    .track-box.track-active-mem {
+      border-color: var(--sig-cyan-border);
+    }
+
+    .track-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+    .track-mode-code {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--sig-cyan);
+    }
+    .track-box.track-static-doc .track-mode-code {
+      color: var(--sig-amber);
+    }
+    .track-scope {
+      font-size: 0.74rem;
+      color: var(--ink-secondary);
+    }
+    .track-desc {
+      font-size: 0.83rem;
+      color: var(--ink-secondary);
+      line-height: 1.56;
+      margin-bottom: 10px;
+    }
+    .pipeline-steps {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      font-size: 0.75rem;
+    }
+    .pipe-step {
+      padding: 3px 8px;
+      border-radius: 3px;
+      background: var(--bg-sheet);
+      border: 1px solid var(--line);
+      color: var(--ink);
+    }
+    .pipe-step.pipe-skip {
+      border-style: dashed;
+      color: var(--ink-secondary);
+    }
+    .pipe-arrow {
+      color: var(--ink-muted);
+    }
+
+    /* L0 / L1 / L2 Progressive Disclosure Ladder in Right Rail */
+    .disclosure-ladder {
+      display: grid;
+      gap: 8px;
+    }
+    .ladder-rung {
+      display: grid;
+      grid-template-columns: 128px 1fr;
+      gap: 12px;
+      padding: 11px 14px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--bg-canvas);
+      align-items: baseline;
+    }
+    .ladder-rung.rung-enforced {
+      border-color: var(--sig-amber-border);
+      background: var(--sig-amber-soft);
+    }
+    .rung-tag {
+      font-size: 0.79rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .rung-enforced .rung-tag {
+      color: var(--sig-amber);
+    }
+    .rung-desc {
+      font-size: 0.82rem;
+      color: var(--ink-secondary);
+      line-height: 1.52;
+    }
+    .rung-enforced .rung-desc {
+      color: var(--ink);
+    }
+
+    /* EasyTier + OpenViking Custom Engineering Deck inside Module 3 */
+    .custom-infra-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1.15fr;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-canvas);
+    }
+    .infra-pane {
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-width: 0;
+    }
+    .infra-pane:first-child {
+      border-right: 1px solid var(--line);
+    }
+    .infra-title {
+      font-size: 1.02rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .mesh-topology {
+      display: grid;
+      gap: 8px;
+      padding: 13px 15px;
+      border: 1px solid var(--sig-cyan-border);
+      background: var(--bg-sheet);
+      border-radius: 4px;
+    }
+    .mesh-hop {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.8rem;
+      padding-bottom: 7px;
+      border-bottom: 1px dashed var(--line);
+      flex-wrap: wrap;
+    }
+    .mesh-hop:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .mesh-hop-node {
+      font-weight: 600;
+      color: var(--sig-cyan);
+    }
+    .mesh-hop-meta {
+      color: var(--ink-secondary);
+      font-size: 0.77rem;
+    }
+    .custom-spec-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      font-size: 0.83rem;
+      color: var(--ink-secondary);
+      line-height: 1.58;
+    }
+    .custom-spec-list li {
+      padding: 10px 13px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--bg-sheet);
+    }
+    .custom-spec-list strong {
+      color: var(--ink);
+    }
+    .custom-spec-list code {
+      font-size: 0.76rem;
+      color: var(--ink);
+      background: var(--bg-elevated);
+      padding: 1px 5px;
+      border-radius: 3px;
+      border: 1px solid var(--line);
+      word-break: break-word;
+    }
+
+    /* Bottom 4 Guardrails Matrix */
+    .guardrail-matrix {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      background: var(--bg-sheet);
+    }
+    .guardrail-cell {
+      padding: 20px 22px;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .guardrail-cell:last-child {
+      border-right: none;
+    }
+    .guardrail-key {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--sig-green);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .guardrail-why {
+      font-size: 0.82rem;
+      color: var(--ink-secondary);
+      line-height: 1.56;
+    }
+    .guardrail-why strong {
+      color: var(--ink);
+    }
+
+    /* ==========================================================================
+       8. MODULE 4 — INTERACTIVE GATE & POSITIVE-CONTROL LAB
+       ========================================================================== */
+    .lab-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-elevated);
+    }
+
+    .lab-tab {
+      padding: 14px 18px;
+      text-align: left;
+      border-right: 1px solid var(--line);
+      border-bottom: 2px solid transparent;
+      transition: background-color 0.16s ease, border-color 0.16s ease;
+    }
+    .lab-tab:last-child {
+      border-right: none;
+    }
+    .lab-tab:hover {
+      background: var(--bg-hover);
+    }
+    .lab-tab[aria-selected="true"] {
+      background: var(--bg-sheet);
+      border-bottom-color: var(--sig-amber);
+    }
+    .lab-tab-id {
+      font-size: 0.75rem;
+      color: var(--ink-secondary);
+      display: block;
+      margin-bottom: 3px;
+    }
+    .lab-tab-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--ink);
+      display: block;
+    }
+
+    .lab-workbench {
+      display: grid;
+      grid-template-columns: 1.22fr 0.98fr;
+    }
+
+    .terminal-column {
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      background: var(--term-bg);
+    }
+
+    .state-switcher-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 18px;
+      background: var(--bg-sheet);
+      border-bottom: 1px solid var(--line);
+      flex-wrap: wrap;
+    }
+
+    .state-btn-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .state-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 11px;
+      border-radius: 4px;
+      border: 1px solid var(--line-strong);
+      background: var(--bg-canvas);
+      font-size: 0.79rem;
+      font-weight: 500;
+      color: var(--ink-secondary);
+      transition: all 0.16s ease;
+    }
+    .state-btn:hover {
+      color: var(--ink);
+    }
+    .state-btn[data-state="warn"][aria-pressed="true"] {
+      background: var(--sig-amber-soft);
+      border-color: var(--sig-amber);
+      color: var(--sig-amber);
+      font-weight: 600;
+    }
+    .state-btn[data-state="fail"][aria-pressed="true"] {
+      background: var(--sig-red-soft);
+      border-color: var(--sig-red);
+      color: var(--sig-red);
+      font-weight: 600;
+    }
+    .state-btn[data-state="pass"][aria-pressed="true"] {
+      background: var(--sig-green-soft);
+      border-color: var(--sig-green);
+      color: var(--sig-green);
+      font-weight: 600;
+    }
+
+    .exit-badge {
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 3px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .exit-badge.badge-warn {
+      background: var(--sig-amber-soft);
+      border: 1px solid var(--sig-amber-border);
+      color: var(--sig-amber);
+    }
+    .exit-badge.badge-fail {
+      background: var(--sig-red-soft);
+      border: 1px solid var(--sig-red-border);
+      color: var(--sig-red);
+    }
+    .exit-badge.badge-pass {
+      background: var(--sig-green-soft);
+      border: 1px solid var(--sig-green-border);
+      color: var(--sig-green);
+    }
+
+    .terminal-chrome {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 18px;
+      border-bottom: 1px solid rgba(236, 234, 228, 0.1);
+      color: var(--term-muted);
+      font-size: 0.75rem;
+    }
+
+    .terminal-screen {
+      margin: 0;
+      padding: 18px 20px 22px;
+      color: var(--term-ink);
+      font-size: 0.8rem;
+      line-height: 1.65;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      min-height: 280px;
+      flex: 1;
+    }
+
+    .t-cmd { color: #ECEAE4; font-weight: 600; }
+    .t-dim { color: #8B939E; }
+    .t-warn { color: #E89B54; }
+    .t-err { color: #F26469; font-weight: 600; }
+    .t-ok { color: #3CC08E; font-weight: 600; }
+    .t-cyan { color: #63B3FF; }
+
+    .lab-analysis {
+      padding: 22px 26px;
+      background: var(--bg-canvas);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .analysis-title {
+      font-size: 1.08rem;
+      margin-bottom: 6px;
+    }
+    .analysis-summary {
+      font-size: 0.87rem;
+      color: var(--ink-secondary);
+      line-height: 1.62;
+    }
+
+    .analysis-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .analysis-item {
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--bg-sheet);
+    }
+    .analysis-item-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--ink-secondary);
+      margin-bottom: 4px;
+    }
+    .analysis-item-val {
+      font-size: 0.84rem;
+      color: var(--ink);
+      line-height: 1.56;
+    }
+
+    /* ==========================================================================
+       9. MODULE 5 — 4 + 6 SKILL SYSTEM & UPSTREAM ECOSYSTEM LEDGER
+       ========================================================================== */
+    .filter-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-elevated);
+      flex-wrap: wrap;
+    }
+
+    .filter-pills {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 6px 12px;
+      border-radius: 4px;
+      border: 1px solid var(--line);
+      background: var(--bg-sheet);
+      font-size: 0.8rem;
+      color: var(--ink-secondary);
+      transition: all 0.15s ease;
+    }
+    .filter-btn:hover {
+      color: var(--ink);
+      border-color: var(--line-strong);
+    }
+    .filter-btn[aria-pressed="true"] {
+      background: var(--sig-amber-soft);
+      border-color: var(--sig-amber);
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .search-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-width: 288px;
+    }
+    .search-wrap .icon {
+      position: absolute;
+      left: 10px;
+      color: var(--ink-muted);
+      pointer-events: none;
+    }
+    .skill-search {
+      width: 100%;
+      padding: 7px 12px 7px 32px;
+      border-radius: 4px;
+      border: 1px solid var(--line-strong);
+      background: var(--bg-sheet);
+      color: var(--ink);
+      font: inherit;
+      font-size: 0.82rem;
+    }
+    .skill-search::placeholder {
+      color: var(--ink-muted);
+    }
+
+    .skill-ledger {
+      width: 100%;
+    }
+
+    .skill-row {
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-sheet);
+      transition: background-color 0.15s ease;
+    }
+    .skill-row:last-child {
+      border-bottom: none;
+    }
+
+    .skill-row-trigger {
+      width: 100%;
+      padding: 15px 20px;
+      display: grid;
+      grid-template-columns: 44px minmax(190px, 0.9fr) 140px minmax(240px, 1.8fr) 28px;
+      gap: 14px;
+      align-items: center;
+      text-align: left;
+    }
+    .skill-row-trigger:hover {
+      background: var(--bg-elevated);
+    }
+
+    .skill-idx {
+      font-size: 0.77rem;
+      color: var(--ink-muted);
+    }
+    .skill-name {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .skill-cat-tag {
+      font-size: 0.73rem;
+      padding: 2px 8px;
+      border-radius: 3px;
+      justify-self: start;
+      border: 1px solid var(--line-strong);
+      color: var(--ink-secondary);
+    }
+    .cat-core {
+      border-color: var(--sig-amber-border);
+      background: var(--sig-amber-soft);
+      color: var(--sig-amber);
+    }
+    .cat-playbook {
+      border-color: var(--sig-green-border);
+      background: var(--sig-green-soft);
+      color: var(--sig-green);
+    }
+    .cat-upstream {
+      border-color: var(--sig-cyan-border);
+      background: var(--sig-cyan-soft);
+      color: var(--sig-cyan);
+    }
+
+    .skill-brief {
+      font-size: 0.85rem;
+      color: var(--ink-secondary);
+      line-height: 1.5;
+    }
+
+    .chevron-icon {
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      color: var(--ink-muted);
+      justify-self: end;
+    }
+    .skill-row[data-open="true"] .chevron-icon {
+      transform: rotate(180deg);
+      color: var(--sig-amber);
+    }
+
+    .skill-drawer {
+      display: none;
+      padding: 0 20px 18px 64px;
+      background: var(--bg-canvas);
+      border-top: 1px dashed var(--line);
+    }
+    .skill-row[data-open="true"] .skill-drawer {
+      display: block;
+    }
+
+    .drawer-grid {
+      padding-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .drawer-col-label {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--ink-secondary);
+      margin-bottom: 5px;
+    }
+    .drawer-col-text {
+      font-size: 0.83rem;
+      color: var(--ink);
+      line-height: 1.58;
+    }
+
+    .empty-state {
+      padding: 36px 24px;
+      text-align: center;
+      color: var(--ink-secondary);
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    /* ==========================================================================
+       10. SIGNATURE ENGINEERING NAMEPLATE FOOTER
+       ========================================================================== */
+    .site-footer {
+      margin-top: 56px;
+      border-top: 1px solid var(--line-strong);
+      background: var(--bg-sheet);
+      padding: 28px 0 36px;
+      font-size: 0.82rem;
+      color: var(--ink-secondary);
+    }
+
+    .footer-plate {
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      background: var(--bg-canvas);
+      overflow: hidden;
+    }
+
+    .footer-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-sheet);
+      flex-wrap: wrap;
+    }
+
+    .footer-sig-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 22px;
+      flex-wrap: wrap;
+    }
+
+    .sig-author-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .sig-author-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .sig-license-tag {
+      font-size: 0.74rem;
+      padding: 2px 8px;
+      border-radius: 3px;
+      border: 1px solid var(--sig-green-border);
+      background: var(--sig-green-soft);
+      color: var(--sig-green);
+      font-weight: 600;
+    }
+
+    .sig-links-group {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .sig-ext-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--ink-secondary);
+      text-decoration: underline;
+      text-decoration-color: var(--line-strong);
+      text-underline-offset: 0.26em;
+      font-size: 0.81rem;
+      transition: color 0.16s ease, text-decoration-color 0.16s ease;
+    }
+    .sig-ext-link:hover {
+      color: var(--sig-amber);
+      text-decoration-color: var(--sig-amber);
+    }
+    .sig-ext-arrow {
+      width: 13px;
+      height: 13px;
+      opacity: 0.75;
+    }
+
+    /* ==========================================================================
+       11. RESPONSIVE BREAKPOINTS (1440 / 1024 / 768 / 390) & REDUCED MOTION
+       ========================================================================== */
+    @media (max-width: 1120px) {
+      .section-block {
+        scroll-margin-top: 152px;
+      }
+      .hero-grid,
+      .workbench-grid,
+      .decouple-banner,
+      .dual-rail-grid,
+      .custom-infra-grid,
+      .lab-workbench {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-main,
+      .canvas-pane,
+      .model-rail:first-child,
+      .infra-pane:first-child,
+      .terminal-column {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+      .guardrail-matrix {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .guardrail-cell:nth-child(2) {
+        border-right: none;
+      }
+      .guardrail-cell:nth-child(1),
+      .guardrail-cell:nth-child(2) {
+        border-bottom: 1px solid var(--line);
+      }
+      .lab-tabs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .lab-tab:nth-child(1),
+      .lab-tab:nth-child(2) {
+        border-bottom: 1px solid var(--line);
+      }
+      .lab-tab[aria-selected="true"] {
+        box-shadow: inset 0 -2px 0 var(--sig-amber);
+      }
+      .skill-row-trigger {
+        grid-template-columns: 38px minmax(0, 1fr) auto 24px;
+      }
+      .skill-brief {
+        grid-column: 2 / 4;
+      }
+      .drawer-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .topbar {
+        position: relative;
+      }
+      .section-block {
+        scroll-margin-top: 16px;
+        padding-top: 36px;
+      }
+      .shell,
+      .topbar-inner {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      .hero-main,
+      .hero-ledger,
+      .model-rail,
+      .infra-pane,
+      .lab-analysis,
+      .inspector-header,
+      .inspector-body,
+      .canvas-pane {
+        padding: 18px 16px;
+      }
+      .axiom-strip,
+      .spec-kv-row,
+      .guardrail-matrix,
+      .lab-tabs {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .axiom-cell,
+      .spec-kv,
+      .guardrail-cell,
+      .lab-tab {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+      .axiom-cell:last-child,
+      .spec-kv:last-child,
+      .guardrail-cell:last-child {
+        border-bottom: none;
+      }
+      .ladder-rung {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 4px;
+      }
+      .skill-row-trigger {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 8px;
+        padding: 14px 16px;
+      }
+      .skill-idx {
+        display: none;
+      }
+      .skill-brief {
+        grid-column: 1 / -1;
+      }
+      .skill-drawer {
+        padding-left: 18px;
+      }
+      .search-wrap {
+        width: 100%;
+        min-width: 0;
+      }
+      .console-controls {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .mode-switch {
+        width: 100%;
+      }
+      .mode-btn {
+        flex: 1;
+        justify-content: center;
+        font-size: 0.74rem;
+        padding: 6px 6px;
+        white-space: normal;
+        text-align: center;
+      }
+      .footer-top-row,
+      .footer-sig-row {
+        padding: 14px 16px;
+      }
+      .quick-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .wire-pulse.active {
+        animation: none;
+        stroke-dasharray: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">跳至主图纸内容</a>
+
+  <!-- ========================================================================
+       MODULE 1A — STICKY TOP CONTROL CONSOLE
+       ======================================================================== -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-group">
+        <a href="#top" class="brand-link" aria-label="gate-first 架构蓝图首页">
+          <span class="brand-mark" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path d="M4 5h16v14H4z" />
+              <path d="M9 5v14M15 5v14M4 12h5M15 12h5" />
+              <circle cx="12" cy="12" r="2" />
+            </svg>
+          </span>
+          <span>gate-first</span>
+        </a>
+        <span class="rev-tag mono">REV 2.4</span>
+      </div>
+
+      <nav class="nav-links" aria-label="核心模块导航">
+        <a href="#blueprint">五层全景推演</a>
+        <a href="#dual-model">异构双模型记忆</a>
+        <a href="#gate-lab">阳性对照实验室</a>
+        <a href="#skill-matrix">4+6 技能矩阵</a>
+      </nav>
+
+      <div class="console-controls">
+        <div class="mode-switch" role="group" aria-label="架构层级全局滤镜">
+          <button type="button" class="mode-btn" data-mode="minimal" aria-pressed="false" id="btn-mode-minimal">
+            <span class="mode-dot" aria-hidden="true"></span>
+            <span>3 分钟最小闭环</span>
+          </button>
+          <button type="button" class="mode-btn" data-mode="full" aria-pressed="true" id="btn-mode-full">
+            <span class="mode-dot" aria-hidden="true"></span>
+            <span>生产全栈 (+Magpie+EasyTier+OV)</span>
+          </button>
+        </div>
+
+        <div class="quick-actions">
+          <a href="https://github.com/abca12a/gate-first" target="_blank" rel="noopener noreferrer" class="gh-top-link" aria-label="GitHub 仓库" title="GitHub · abca12a/gate-first">
+            <svg class="icon" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
+              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+            <span class="mono">GitHub</span>
+          </a>
+
+          <button type="button" class="theme-btn" id="btn-theme-toggle" aria-pressed="false" aria-label="切换深浅图纸主题">
+            <svg class="icon" id="theme-icon-dark" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.5" />
+              <path d="M12 2.5v2.5M12 19v2.5M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2.5 12H5M19 12h2.5M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" />
+            </svg>
+            <span id="theme-label">档案图纸</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- ======================================================================
+         MODULE 1B — CORE ENGINEERING THESIS & STACK SCOPE SHEET
+         ====================================================================== -->
+    <section class="hero-section" id="top">
+      <div class="shell">
+        <div class="blueprint-frame">
+          <div class="frame-statusbar mono">
+            <div class="status-cluster">
+              <span class="status-pill"><span class="led led-green"></span>GATE CONTRACT: HARD-EXIT NON-ZERO</span>
+              <span class="status-pill"><span class="led led-cyan"></span>EMBEDDING: gemini-embedding-2 (3072d)</span>
+              <span class="status-pill"><span class="led led-amber"></span>VLM COMPILER: deepseek-v4.1-flash-1017</span>
+            </div>
+            <span id="active-filter-readout">ACTIVE VIEW · FULL PRODUCTION STACK (10/10 NODES LIT)</span>
+          </div>
+
+          <div class="hero-grid">
+            <div class="hero-main">
+              <div>
+                <h1 class="hero-title">
+                  踩过一次坑，<br />就长出一个下次<span class="em-red">会变红</span>的<span class="em-amber">门禁</span>
+                </h1>
+                <p class="hero-lead">
+                  提示词写十遍「请注意不要犯错」，不如在真实提交入口挂一条违规即退 <code>exit 1</code> 的脚本。<strong>gate-first</strong> 不赌 AI 自觉，而是用<strong>唯一主导责任隔离</strong>、<strong>带阳性对照的门禁自增长</strong>与<strong>异构双模型分层记忆契约</strong>，让每一次返工都沉淀为机器可复验的工程护栏。
+                </p>
+              </div>
+
+              <div class="axiom-strip">
+                <div class="axiom-cell">
+                  <div class="axiom-head">
+                    <svg class="icon" viewBox="0 0 24 24" style="color:var(--sig-amber)" aria-hidden="true">
+                      <path d="M12 3v6m0 0l-4 4m4-4l4 4M5 17h4v4H5zm10 0h4v4h-4z" />
+                    </svg>
+                    <span>责任物理隔离</span>
+                  </div>
+                  <p class="axiom-desc">唯一主导只对齐、拆单、审查与合并；写者在独立 <code>git worktree</code> 施工，子代理禁写共享记忆。</p>
+                </div>
+                <div class="axiom-cell">
+                  <div class="axiom-head">
+                    <svg class="icon" viewBox="0 0 24 24" style="color:var(--sig-red)" aria-hidden="true">
+                      <path d="M12 8v5m0 3.5h.01M4.5 19.5h15L12 4.5z" />
+                    </svg>
+                    <span>阳性对照防假绿</span>
+                  </div>
+                  <p class="axiom-desc">只打黄字退 <code>0</code> 不是门禁。新门禁必须向真实入口注入违规确认 <code>exit 1</code>，再恢复确认 <code>exit 0</code>。</p>
+                </div>
+                <div class="axiom-cell">
+                  <div class="axiom-head">
+                    <svg class="icon" viewBox="0 0 24 24" style="color:var(--sig-cyan)" aria-hidden="true">
+                      <circle cx="7.5" cy="12" r="3.5" />
+                      <circle cx="16.5" cy="12" r="3.5" />
+                      <path d="M11 12h2" />
+                    </svg>
+                    <span>异构双模型记忆</span>
+                  </div>
+                  <p class="axiom-desc"><code>gemini-embedding-2</code> 专司 3072d 稠密召回，<code>deepseek-v4.1-flash-1017</code> 异步编译 L0/L1 摘要，零重算解耦。</p>
+                </div>
+              </div>
+            </div>
+
+            <aside class="hero-ledger" aria-label="架构分层对照清单">
+              <div class="ledger-header">
+                <span class="ledger-title">渐进采用契约（点击顶部切换滤镜对比）</span>
+                <span class="ledger-state mono" id="ledger-state-badge">生产全栈已点亮</span>
+              </div>
+
+              <div class="tier-block tier-core">
+                <div class="tier-top">
+                  <span class="tier-name">
+                    <span class="led led-green" aria-hidden="true"></span>
+                    <span>Layer A · 3 分钟最小闭环（常驻基座）</span>
+                  </span>
+                  <span class="tier-badge mono">Git + Node.js 零外部依赖</span>
+                </div>
+                <ul class="tier-items">
+                  <li><span>仓内脚手架 <code>scaffold/init-project.mjs</code> + 记忆模板 <code>memory/templates/STATE.md</code></span></li>
+                  <li><span><code>.githooks/pre-commit</code> → <code>scripts/check-all.mjs</code>（POSIX LF、<code>unset GIT_*</code>、缺环境退 <code>1</code>）</span></li>
+                  <li><span><code>gates/PROTOCOL.md</code> 阳性对照协议 + <code>pit-to-gate</code> / <code>defect-review</code></span></li>
+                </ul>
+              </div>
+
+              <div class="tier-block tier-enhanced">
+                <div class="tier-top">
+                  <span class="tier-name">
+                    <span class="led led-amber" aria-hidden="true"></span>
+                    <span>Layer B · 作者生产全栈（多宿主 + 加密内网 + 记忆引擎）</span>
+                  </span>
+                  <span class="tier-badge mono">Magpie + EasyTier + OV v0.5.5</span>
+                </div>
+                <ul class="tier-items">
+                  <li><span><strong>Magpie 单源</strong>：29 行独立普通文件分发 5 宿主 + 严禁下发裸 <code>openviking</code> MCP 防冲突</span></li>
+                  <li><span><strong>EasyTier 虚拟内网</strong>：容器仅绑 <code>127.0.0.1:1933</code>，<code>&lt;easytier-virtual-ip&gt;%tun0</code> 10s 自愈转发</span></li>
+                  <li><span><strong>OpenViking v0.5.5</strong>：<code>gemini-embedding-2</code> (3072d) × <code>deepseek-v4.1-flash-1017</code> + 三联 <code>systemd</code></span></li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         MODULE 2 — 5-LAYER INTERACTIVE BLUEPRINT & 6-STEP SIGNAL SIMULATOR
+         ====================================================================== -->
+    <section class="section-block" id="blueprint">
+      <div class="shell">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">五层全景交互式架构与 6 步信号推演</h2>
+            <p class="section-desc">
+              使用播放控制器观察单次研发任务从「开场资产注入」到「异步记忆编译」的完整控制流；点击画布中任意架构节点，右侧解剖面板即刻调出其真实参数、踩坑事故复盘与仓内路径。
+            </p>
+          </div>
+          <div class="section-meta mono">
+            <span>5 LAYERS</span>
+            <span>·</span>
+            <span>10 INTERACTIVE NODES</span>
+            <span>·</span>
+            <span>6 LIFECYCLE STEPS</span>
+          </div>
+        </div>
+
+        <div class="blueprint-frame">
+          <!-- Simulator Transport Controls -->
+          <div class="sim-toolbar">
+            <div class="step-tabs" role="tablist" aria-label="全流程 6 步推演阶段">
+              <button type="button" class="step-tab" role="tab" data-step="0" aria-selected="true">
+                <span class="step-num mono">S1</span><span>单源分发与注入</span>
+              </button>
+              <button type="button" class="step-tab" role="tab" data-step="1" aria-selected="false">
+                <span class="step-num mono">S2</span><span>主导拆单与向量召回</span>
+              </button>
+              <button type="button" class="step-tab" role="tab" data-step="2" aria-selected="false">
+                <span class="step-num mono">S3</span><span>Worktree 隔离与防火墙</span>
+              </button>
+              <button type="button" class="step-tab" role="tab" data-step="3" aria-selected="false">
+                <span class="step-num mono">S4</span><span>踩坑分流与阳性对照</span>
+              </button>
+              <button type="button" class="step-tab" role="tab" data-step="4" aria-selected="false">
+                <span class="step-num mono">S5</span><span>提交硬门禁与盲审</span>
+              </button>
+              <button type="button" class="step-tab" role="tab" data-step="5" aria-selected="false">
+                <span class="step-num mono">S6</span><span>EasyTier 与 VLM 编译</span>
+              </button>
+            </div>
+
+            <div class="transport-controls">
+              <button type="button" class="ctrl-btn" id="btn-step-prev" aria-label="上一步">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
+                <span>上一步</span>
+              </button>
+              <button type="button" class="ctrl-btn" id="btn-step-play" aria-pressed="false">
+                <svg class="icon" id="icon-play" viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 4 20 12 6 20 6 4" fill="currentColor" stroke="none" /></svg>
+                <span id="label-play">自动推演</span>
+              </button>
+              <button type="button" class="ctrl-btn" id="btn-step-next" aria-label="下一步">
+                <span>下一步</span>
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6" /></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Active Step Signal Summary -->
+          <div class="step-banner" aria-live="polite">
+            <div class="step-banner-main">
+              <div class="step-banner-title">
+                <span id="sim-step-heading">Step 1 · 资产单源分发与开场确定性注入</span>
+              </div>
+              <p class="step-banner-copy" id="sim-step-desc">
+                Magpie 将 29 行 instructions.md 分发为 5 个宿主各自的独立实体文件（杜绝软链共指被截断为 0 字节），并通过符号链接池挂载 10 个核心 Skill；宿主插件按 CJK 1.5 tok/字预算注入全局偏好与当前 Git 仓库隔离空间 peers/&lt;actor&gt;/。
+              </p>
+            </div>
+            <div class="legend-bar mono" aria-label="信号线图例">
+              <span class="legend-item"><span class="legend-swatch" style="background:var(--sig-amber)"></span>主导控制 / 单源分发</span>
+              <span class="legend-item"><span class="legend-swatch" style="background:var(--sig-cyan)"></span>3072d 向量 / VLM 语义流</span>
+              <span class="legend-item"><span class="legend-swatch" style="background:var(--sig-green)"></span>门禁真绿 (exit 0)</span>
+              <span class="legend-item"><span class="legend-swatch" style="background:var(--sig-red)"></span>硬拦截 / 防火墙阻断</span>
+            </div>
+          </div>
+
+          <!-- Split Blueprint Canvas + Node Inspector -->
+          <div class="workbench-grid">
+            <div class="canvas-pane">
+              <div class="svg-stage">
+                <svg class="blueprint-svg" viewBox="0 0 880 680" role="group" aria-label="gate-first 五层全流程交互架构图">
+                  <defs>
+                    <marker id="arrow-muted" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                      <path d="M 1 1.5 L 8.5 5 L 1 8.5 z" fill="var(--ink-muted)" />
+                    </marker>
+                    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                      <path d="M 1 1.5 L 8.5 5 L 1 8.5 z" fill="var(--sig-amber)" />
+                    </marker>
+                    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                      <path d="M 1 1.5 L 8.5 5 L 1 8.5 z" fill="var(--sig-cyan)" />
+                    </marker>
+                    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                      <path d="M 1 1.5 L 8.5 5 L 1 8.5 z" fill="var(--sig-green)" />
+                    </marker>
+                    <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                      <path d="M 1 1.5 L 8.5 5 L 1 8.5 z" fill="var(--sig-red)" />
+                    </marker>
+                  </defs>
+
+                  <!-- 5 Horizontal Engineering Swimlanes -->
+                  <g aria-hidden="true">
+                    <rect class="lane-rect" x="14" y="14" width="852" height="118" rx="4" />
+                    <text class="lane-tag" x="28" y="36">L1 · ASSET &amp; BOOT</text>
+                    <text class="lane-title-svg" x="28" y="54">单源资产与多宿主开场层</text>
+
+                    <rect class="lane-rect-alt" x="14" y="146" width="852" height="118" rx="4" />
+                    <text class="lane-tag" x="28" y="168">L2 · LEAD &amp; RECALL</text>
+                    <text class="lane-title-svg" x="28" y="186">唯一主导与经验召回层</text>
+
+                    <rect class="lane-rect" x="14" y="278" width="852" height="118" rx="4" />
+                    <text class="lane-tag" x="28" y="300">L3 · ISOLATED EXEC</text>
+                    <text class="lane-title-svg" x="28" y="318">Worktree 隔离与防火墙</text>
+
+                    <rect class="lane-rect-alt" x="14" y="410" width="852" height="118" rx="4" />
+                    <text class="lane-tag" x="28" y="432">L4 · GATE &amp; REVIEW</text>
+                    <text class="lane-title-svg" x="28" y="450">踩坑分流与提交硬拦截</text>
+
+                    <rect class="lane-rect" x="14" y="542" width="852" height="124" rx="4" />
+                    <text class="lane-tag" x="28" y="564">L5 · EASYTIER &amp; VLM</text>
+                    <text class="lane-title-svg" x="28" y="582">EasyTier 内网与语义编译层</text>
+                  </g>
+
+                  <!-- Base Orthogonal Signal Wires -->
+                  <g aria-hidden="true">
+                    <!-- W1: Magpie -> Hosts (S1) -->
+                    <path id="base-w1" class="wire-base wire-fullstack" d="M 480 73 L 538 73" marker-end="url(#arrow-muted)" />
+                    <!-- W2: Hosts -> Lead (S1/S2) -->
+                    <path id="base-w2" class="wire-base" d="M 688 112 L 688 136 L 335 136 L 335 162" marker-end="url(#arrow-muted)" />
+                    <!-- W3: Lead <-> OV Recall (S2) -->
+                    <path id="base-w3" class="wire-base wire-fullstack" d="M 480 196 L 538 196" marker-end="url(#arrow-muted)" />
+                    <path id="base-w3b" class="wire-base wire-fullstack" d="M 538 216 L 480 216" marker-end="url(#arrow-muted)" />
+                    <!-- W4: Lead -> Worktree (S3) -->
+                    <path id="base-w4" class="wire-base" d="M 335 248 L 335 294" marker-end="url(#arrow-muted)" />
+                    <!-- W5: Worktree -> Subagent Firewall Blocked (S3) -->
+                    <path id="base-w5" class="wire-base wire-fullstack" d="M 480 337 L 538 337" marker-end="url(#arrow-muted)" />
+                    <!-- W6: Worktree -> Pit-to-Gate (S4) -->
+                    <path id="base-w6" class="wire-base" d="M 335 380 L 335 426" marker-end="url(#arrow-muted)" />
+                    <!-- W7: Pit-to-Gate -> Pre-commit & Review (S4/S5) -->
+                    <path id="base-w7" class="wire-base" d="M 480 469 L 538 469" marker-end="url(#arrow-muted)" />
+                    <!-- W8: Pre-commit -> Lead Evidence Verify (S5) -->
+                    <path id="base-w8" class="wire-base" d="M 838 469 L 856 469 L 856 205 L 842 205" opacity="0.35" />
+                    <path id="base-w8b" class="wire-base" d="M 688 426 L 688 400 L 208 400 L 208 248" marker-end="url(#arrow-muted)" />
+                    <!-- W9: Lead/Hosts -> Async Queue (S6) -->
+                    <path id="base-w9" class="wire-base wire-fullstack" d="M 225 248 L 225 560" marker-end="url(#arrow-muted)" />
+                    <!-- W10: Async Queue -> DeepSeek VLM Compiler (S6) -->
+                    <path id="base-w10" class="wire-base wire-fullstack" d="M 480 603 L 538 603" marker-end="url(#arrow-muted)" />
+                    <!-- W11: DeepSeek VLM -> OV Recall & Boot Store Loop (S6) -->
+                    <path id="base-w11" class="wire-base wire-fullstack" d="M 840 603 L 856 603 L 856 73 L 840 73" marker-end="url(#arrow-muted)" />
+                  </g>
+
+                  <!-- Animated Signal Pulses per Step -->
+                  <g aria-hidden="true">
+                    <path class="wire-pulse wire-amber" data-steps="0" d="M 480 73 L 538 73" marker-end="url(#arrow-amber)" />
+                    <path class="wire-pulse wire-cyan" data-steps="0" d="M 856 603 L 856 73 L 840 73" marker-end="url(#arrow-cyan)" />
+                    <path class="wire-pulse wire-amber" data-steps="0,1" d="M 688 112 L 688 136 L 335 136 L 335 162" marker-end="url(#arrow-amber)" />
+
+                    <path class="wire-pulse wire-cyan" data-steps="1" d="M 480 196 L 538 196" marker-end="url(#arrow-cyan)" />
+                    <path class="wire-pulse wire-cyan" data-steps="1" d="M 538 216 L 480 216" marker-end="url(#arrow-cyan)" />
+
+                    <path class="wire-pulse wire-amber" data-steps="2" d="M 335 248 L 335 294" marker-end="url(#arrow-amber)" />
+                    <path class="wire-pulse wire-red" data-steps="2" d="M 480 337 L 538 337" marker-end="url(#arrow-red)" />
+
+                    <path class="wire-pulse wire-amber" data-steps="3" d="M 335 380 L 335 426" marker-end="url(#arrow-amber)" />
+                    <path class="wire-pulse wire-red" data-steps="3" d="M 480 469 L 538 469" marker-end="url(#arrow-red)" />
+
+                    <path class="wire-pulse wire-green" data-steps="4" d="M 480 469 L 538 469" marker-end="url(#arrow-green)" />
+                    <path class="wire-pulse wire-green" data-steps="4" d="M 688 426 L 688 400 L 208 400 L 208 248" marker-end="url(#arrow-green)" />
+
+                    <path class="wire-pulse wire-cyan" data-steps="5" d="M 225 248 L 225 560" marker-end="url(#arrow-cyan)" />
+                    <path class="wire-pulse wire-cyan" data-steps="5" d="M 480 603 L 538 603" marker-end="url(#arrow-cyan)" />
+                    <path class="wire-pulse wire-cyan" data-steps="5" d="M 840 603 L 856 603 L 856 206 L 840 206" marker-end="url(#arrow-cyan)" />
+                  </g>
+
+                  <!-- Inline Callout Micro-Labels on Wires -->
+                  <g aria-hidden="true">
+                    <rect class="wire-label-bg" x="484" y="42" width="50" height="16" />
+                    <text class="wire-label-text" x="509" y="53" text-anchor="middle">实体拷贝</text>
+
+                    <rect class="wire-label-bg" x="482" y="172" width="54" height="16" />
+                    <text class="wire-label-text" x="509" y="183" text-anchor="middle">L0→L1→L2</text>
+
+                    <rect class="wire-label-bg" x="344" y="263" width="76" height="16" />
+                    <text class="wire-label-text" x="382" y="274" text-anchor="middle">AGENT-TASK</text>
+
+                    <rect class="wire-label-bg" x="483" y="314" width="52" height="16" />
+                    <text class="wire-label-text" x="509" y="325" text-anchor="middle">禁写记忆</text>
+
+                    <rect class="wire-label-bg" x="481" y="445" width="56" height="16" />
+                    <text class="wire-label-text" x="509" y="456" text-anchor="middle">exit 1 / 0</text>
+
+                    <rect class="wire-label-bg" x="482" y="579" width="54" height="16" />
+                    <text class="wire-label-text" x="509" y="590" text-anchor="middle">60s 重放</text>
+                  </g>
+
+                  <!-- ================= 10 INTERACTIVE NODES ================= -->
+                  <!-- L1 Left: Magpie -->
+                  <g class="bp-node step-lit is-selected" id="svg-node-magpie" data-node="magpie" data-tier="full" data-tone="amber" tabindex="0" role="button" aria-label="节点 01: Magpie 单源资产分发器">
+                    <rect class="node-box" x="190" y="30" width="290" height="84" />
+                    <rect class="node-chip-bg node-chip-amber" x="204" y="41" width="72" height="17" />
+                    <text class="node-chip-text chip-ink-amber" x="240" y="52.5" text-anchor="middle">MAGPIE SSOT</text>
+                    <text class="node-sub-svg" x="466" y="52.5" text-anchor="end">N01</text>
+                    <text class="node-title-svg" x="204" y="76">Magpie 单源分发与管辖切割</text>
+                    <text class="node-sub-svg" x="204" y="96">5 宿主独立哈希块文件 · check-host-skills</text>
+                  </g>
+
+                  <!-- L1 Right: 5 Host Lifecycles -->
+                  <g class="bp-node step-lit" id="svg-node-hosts" data-node="hosts" data-tier="core" data-tone="amber" tabindex="0" role="button" aria-label="节点 02: 5 大宿主开场注入与生命周期">
+                    <rect class="node-box" x="540" y="30" width="298" height="84" />
+                    <rect class="node-chip-bg node-chip-core" x="554" y="41" width="96" height="17" />
+                    <text class="node-chip-text chip-ink-core" x="602" y="52.5" text-anchor="middle">5 HOSTS + URI GUARD</text>
+                    <text class="node-sub-svg" x="824" y="52.5" text-anchor="end">N02</text>
+                    <text class="node-title-svg" x="554" y="76">5 宿主挂载、URI Guard 与注入</text>
+                    <text class="node-sub-svg" x="554" y="96">CJK 1.5 tok/字预算 · Claude/DSH 拦 viking://</text>
+                  </g>
+
+                  <!-- L2 Left: Lead Session -->
+                  <g class="bp-node" id="svg-node-lead" data-node="lead" data-tier="core" data-tone="amber" tabindex="0" role="button" aria-label="节点 03: 唯一主导会话">
+                    <rect class="node-box" x="190" y="162" width="290" height="86" />
+                    <rect class="node-chip-bg node-chip-core" x="204" y="173" width="76" height="17" />
+                    <text class="node-chip-text chip-ink-core" x="242" y="184.5" text-anchor="middle">MINIMAL CORE</text>
+                    <text class="node-sub-svg" x="466" y="184.5" text-anchor="end">N03</text>
+                    <text class="node-title-svg" x="204" y="208">唯一主导会话（Lead Orchestrator）</text>
+                    <text class="node-sub-svg" x="204" y="228">只对齐/拆单/审查/合并 · 签发 AGENT-TASK</text>
+                  </g>
+
+                  <!-- L2 Right: Gemini 3072d Recall -->
+                  <g class="bp-node" id="svg-node-recall" data-node="recall" data-tier="full" data-tone="cyan" tabindex="0" role="button" aria-label="节点 04: Gemini 3072维向量经验召回">
+                    <rect class="node-box" x="540" y="162" width="298" height="86" />
+                    <rect class="node-chip-bg node-chip-full" x="554" y="173" width="102" height="17" />
+                    <text class="node-chip-text chip-ink-full" x="605" y="184.5" text-anchor="middle">GEMINI 3072d VEC</text>
+                    <text class="node-sub-svg" x="824" y="184.5" text-anchor="end">N04</text>
+                    <text class="node-title-svg" x="554" y="208">OpenViking 经验向量检索</text>
+                    <text class="node-sub-svg" x="554" y="228">gemini-embedding-2 · 强制 read L2 原文</text>
+                  </g>
+
+                  <!-- L3 Left: Git Worktree Isolation -->
+                  <g class="bp-node" id="svg-node-worktree" data-node="worktree" data-tier="core" data-tone="amber" tabindex="0" role="button" aria-label="节点 05: Git Worktree 物理隔离执行舱">
+                    <rect class="node-box" x="190" y="294" width="290" height="86" />
+                    <rect class="node-chip-bg node-chip-core" x="204" y="305" width="76" height="17" />
+                    <text class="node-chip-text chip-ink-core" x="242" y="316.5" text-anchor="middle">MINIMAL CORE</text>
+                    <text class="node-sub-svg" x="466" y="316.5" text-anchor="end">N05</text>
+                    <text class="node-title-svg" x="204" y="340">Git Worktree 并行隔离执行舱</text>
+                    <text class="node-sub-svg" x="204" y="360">独立分支写隔离 · ToolParts 12,000 字采集</text>
+                  </g>
+
+                  <!-- L3 Right: Subagent Memory Firewall -->
+                  <g class="bp-node" id="svg-node-firewall" data-node="firewall" data-tier="full" data-tone="red" tabindex="0" role="button" aria-label="节点 06: 子代理共享记忆防火墙">
+                    <rect class="node-box" x="540" y="294" width="298" height="86" />
+                    <rect class="node-chip-bg node-chip-full" x="554" y="305" width="106" height="17" />
+                    <text class="node-chip-text chip-ink-full" x="607" y="316.5" text-anchor="middle">MEMORY FIREWALL</text>
+                    <text class="node-sub-svg" x="824" y="316.5" text-anchor="end">N06</text>
+                    <text class="node-title-svg" x="554" y="340">子代理记忆回写硬防火墙</text>
+                    <text class="node-sub-svg" x="554" y="360">skipSubagentSessions: true · 只回传证据</text>
+                  </g>
+
+                  <!-- L4 Left: pit-to-gate & Positive Control -->
+                  <g class="bp-node" id="svg-node-pittogate" data-node="pittogate" data-tier="core" data-tone="red" tabindex="0" role="button" aria-label="节点 07: pit-to-gate 踩坑分流与阳性对照">
+                    <rect class="node-box" x="190" y="426" width="290" height="86" />
+                    <rect class="node-chip-bg node-chip-core" x="204" y="437" width="76" height="17" />
+                    <text class="node-chip-text chip-ink-core" x="242" y="448.5" text-anchor="middle">MINIMAL CORE</text>
+                    <text class="node-sub-svg" x="466" y="448.5" text-anchor="end">N07</text>
+                    <text class="node-title-svg" x="204" y="472">pit-to-gate 三路分流与阳性对照</text>
+                    <text class="node-sub-svg" x="204" y="492">门禁 / Skill / 记忆 · 坏例退 1 → 合法例退 0</text>
+                  </g>
+
+                  <!-- L4 Right: pre-commit + defect-review -->
+                  <g class="bp-node" id="svg-node-precommit" data-node="precommit" data-tier="core" data-tone="green" tabindex="0" role="button" aria-label="节点 08: pre-commit 硬拦截与独立盲审">
+                    <rect class="node-box" x="540" y="426" width="298" height="86" />
+                    <rect class="node-chip-bg node-chip-core" x="554" y="437" width="92" height="17" />
+                    <text class="node-chip-text chip-ink-core" x="600" y="448.5" text-anchor="middle">HARD EXIT GATE</text>
+                    <text class="node-sub-svg" x="824" y="448.5" text-anchor="end">N08</text>
+                    <text class="node-title-svg" x="554" y="472">.githooks/pre-commit 与独立盲审</text>
+                    <text class="node-sub-svg" x="554" y="492">unset GIT_* · defect-review · 分层证据验收</text>
+                  </g>
+
+                  <!-- L5 Left: EasyTier Virtual Mesh & Local Pending Queue -->
+                  <g class="bp-node" id="svg-node-queue" data-node="queue" data-tier="full" data-tone="cyan" tabindex="0" role="button" aria-label="节点 09: EasyTier 零公网暴露虚拟内网与单飞队列">
+                    <rect class="node-box" x="190" y="560" width="290" height="88" />
+                    <rect class="node-chip-bg node-chip-full" x="204" y="571" width="114" height="17" />
+                    <text class="node-chip-text chip-ink-full" x="261" y="582.5" text-anchor="middle">EASYTIER + PENDING</text>
+                    <text class="node-sub-svg" x="466" y="582.5" text-anchor="end">N09</text>
+                    <text class="node-title-svg" x="204" y="606">EasyTier 虚拟内网与 60s 单飞队列</text>
+                    <text class="node-sub-svg" x="204" y="626">&lt;easytier-virtual-ip&gt;:1933 · 127.0.0.1 回环</text>
+                  </g>
+
+                  <!-- L5 Right: DeepSeek VLM Semantic Compiler & Systemd Ops -->
+                  <g class="bp-node" id="svg-node-vlm" data-node="vlm" data-tier="full" data-tone="cyan" tabindex="0" role="button" aria-label="节点 10: DeepSeek VLM 语义提炼与三联 systemd 运维">
+                    <rect class="node-box" x="540" y="560" width="298" height="88" />
+                    <rect class="node-chip-bg node-chip-full" x="554" y="571" width="122" height="17" />
+                    <text class="node-chip-text chip-ink-full" x="615" y="582.5" text-anchor="middle">DEEPSEEK + SYSTEMD</text>
+                    <text class="node-sub-svg" x="824" y="582.5" text-anchor="end">N10</text>
+                    <text class="node-title-svg" x="554" y="606">DeepSeek 编译与三联 systemd 自治</text>
+                    <text class="node-sub-svg" x="554" y="626">peers/* 全量 organize · 巡检自举落 resources/</text>
+                  </g>
+                </svg>
+              </div>
+
+              <div class="canvas-hint">
+                <span>交互提示：点击或用 Tab + Enter 选中任意节点，右侧实时检视该节点底层参数与真实踩坑复盘。</span>
+                <span class="mono" id="canvas-selected-indicator">INSPECTING · N01 magpie</span>
+              </div>
+            </div>
+
+            <!-- Linked Node Inspector Panel -->
+            <aside class="inspector-pane" aria-live="polite" aria-label="节点深度解剖面板">
+              <div class="inspector-header">
+                <div class="inspector-top-row">
+                  <span class="inspector-id mono" id="ins-id">NODE N01 · LAYER 1</span>
+                  <span class="inspector-tier-badge is-full mono" id="ins-tier">Magpie / OpenViking 全栈增强</span>
+                </div>
+                <h3 class="inspector-title" id="ins-title">Magpie 单源分发与符号链接池</h3>
+                <p class="inspector-sub" id="ins-sub">29 行全局指令独立拷贝 + 10 个核心 Skill 符号链接挂载</p>
+              </div>
+
+              <div class="inspector-body">
+                <div class="spec-field">
+                  <span class="spec-label">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <span>工程职责与运行机制</span>
+                  </span>
+                  <p class="spec-text" id="ins-duty"></p>
+                </div>
+
+                <div class="spec-field">
+                  <span class="spec-label">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6" /></svg>
+                    <span>真实配置参数与门禁契约</span>
+                  </span>
+                  <pre class="code-snippet" id="ins-config"></pre>
+                </div>
+
+                <div class="incident-box">
+                  <div class="incident-head">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" /></svg>
+                    <span>挡住的真实踩坑事故（Postmortem）</span>
+                  </div>
+                  <p id="ins-incident"></p>
+                </div>
+
+                <div class="spec-field">
+                  <span class="spec-label">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
+                    <span>仓库内对应相对路径</span>
+                  </span>
+                  <div class="path-chips mono" id="ins-paths"></div>
+                </div>
+
+                <div class="node-quick-nav">
+                  <span>支持点击左侧蓝图任意节点无缝切换</span>
+                  <div>
+                    <button type="button" class="ctrl-btn" id="btn-node-prev" style="padding:3px 8px;font-size:0.74rem;">上一节点</button>
+                    <button type="button" class="ctrl-btn" id="btn-node-next" style="padding:3px 8px;font-size:0.74rem;">下一节点</button>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         MODULE 3 — OPENVIKING HETEROGENEOUS DUAL-MODEL DEEP DIVE
+         ====================================================================== -->
+    <section class="section-block" id="dual-model">
+      <div class="shell">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">OpenViking v0.5.5 异构双模型、EasyTier 加密内网与工作流专属定制</h2>
+            <p class="section-desc">
+              从底层异构双模型解耦（3072d 稠密向量 × DeepSeek 语义编译）、EasyTier 零公网暴露虚拟内网转发，到配套本工作流的 ovcli.conf 优先级、双宿主 URI Guard 与三联 systemd 自治体系一次拆透。
+            </p>
+          </div>
+          <div class="section-meta mono">
+            <span>EasyTier Mesh</span>
+            <span>·</span>
+            <span>gemini-embedding-2 (3072d)</span>
+            <span>×</span>
+            <span>deepseek-v4.1-flash-1017</span>
+          </div>
+        </div>
+
+        <div class="blueprint-frame">
+          <!-- Decoupling Evolution Banner -->
+          <div class="decouple-banner">
+            <div>
+              <h3 class="decouple-title">
+                <svg class="icon icon-lg" viewBox="0 0 24 24" style="color:var(--sig-cyan)" aria-hidden="true">
+                  <path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                </svg>
+                <span>架构演进实测：向量空间与语义编译器正交解耦，零向量重算平滑迁移</span>
+              </h3>
+              <p class="decouple-copy">
+                早期方案中 Embedding 与会话记忆提炼共用 <code>gemini-3.8-flash</code> 配额池，高频长会话收尾时易与实时向量检索争抢速率窗口。切换至 <strong><code>deepseek-v4.1-flash-1017</code> 承担全部 VLM 语义编译</strong>后，Gemini 额度 100% 专供 <code>gemini-embedding-2</code>；更关键的是，<strong>底层 3072 维稠密向量坐标只取决于 Embedding 模型</strong>，更换右侧 VLM 模型实现<strong>零索引重建、零向量重算、零停机无缝切换</strong>。
+              </p>
+            </div>
+
+            <div class="migration-equation mono" aria-label="双模型演进前后对比">
+              <div class="eq-row">
+                <span>早期耦合态</span>
+                <span class="eq-old">gemini-embedding-2 + gemini-3.8-flash (争抢配额)</span>
+              </div>
+              <div class="eq-row">
+                <span>当前生产态</span>
+                <span class="eq-new">gemini-embedding-2 × deepseek-v4.1-flash-1017</span>
+              </div>
+              <div class="eq-row">
+                <span>迁移重算成本</span>
+                <span style="color:var(--sig-cyan);font-weight:600;">0 条向量重算 · 3072d 索引原位复用</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Left & Right Model Rails -->
+          <div class="dual-rail-grid">
+            <!-- Left Rail: gemini-embedding-2 -->
+            <div class="model-rail rail-cyan">
+              <div class="rail-head">
+                <div>
+                  <div class="rail-model-name">gemini-embedding-2</div>
+                  <div class="rail-provider">稠密向量索引与高维语义检索轨 · Google 原生接口</div>
+                </div>
+                <span class="rev-tag mono" style="border-color:var(--sig-cyan-border);color:var(--sig-cyan);">DENSE VECTOR RAIL</span>
+              </div>
+
+              <div class="spec-kv-row mono">
+                <div class="spec-kv">
+                  <div class="spec-k">向量维度</div>
+                  <div class="spec-v">dimension = 3072</div>
+                </div>
+                <div class="spec-kv">
+                  <div class="spec-k">协议通道</div>
+                  <div class="spec-v">Google Native API</div>
+                </div>
+                <div class="spec-kv">
+                  <div class="spec-k">跨语种对齐</div>
+                  <div class="spec-v">中文 + 英文 + 代码符号</div>
+                </div>
+              </div>
+
+              <div class="track-compare">
+                <div class="track-box track-active-mem">
+                  <div class="track-header">
+                    <code class="track-mode-code">semantic_and_vectors</code>
+                    <span class="track-scope mono">活跃结构化记忆（6 类命名空间）</span>
+                  </div>
+                  <p class="track-desc">
+                    覆盖 <code>profile</code> / <code>preferences</code> / <code>entities</code> / <code>events</code> / <code>experiences</code> 与仓库隔离空间 <code>peers/&lt;actor&gt;/</code>。入库时既构建 3072d 向量，又触发右侧 VLM 生成 L0/L1 双层摘要。
+                  </p>
+                  <div class="pipeline-steps mono">
+                    <span class="pipe-step">结构化记忆载荷</span>
+                    <span class="pipe-arrow">→</span>
+                    <span class="pipe-step" style="border-color:var(--sig-cyan-border)">3072d 稠密向量</span>
+                    <span class="pipe-arrow">+</span>
+                    <span class="pipe-step" style="border-color:var(--sig-amber-border)">VLM 编译 L0/L1</span>
+                  </div>
+                </div>
+
+                <div class="track-box track-static-doc">
+                  <div class="track-header">
+                    <code class="track-mode-code">vectors_only</code>
+                    <span class="track-scope mono">resources/ 静态长文档归档（40+ 篇）</span>
+                  </div>
+                  <p class="track-desc">
+                    本机运维手册、历史长篇调研与归档规范放入 <code>resources/</code>（从不注入开场上下文，仅按需语义召回）。显式设为<strong>仅建 3072d 向量、跳过 VLM 摘要编译</strong>，省去大批量 Token 消耗并保留原文颗粒度。
+                  </p>
+                  <div class="pipeline-steps mono">
+                    <span class="pipe-step">40+ 静态长文档</span>
+                    <span class="pipe-arrow">→</span>
+                    <span class="pipe-step" style="border-color:var(--sig-cyan-border)">分块 3072d 向量入库</span>
+                    <span class="pipe-arrow">→</span>
+                    <span class="pipe-step pipe-skip">跳过 VLM 摘要 (零损耗省成本)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Rail: deepseek-v4.1-flash-1017 -->
+            <div class="model-rail rail-amber">
+              <div class="rail-head">
+                <div>
+                  <div class="rail-model-name">deepseek-v4.1-flash-1017</div>
+                  <div class="rail-provider">异步记忆抽取、渐进摘要编译与去重治理轨 · OpenAI 兼容接口</div>
+                </div>
+                <span class="rev-tag mono" style="border-color:var(--sig-amber-border);color:var(--sig-amber);">SEMANTIC COMPILER RAIL</span>
+              </div>
+
+              <div class="spec-kv-row mono">
+                <div class="spec-kv">
+                  <div class="spec-k">执行时机</div>
+                  <div class="spec-v">异步收尾 / 零阻塞</div>
+                </div>
+                <div class="spec-kv">
+                  <div class="spec-k">协议通道</div>
+                  <div class="spec-v">OpenAI-Compatible</div>
+                </div>
+                <div class="spec-kv">
+                  <div class="spec-k">周期维护</div>
+                  <div class="spec-v">每日定时 organize</div>
+                </div>
+              </div>
+
+              <div class="disclosure-ladder" aria-label="L0 到 L2 三级渐进披露契约">
+                <div class="ladder-rung">
+                  <code class="rung-tag">L0 · .abstract.md</code>
+                  <p class="rung-desc">由 <code>deepseek-v4.1-flash-1017</code> 提炼的一句话高密度摘要。供 <code>find</code> / <code>search</code> 阶段极低 Token 成本扫读候选列表。</p>
+                </div>
+                <div class="ladder-rung">
+                  <code class="rung-tag">L1 · .overview.md</code>
+                  <p class="rung-desc">结构化触发背景、关键结论与适用边界概览。主导会话据此筛出最相关的 1–3 条候选经验，过滤同名异构项目干扰。</p>
+                </div>
+                <div class="ladder-rung rung-enforced">
+                  <code class="rung-tag">L2 · 完整原文核实</code>
+                  <p class="rung-desc"><strong>硬性契约：摘要绝不等同于当前事实。</strong>命中候选后必须调用 <code>read</code> 展开 L2 原文核实命令、路径与失效条件，严禁只看 L0/L1 直接改代码。</p>
+                </div>
+              </div>
+
+              <div class="track-box">
+                <div class="track-header">
+                  <code class="track-mode-code" style="color:var(--sig-green)">异步收尾与每日 organize 合并闭环</code>
+                  <span class="track-scope mono">防记忆碎片化堆积</span>
+                </div>
+                <p class="track-desc" style="margin-bottom:0;">
+                  会话达到 <code>60,000 tokens</code> / <code>20 turns</code>、<code>PreCompact</code> 或 <code>SessionEnd</code> 时，连同截断在 <code>12,000</code> 字符内的真实 <code>ToolParts</code> 异步送入服务端抽取结构化条目；每日定时运行 <code>organize</code> 合并重复经验、覆写旧状态，不叠加冲突副本。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- EasyTier Virtual Mesh + OpenViking v0.5.5 Workflow Customizations -->
+          <div class="custom-infra-grid" aria-label="EasyTier 虚拟内网与 OpenViking 工作流专属定制">
+            <!-- Left Deck: EasyTier Zero-Public-Exposure Virtual Mesh -->
+            <div class="infra-pane">
+              <div class="infra-title">
+                <span>EasyTier 私有加密虚拟内网底座（淘汰脆弱 ssh -N -L 隧道）</span>
+                <span class="rev-tag mono" style="border-color:var(--sig-cyan-border);color:var(--sig-cyan);">ZERO PUBLIC EXPOSURE</span>
+              </div>
+
+              <div class="mesh-topology mono">
+                <div class="mesh-hop">
+                  <span class="mesh-hop-node">1. 多宿主客户端 private_mode = true</span>
+                  <span class="mesh-hop-meta">2s 静态握手 · tcp:// + wss:// 双中继冗余</span>
+                </div>
+                <div class="mesh-hop">
+                  <span class="mesh-hop-node">2. P2P 低延迟直连 / 严苛办公网纯出站穿透</span>
+                  <span class="mesh-hop-meta">双模自适应切换 + ~/.openviking/pending/ 60s 单飞队列</span>
+                </div>
+                <div class="mesh-hop">
+                  <span class="mesh-hop-node">3. easytier-core (&lt;easytier-virtual-ip&gt;%tun0:1933)</span>
+                  <span class="mesh-hop-meta">严格绑定虚拟网卡接口 · openviking-port-forward.service 10s 自愈</span>
+                </div>
+                <div class="mesh-hop">
+                  <span class="mesh-hop-node">4. Docker 容器回环 (127.0.0.1:1933)</span>
+                  <span class="mesh-hop-meta">仅绑本机回环防 Docker 改 iptables 裸露公网</span>
+                </div>
+              </div>
+
+              <ul class="custom-spec-list">
+                <li>
+                  <strong>10 秒轮询自愈与 98.6% 日志降噪：</strong>服务端配 <code>openviking-port-forward.service</code> 每 10 秒核验并自愈转发规则（防进程重启丢失内存态端口映射），并将虚拟网日志收敛至 <code>warn</code> 级，磁盘日志写入量直降 <strong><code>98.6%</code></strong>。
+                </li>
+                <li>
+                  <strong>断网零阻塞闭环：</strong>客户端通过 <code>http://&lt;easytier-virtual-ip&gt;:1933</code> 通信；遇网络切换或服务端升级时自动落入本地 <code>~/.openviking/pending/</code>，由 <strong>60 秒单飞锁（single-flight）</strong>后台静默重放，前台编码零卡顿。
+                </li>
+              </ul>
+            </div>
+
+            <!-- Right Deck: OpenViking v0.5.5 Workflow-Specific Customizations -->
+            <div class="infra-pane">
+              <div class="infra-title">
+                <span>OpenViking v0.5.5 配套工作流专属深度定制</span>
+                <span class="rev-tag mono" style="border-color:var(--sig-amber-border);color:var(--sig-amber);">ovcli.conf · PLUGIN OVERRIDE</span>
+              </div>
+
+              <pre class="code-snippet">{
+  "url": "http://&lt;easytier-virtual-ip&gt;:1933",
+  "api_key": "&lt;redacted-user-key&gt;",
+  "account": "default",
+  "user": "default",
+  "plugin": {
+    "recallPeerScope": "actor",
+    "commitTokenThreshold": 60000,
+    "commitTurnThreshold": 20,
+    "captureToolResults": true,
+    "captureToolMaxChars": 12000,
+    "skipSubagentSessions": true
+  }
+}</pre>
+
+              <ul class="custom-spec-list">
+                <li>
+                  <strong>控制面优先级 + Magpie 管辖切割 + 双宿主 URI Guard：</strong><code>ovcli.conf</code> 的 <code>plugin</code> 段优先级高于单宿主本地入参，改一处全宿主同步生效；严禁 Magpie 下发裸 <code>openviking</code> MCP（防与原生插件内置桥接冲突），且 <strong>Claude Code 与 DSH 均内置 <code>URI Guard</code></strong> 拦截本地文件工具误读 <code>viking://</code>。
+                </li>
+                <li>
+                  <strong>服务端三联 <code>systemd</code> 自治 + 自举巡检 + 人设对齐：</strong>① 14 天滚动 <code>backup</code>（改库前强制 <code>snapshot commit</code>）；② 定制扩展 <code>organize</code> <strong>自动遍历 <code>peers/*</code> 全量项目空间</strong>编译去重；③ 每日 <code>inspection</code> 巡检日报自举写入 <code>resources/ops/reports/</code>（平时零常驻 Token，排障按需语义召回），配齐 <code>vikingbot</code> <code>memories/soul.md</code> 中文工程人设。
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 4 Anti-Pollution Guardrails -->
+          <div class="guardrail-matrix" aria-label="四道记忆防污染硬护栏">
+            <div class="guardrail-cell">
+              <div class="guardrail-key mono">
+                <span class="led led-green"></span>
+                <span>OpenViking Rules = 0</span>
+              </div>
+              <p class="guardrail-why">
+                <strong>禁用软规则语义召回。</strong>行为红线只留在仓内 <code>AGENTS.md</code> 与全局规则文件；若把硬规则塞进向量库，一旦余弦相似度漏召回就会静默失效，且造成双源漂移。
+              </p>
+            </div>
+            <div class="guardrail-cell">
+              <div class="guardrail-key mono">
+                <span class="led led-green"></span>
+                <span>viking://agent/skills = 空</span>
+              </div>
+              <p class="guardrail-why">
+                <strong>技能只归 Magpie 单源管理。</strong>绝不在记忆库里存第二份 Skill 副本，避免「改了本地 SKILL.md 却被记忆库旧摘要带偏」的幽灵回退。
+              </p>
+            </div>
+            <div class="guardrail-cell">
+              <div class="guardrail-key mono">
+                <span class="led led-green"></span>
+                <span>skipSubagentSessions: true</span>
+              </div>
+              <p class="guardrail-why">
+                <strong>子代理排错噪音零入库。</strong>并行子代理的试探命令、走不通的分支猜想一律拦截在记忆库之外，只允许唯一主导验收后沉淀真实结论。
+              </p>
+            </div>
+            <div class="guardrail-cell">
+              <div class="guardrail-key mono">
+                <span class="led led-green"></span>
+                <span>recallPeerScope: "actor"</span>
+              </div>
+              <p class="guardrail-why">
+                <strong>自动隔离与主动跨仓双轨互补。</strong>生命周期自动注入/捕获按 Git 仓严格锁定 <code>peers/&lt;actor&gt;/</code> 防串味；而主动显式调 MCP 检索时天然支持跨项目借鉴历史经验。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         MODULE 4 — INTERACTIVE GATE & POSITIVE-CONTROL LAB
+         ====================================================================== -->
+    <section class="section-block" id="gate-lab">
+      <div class="shell">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">门禁阳性对照交互实验室</h2>
+            <p class="section-desc">
+              切换 4 条真实工程门禁，并在每条门禁下亲手对比「只打警告退 0 的反面教材」「注入违规触发 exit 1 的阳性对照」与「修复归档后 exit 0 真绿」。
+            </p>
+          </div>
+          <div class="section-meta mono">
+            <span>4 REAL GATES</span>
+            <span>·</span>
+            <span>3 EXECUTION STATES EACH</span>
+          </div>
+        </div>
+
+        <div class="blueprint-frame">
+          <!-- 4 Gate Tabs -->
+          <div class="lab-tabs" role="tablist" aria-label="4 条真实门禁实验切换">
+            <button type="button" class="lab-tab" role="tab" data-gate="0" aria-selected="true">
+              <span class="lab-tab-id mono">GATE 01 · META CAP</span>
+              <span class="lab-tab-name">state-log-cap 元门禁</span>
+            </button>
+            <button type="button" class="lab-tab" role="tab" data-gate="1" aria-selected="false">
+              <span class="lab-tab-id mono">GATE 02 · ARCHIVE LINKS</span>
+              <span class="lab-tab-name">doc-links 归档断链门禁</span>
+            </button>
+            <button type="button" class="lab-tab" role="tab" data-gate="2" aria-selected="false">
+              <span class="lab-tab-id mono">GATE 03 · BIDIRECTIONAL</span>
+              <span class="lab-tab-name">secret-shapes 双向白名单门禁</span>
+            </button>
+            <button type="button" class="lab-tab" role="tab" data-gate="3" aria-selected="false">
+              <span class="lab-tab-id mono">GATE 04 · PORTABILITY</span>
+              <span class="lab-tab-name">host-neutral 宿主中立门禁</span>
+            </button>
+          </div>
+
+          <div class="lab-workbench">
+            <!-- Left Terminal Simulator -->
+            <div class="terminal-column">
+              <div class="state-switcher-bar">
+                <div class="state-btn-group" role="group" aria-label="门禁运行状态切换">
+                  <button type="button" class="state-btn" data-state="warn" aria-pressed="false">
+                    <span>状态 A · 反面教材 (只打警告退 0)</span>
+                  </button>
+                  <button type="button" class="state-btn" data-state="fail" aria-pressed="true">
+                    <span>状态 B · 阳性对照 (注入违规退 1)</span>
+                  </button>
+                  <button type="button" class="state-btn" data-state="pass" aria-pressed="false">
+                    <span>状态 C · 修复复检 (真绿退 0)</span>
+                  </button>
+                </div>
+                <span class="exit-badge badge-fail mono" id="lab-exit-badge">EXIT 1 · BLOCKED</span>
+              </div>
+
+              <div class="terminal-chrome mono">
+                <span id="lab-cmd-title">.githooks/pre-commit → node gates/examples/01-state-log-cap/check-state-log.mjs</span>
+                <span>POSIX LF · GIT_* UNSET</span>
+              </div>
+
+              <pre class="terminal-screen mono" id="lab-terminal-output" aria-live="polite"></pre>
+            </div>
+
+            <!-- Right Principle Breakdown -->
+            <div class="lab-analysis">
+              <div>
+                <h3 class="analysis-title" id="lab-analysis-title">01 · state-log-cap 状态入口膨胀元门禁</h3>
+                <p class="analysis-summary" id="lab-analysis-summary"></p>
+              </div>
+
+              <div class="analysis-grid">
+                <div class="analysis-item">
+                  <div class="analysis-item-label">被戳破的「假绿」形态</div>
+                  <div class="analysis-item-val" id="lab-fake-green"></div>
+                </div>
+                <div class="analysis-item">
+                  <div class="analysis-item-label">单一真值源与同源断言设计</div>
+                  <div class="analysis-item-val" id="lab-ssot-rule"></div>
+                </div>
+                <div class="analysis-item">
+                  <div class="analysis-item-label">真实入口阳性对照步骤</div>
+                  <div class="analysis-item-val" id="lab-pos-control"></div>
+                </div>
+              </div>
+
+              <div class="path-chips mono" id="lab-paths"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         MODULE 5 — 4 + 6 SKILL SYSTEM & UPSTREAM ECOSYSTEM MATRIX
+         ====================================================================== -->
+    <section class="section-block" id="skill-matrix">
+      <div class="shell">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">4 + 6 自持技能体系与推荐上游生态速查矩阵</h2>
+            <p class="section-desc">
+              不重新发明通用轮子：4 个治理核心立规矩，6 个实战工程手册挡具体大坑，审美与基础设施直接组合经过验证的开源上游。点击任意条目展开触发判据与真实事故档案。
+            </p>
+          </div>
+          <div class="section-meta mono">
+            <span id="skill-count-readout">SHOWING 14 / 14 ENTRIES</span>
+          </div>
+        </div>
+
+        <div class="blueprint-frame">
+          <div class="filter-toolbar">
+            <div class="filter-pills" role="group" aria-label="技能与生态分类筛选">
+              <button type="button" class="filter-btn" data-cat="all" aria-pressed="true">全部 (10 + 4)</button>
+              <button type="button" class="filter-btn" data-cat="core" aria-pressed="false">方法论治理核心 (4)</button>
+              <button type="button" class="filter-btn" data-cat="playbook" aria-pressed="false">实战工程手册 (6)</button>
+              <button type="button" class="filter-btn" data-cat="upstream" aria-pressed="false">推荐上游搭配 (4)</button>
+            </div>
+
+            <div class="search-wrap">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="11" cy="11" r="7" />
+                <path d="M20 20l-3.5-3.5" />
+              </svg>
+              <input type="search" class="skill-search" id="skill-search-input" placeholder="筛选技能名、路径或事故词…" aria-label="搜索技能与生态条目" />
+            </div>
+          </div>
+
+          <div class="skill-ledger" id="skill-ledger-list"></div>
+          <div class="empty-state" id="skill-empty-state">未匹配到符合当前筛选条件的条目，请清空关键词或切换分类重试。</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="footer-plate">
+        <div class="footer-top-row">
+          <div>
+            <strong style="color:var(--ink)">gate-first</strong> · 可验证的多会话 Agent 工程治理与门禁自增长蓝图 · 零外部框架自包含单页
+          </div>
+          <div class="mono">
+            <span>Git + Node.js Minimal Loop</span>
+            <span> · </span>
+            <span>Magpie SSOT</span>
+            <span> · </span>
+            <span>EasyTier Mesh</span>
+            <span> · </span>
+            <span>OpenViking v0.5.5</span>
+          </div>
+        </div>
+
+        <div class="footer-sig-row">
+          <div class="sig-author-group">
+            <span class="sig-author-badge">
+              <svg class="icon" viewBox="0 0 24 24" style="color:var(--sig-amber)" aria-hidden="true">
+                <path d="M12 2l8 4.5v11L12 22l-8-4.5v-11L12 2z" />
+                <path d="M12 22V12m0 0L4 7.5m8 4.5l8-4.5" />
+              </svg>
+              <span>Designed &amp; Open-Sourced by <strong>han</strong></span>
+            </span>
+            <span class="sig-license-tag mono">MIT License</span>
+          </div>
+
+          <div class="sig-links-group mono">
+            <a href="https://github.com/abca12a/gate-first" target="_blank" rel="noopener noreferrer" class="sig-ext-link">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
+                <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              </svg>
+              <span>github.com/abca12a/gate-first</span>
+              <svg class="icon sig-ext-arrow" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 17L17 7M9 7h8v8" />
+              </svg>
+            </a>
+
+            <a href="https://dimilinks.com/" target="_blank" rel="noopener noreferrer" class="sig-ext-link">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M3.6 9h16.8M3.6 15h16.8M12 3a14.5 14.5 0 000 18M12 3a14.5 14.5 0 010 18" />
+              </svg>
+              <span>dimilinks.com</span>
+              <svg class="icon sig-ext-arrow" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 17L17 7M9 7h8v8" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       INLINE INTERACTIVE ENGINE (Zero External Dependencies, Offline Ready)
+       ======================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ----------------------------------------------------------------------
+         1. DATA DICTIONARY — 6 Lifecycle Steps & 10 Architecture Nodes
+         ---------------------------------------------------------------------- */
+      var STEPS = [
+        {
+          heading: 'Step 1 · 资产单源分发、Magpie 管辖切割与开场注入',
+          desc: 'Magpie 将 29 行 instructions.md 生成为 5 个宿主各自带哈希块的独立普通文件（根治 3 宿主软链共指 ~/.agents/AGENTS.md 踩踏成 0 字节的事故），严禁下发裸 openviking MCP 防冲突，并用 check-host-skills.mjs 跟随校验符号链接池；Claude Code 与 DSH 双宿主内置 URI Guard 并按 CJK 1.5 tok/字预算注入全局画像与 peers/<actor>/。',
+          nodes: ['magpie', 'hosts'],
+          focusNode: 'magpie'
+        },
+        {
+          heading: 'Step 2 · 唯一主导对齐拆单 & Gemini 向量经验召回',
+          desc: '唯一主导会话（只拆单/派工/审查/合并，绝不亲自改业务代码）按 ov-experience-memory 检索 viking://~/memories/experiences —— 由 gemini-embedding-2（Google 原生，dimension = 3072）执行高维语义匹配，先读 L0（.abstract.md）/ L1（.overview.md）筛出 1–3 条，再强制 read 展开 L2 原文核实，签发写边界互不重叠的 AGENT-TASK 工单。',
+          nodes: ['lead', 'recall'],
+          focusNode: 'recall'
+        },
+        {
+          heading: 'Step 3 · Worktree 物理隔离执行 & 子代理记忆防火墙',
+          desc: '并行写者在各自 git worktree + 独立分支上隔离施工；ovcli.conf 的 plugin.skipSubagentSessions: true 高优先级统管全宿主，硬性拦截所有子代理回写共享记忆（只向主导回传证据）；工具轨迹按 plugin.captureToolResults: true 与 captureToolMaxChars: 12000 安全截断采集。',
+          nodes: ['worktree', 'firewall'],
+          focusNode: 'firewall'
+        },
+        {
+          heading: 'Step 4 · 踩坑分流（pit-to-gate）与阳性对照闭环',
+          desc: '发生缺陷或返工后，按三路判据分流（二元可判定 → 机器门禁；需判断但取证步骤可复用 → Skill；项目背景事实 → 文档/记忆）。新门禁抽离单一真值源（如 state-section.mjs 的 HEADING 与 LINE_LIMIT），并跑通阳性对照：注入已知坏例确认 exit 1 变红 → 恢复合法态确认 exit 0 变绿。',
+          nodes: ['pittogate', 'precommit'],
+          focusNode: 'pittogate'
+        },
+        {
+          heading: 'Step 5 · pre-commit 硬拦截、独立盲审与证据分层交付',
+          desc: '提交统一经过 #!/bin/sh 的 .githooks/pre-commit（100755 执行位、纯 LF 零 \\r、unset 六个 GIT_* 变量防串仓、缺环境 exit 1 闭锁）；高风险改动交不带上下文偏见的 defect-review 独立盲审；主导复核 EVIDENCE-REPORT（严格区分已验证 / 待核对 / 未执行，回报 ≠ 验收）。',
+          nodes: ['precommit', 'lead'],
+          focusNode: 'precommit'
+        },
+        {
+          heading: 'Step 6 · EasyTier 加密虚拟内网传输、DeepSeek 编译与三联 systemd 自治',
+          desc: '会话达 commitTokenThreshold: 60000 / commitTurnThreshold: 20、PreCompact 或 SessionEnd 时，经 EasyTier 加密内网（<easytier-virtual-ip>:1933 → 容器回环 127.0.0.1:1933，断网落 ~/.openviking/pending/ 60s 单飞重放）异步提交；服务端由 deepseek-v4.1-flash-1017 提炼记忆并配合三联 systemd 遍历 peers/* 全量去重、自举巡检日报写入 resources/ops/reports/。',
+          nodes: ['queue', 'vlm', 'recall'],
+          focusNode: 'queue'
+        }
+      ];
+
+      var NODES_ORDER = [
+        'magpie', 'hosts', 'lead', 'recall', 'worktree',
+        'firewall', 'pittogate', 'precommit', 'queue', 'vlm'
+      ];
+
+      var NODE_DETAILS = {
+        magpie: {
+          id: 'NODE N01 · LAYER 1',
+          tier: 'full',
+          tierLabel: 'Magpie 全栈增强层',
+          title: 'Magpie 单源分发与管辖切割',
+          sub: '5 宿主独立哈希块普通文件 · 严禁下发裸 openviking MCP · check-host-skills 防断链',
+          duty: '将 29 行全局指令分发为 Claude Code、Codex、DSH、OpenCode、Antigravity 各自带哈希边界块的独立普通文件；严禁 Magpie 下发裸 openviking MCP（防止与 Claude/DSH 原生生命周期插件内置桥接代理冲突）；宿主技能软链池由 check-host-skills.mjs 强制跟随校验目标真值。',
+          config: '// skills/skill-maintenance/scripts/check-host-skills.mjs\nconst st = fs.lstatSync(skillPath);\nif (st.isSymbolicLink()) {\n  // 必须用 statSync 跟随目标：悬空软链 lstatSync 仍为真，statSync 必抛 ENOENT\n  fs.statSync(skillPath);\n}',
+          incident: '曾将 3 个宿主的全局规则路径全部软链共指同一个中转文件（~/.agents/AGENTS.md），分发器按宿主顺序截断覆写同一底层文件导致互相踩踏清空成 0 字节；另一次技能精简后残留 33 条悬空软链被常规存在检查报全绿。现已由独立普通文件分发 + check-host-skills.mjs 彻底封死。',
+          paths: ['skills/skill-maintenance/scripts/check-host-skills.mjs', 'prompts/instructions.template.md', 'prompts/README.md', 'docs/REFERENCE-STACK.md']
+        },
+        hosts: {
+          id: 'NODE N02 · LAYER 1',
+          tier: 'core',
+          tierLabel: '最小闭环基座 + 宿主插件',
+          title: '5 宿主挂载、双宿主 URI Guard 与开场注入',
+          sub: 'Claude 9 Hooks + DSH 原生插件均内置 URI Guard · CJK 1.5 tok/字预算',
+          duty: '最小闭环直接读取仓内 AGENTS.md 与 docs/STATE.md；全栈模式下 Claude Code（9 生命周期 Hook）与 DSH 原生插件均内置 URI Guard（当场拦截本地文件工具误读 viking:// 虚拟 URI），并在 SessionStart 按 CJK 1.5 tok/字预算确定性注入全局画像与当前 Git 仓 peers/<actor>/。',
+          config: '// ~/.openviking/ovcli.conf (plugin 段优先级高于单宿主本地入参，改一处全宿主生效)\n{\n  "url": "http://<easytier-virtual-ip>:1933",\n  "api_key": "<redacted-user-key>",\n  "account": "default",\n  "user": "default",\n  "plugin": {\n    "recallPeerScope": "actor",\n    "skipSubagentSessions": true\n  }\n}',
+          incident: '模型偶发把 viking://~/memories/... 当作本地磁盘路径传给 ReadFile 工具导致连环报错空转；在 Claude Code 与 DSH 双宿主生命周期层内置 URI Guard 拦截引导后，无效错误轮次直接归零。',
+          paths: ['memory/CONTRACT.md', 'gates/hooks/stop-hook-example.mjs', 'skills/lead-orchestration/references/host-adapters.md', 'docs/REFERENCE-STACK.md']
+        },
+        lead: {
+          id: 'NODE N03 · LAYER 2',
+          tier: 'core',
+          tierLabel: '3 分钟最小闭环核心',
+          title: '唯一主导会话（Lead Orchestrator）',
+          sub: '只做对话、对齐、拆单、派工、审查与合并，绝不亲自下场改业务代码',
+          duty: '确立单任务唯一负责人：开工前先读 docs/STATE.md 的「## 当前动作」节，按「三派三不派」判据决定串行或并行；派工时签发写明可观察结果、失败信号与物理互不重叠写目录的 AGENT-TASK 工单；收回执行者输出后坚持「回报 ≠ 验收」，逐项复核退出码与分层证据。',
+          config: '# AGENT-TASK 工单必填四要素（多模块隔离示例）\n1. 写目录白名单: src/billing/ (与并行 worktree src/auth/ 物理互不重叠)\n2. 可观察交付物: 账单结算幂等校验与正负向回归单测\n3. 失败阻断信号: 重复扣款未退非零码 / pre-commit 门禁未绿\n4. 验收分层要求: 区分「已验证 / 待核对 / 未执行」，附原始退出码',
+          incident: '主导会话一旦顺手亲自改两行业务代码，就会丧失独立审查视角，还常与后台并行执行者产生工作区写冲突。把主导严格锁死在编排与验收位后，多代理并行返工率骤降。',
+          paths: ['skills/lead-orchestration/SKILL.md', 'scaffold/init-project.mjs', 'scripts/check-all.mjs']
+        },
+        recall: {
+          id: 'NODE N04 · LAYER 2',
+          tier: 'full',
+          tierLabel: 'OpenViking 全栈增强层',
+          title: 'OpenViking 经验向量检索（Gemini 3072d）',
+          sub: 'gemini-embedding-2 高维召回 · 自动隔离与主动跨仓检索双轨互补',
+          duty: '生命周期自动注入按 recallPeerScope: "actor" 严格隔离当前 Git 仓库防串味；而主动显式调用 MCP 检索 viking://~/memories/experiences 时天然支持跨项目借鉴历史经验。由 gemini-embedding-2 (3072d) 检索 L0/L1 筛出 1–3 条后，强制调用 read 展开 L2 原文核实适用前提。',
+          config: '// 检索契约：自动注入按 actor 锁仓隔离，显式 MCP 检索支持跨仓取经\n1. find({ uri: "viking://~/memories/experiences", query, limit: 5 }) -> 读 L0/L1\n2. 筛出 1~3 条匹配当前技术栈前提的精确文件 URI（忽略侧车摘要文件）\n3. read({ uri: candidateUri }) -> 强制展开 L2 原文核实命令与失效条件',
+          incident: '曾有会话仅凭 L0 一句话摘要套用某历史仓库的构建修复命令，忽略了 L2 原文中写明的「仅适用于多包 monorepo」限制。强制规定「未展开 L2 原文不得采信」后彻底杜绝断章取义。',
+          paths: ['memory/CONTRACT.md', 'docs/REFERENCE-STACK.md', 'skills/lead-orchestration/SKILL.md']
+        },
+        worktree: {
+          id: 'NODE N05 · LAYER 3',
+          tier: 'core',
+          tierLabel: '3 分钟最小闭环核心',
+          title: 'Git Worktree 并行隔离执行舱',
+          sub: '多写者各自独立 worktree 与分支 · captureToolMaxChars: 12000 采集轨迹',
+          duty: '同一目录同一时刻只允许一个写者；当两个以上互不重叠模块需并行交付时，每个执行者各建独立 git worktree 与分支，各自跑过提交钩子，再由唯一主导合并。同时由 ovcli.conf 的 plugin 段开启真实工具调用结果采集并在 12,000 字符处安全截断。',
+          config: '# 并行写者物理隔离（废除「能改不能提交」的口头提交权）\ngit worktree add ../wt-billing -b feat/billing-idempotency\n\n// ovcli.conf -> plugin 段工具轨迹采集参数\n"captureToolResults": true,\n"captureToolMaxChars": 12000',
+          incident: '早期多个会话共用同一工作区并口头约定「谁先改完谁提交」，结果门禁扫描整个工作区时把另一会话未写完的半成品一起算进去，两边互相阻塞谁也没法绿。',
+          paths: ['skills/lead-orchestration/SKILL.md', 'skills/git-branch-worktree-cleanup/SKILL.md', 'docs/REFERENCE-STACK.md']
+        },
+        firewall: {
+          id: 'NODE N06 · LAYER 3',
+          tier: 'full',
+          tierLabel: 'OpenViking 全栈增强层',
+          title: '子代理记忆回写硬防火墙',
+          sub: 'plugin.skipSubagentSessions: true · 全宿主统管拦截子代理噪音',
+          duty: '子代理和独立审查代理在执行过程中会产生大量试错搜索与局部排障日志。利用 ovcli.conf 中 plugin 段高于单宿主本地入参的控制面优先级，一处设死 skipSubagentSessions: true 即可全宿主同步跳过子代理轨迹捕获与提交，子代理只向主导回传证据。',
+          config: '// ~/.openviking/ovcli.conf (v0.5.5 真实嵌套结构)\n{\n  "url": "http://<easytier-virtual-ip>:1933",\n  "api_key": "<redacted-user-key>",\n  "account": "default",\n  "user": "default",\n  "plugin": {\n    "recallPeerScope": "actor",\n    "skipSubagentSessions": true\n  }\n}',
+          incident: '未开子代理过滤前，一次并发派出 4 个排查子代理，会话结束后把 4 份未验证的中间猜想自动抽进了长期经验库，导致次日新会话召回出互相矛盾的结论。',
+          paths: ['memory/CONTRACT.md', 'docs/REFERENCE-STACK.md', 'skills/lead-orchestration/SKILL.md']
+        },
+        pittogate: {
+          id: 'NODE N07 · LAYER 4',
+          tier: 'core',
+          tierLabel: '3 分钟最小闭环核心',
+          title: 'pit-to-gate 三路分流与阳性对照',
+          sub: '二元可判定→门禁 / 取证可复用→Skill / 背景事实→文档 · 坏例退 1 验证',
+          duty: '每次真实缺陷或被纠正做法后，严格按三路判据分流落盘。凡落为机器门禁的规则，必须抽离单一阈值真值源（如 state-section.mjs 导出 HEADING 与 LINE_LIMIT），并在真实入口跑通阳性对照（注入违规确认 exit 1 → 还原确认 exit 0），防止自证循环假绿。',
+          config: '// gates/examples/01-state-log-cap/check-state-log.mjs\nimport { HEADING, LINE_LIMIT, readCurrentAction } from "./state-section.mjs";\nconst section = readCurrentAction(content); // 定位 "## 当前动作" (120 行硬上限)\nif (section.lineCount > LINE_LIMIT) {\n  console.error(`[FAIL] docs/STATE.md ${HEADING}: ${section.lineCount} > ${LINE_LIMIT}`);\n  process.exitCode = 1;\n}',
+          incident: '某不亏本单测曾用「售价 / 1.4 / 7.2」反推成本再断言利润率，把加价逻辑删成 0 后测试居然照样全绿（自证循环）！引入「把被测实现临时退回缺陷态必须变红」的阳性对照后当场揪出假测试。',
+          paths: ['gates/PROTOCOL.md', 'skills/pit-to-gate/SKILL.md', 'gates/examples/01-state-log-cap/state-section.mjs', 'gates/examples/01-state-log-cap/test-positive-control.mjs']
+        },
+        precommit: {
+          id: 'NODE N08 · LAYER 4',
+          tier: 'core',
+          tierLabel: '3 分钟最小闭环核心',
+          title: '.githooks/pre-commit 硬拦截与独立盲审',
+          sub: '#!/bin/sh · 100755 + 纯 LF · unset 六个 GIT_* 变量 · defect-review 盲审',
+          duty: '所有会话提交统一经过 .githooks/pre-commit：首行固定 #!/bin/sh、Git 索引 100755 执行位、纯 LF 零 \\r 字节，显式 unset 6 个 GIT_* 环境变量防止钩子内测试串仓污染主仓索引，缺 Node 或缺门禁脚本一律 exit 1 闭锁；高风险改动叠加 defect-review 独立盲审。',
+          config: '#!/bin/sh\n# .githooks/pre-commit & gates/hooks/pre-commit (mode 100755, pure LF)\nunset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE \\\n      GIT_PREFIX GIT_OBJECT_DIRECTORY GIT_COMMON_DIR\ncommand -v node >/dev/null 2>&1 || { echo "[BLOCK] node missing" >&2; exit 1; }\nexec node scripts/check-all.mjs',
+          incident: '钩子内跑含 git worktree 或临时子仓初始化的阳性对照测试时，父仓库残留的 GIT_DIR / GIT_INDEX_FILE / GIT_PREFIX 会让子进程误读写主仓对象库！显式 unset 六变量后彻底隔离。',
+          paths: ['.githooks/pre-commit', 'gates/hooks/pre-commit', 'gates/hooks/stop-hook-example.mjs', 'scripts/check-all.mjs']
+        },
+        queue: {
+          id: 'NODE N09 · LAYER 5',
+          tier: 'full',
+          tierLabel: 'EasyTier + OpenViking 全栈层',
+          title: 'EasyTier 虚拟内网与 60s 离线单飞队列',
+          sub: 'private_mode=true 2s 握手 · <easytier-virtual-ip>%tun0:1933 → 127.0.0.1:1933',
+          duty: '淘汰易断的 ssh -N -L 隧道：服务端容器仅绑 127.0.0.1:1933 防 Docker 改 iptables 裸露公网，由 easytier-core 绑在 <easytier-virtual-ip>%tun0:1933 转发并配 openviking-port-forward.service 10s 轮询自愈与 warn 级降噪（日志降 98.6%）；客户端支持 P2P 直连与严苛办公网纯出站双模，配合 ~/.openviking/pending/ 60s 单飞队列断网零阻塞。',
+          config: '// ~/.openviking/ovcli.conf (v0.5.5 阈值与虚拟内网端点)\n{\n  "url": "http://<easytier-virtual-ip>:1933",\n  "api_key": "<redacted-user-key>",\n  "account": "default",\n  "user": "default",\n  "plugin": {\n    "commitTokenThreshold": 60000,\n    "commitTurnThreshold": 20,\n    "captureToolResults": true,\n    "captureToolMaxChars": 12000\n  }\n}',
+          incident: '早期用 ssh -N -L 转发时笔记本休眠或网络切换常留僵尸半开连接，且 Docker 直接映射端口会绕过防火墙裸露公网；切到 EasyTier 虚拟网卡绑定 + 10s 自愈守护 + 本地 pending 队列后稳如磐石。',
+          paths: ['docs/REFERENCE-STACK.md', 'memory/CONTRACT.md']
+        },
+        vlm: {
+          id: 'NODE N10 · LAYER 5',
+          tier: 'full',
+          tierLabel: 'OpenViking 全栈增强层',
+          title: 'DeepSeek 语义编译与三联 systemd 自治运维',
+          sub: 'deepseek-v4.1-flash-1017 · 遍历 peers/* 全量 organize · 巡检自举落 resources/',
+          duty: '由 deepseek-v4.1-flash-1017 异步提炼结构化记忆并编译 L0/L1 摘要；服务端配套三联 systemd 自动化改造：① 14 天滚动 backup（改库前强制 snapshot commit）；② 定制扩展 organize 自动遍历 peers/* 全量项目空间去重合并；③ 每日 inspection 巡检日报自举写入 resources/ops/reports/（零常驻 Token，排障按需语义召回），并对齐 vikingbot memories/soul.md 中文工程人设。',
+          config: '# 服务端三联 systemd 自动化治理闭环\n1. openviking-backup.timer     -> 改库前 snapshot commit + 14 天滚动归档\n2. openviking-organize.timer   -> deepseek-v4.1-flash-1017 遍历 peers/* 全量去重\n3. openviking-inspection.timer -> 日报自举写入 viking://resources/ops/reports/',
+          incident: '默认 organize 若只扫主空间会让数十个活跃仓库的 peers/<actor>/ 长期堆积同义碎片，而把运维日报塞进开场上下文又白占预算；改为遍历 peers/* + 巡检日报自举归入 resources/ 后彻底两全。',
+          paths: ['docs/REFERENCE-STACK.md', 'memory/CONTRACT.md']
+        }
+      };
+
+      /* ----------------------------------------------------------------------
+         2. DATA DICTIONARY — 4 Real Gates × 3 Execution States (Module 4)
+         ---------------------------------------------------------------------- */
+      var GATES_LAB = [
+        {
+          title: '01 · state-log-cap 状态入口膨胀元门禁',
+          cmdTitle: '.githooks/pre-commit → node gates/examples/01-state-log-cap/check-state-log.mjs',
+          summary: '项目状态入口 docs/STATE.md 的「## 当前动作」节每次会话开工必读。若只靠文档约定「不超过 120 行」或只打印黄字提醒而不退非零码，文件会在几周内失控膨胀，白白吞噬大量上下文预算。',
+          fakeGreen: '实测事故：检查工具早在两周前就检测出超行并打印黄字警告（阈值 120 行同时写在三处文档里），但退出码恒为 0；结果 docs/STATE.md 一路涨到 569 行（上限 4.7 倍），每次开工吐出 104 KB，全程绿灯无人处理。',
+          ssotRule: '由 state-section.mjs 唯一导出 HEADING ("## 当前动作")、LINE_LIMIT (120) 与 readCurrentAction；人类阅读器与 check-state-log.mjs 同源导入，并由 test-positive-control.mjs 断言两边对同一输入算出的行数逐字一致。',
+          posControl: '运行 test-positive-control.mjs 向临时夹具或 docs/STATE.md 的「## 当前动作」节注入超 120 行内容 → 确认 check-state-log.mjs 退 exit 1 → 将历史记录归档至 docs/archive/ 并在原处留链接 → 复检确认 exit 0。',
+          paths: ['gates/examples/01-state-log-cap/check-state-log.mjs', 'gates/examples/01-state-log-cap/state-section.mjs', 'gates/examples/01-state-log-cap/test-positive-control.mjs', 'docs/STATE.md'],
+          states: {
+            warn: {
+              badge: 'EXIT 0 · FAKE GREEN (反面教材)',
+              cls: 'badge-warn',
+              html: '<span class="t-cmd">$ node scripts/legacy-status-reader.mjs</span>\n' +
+                    '<span class="t-dim">[info] reading section "## 当前动作" from docs/STATE.md</span>\n' +
+                    '<span class="t-warn">[WARN] docs/STATE.md has grown to 569 lines (104.2 KB), recommended <= 120 lines.</span>\n' +
+                    '<span class="t-warn">[WARN] Consider moving completed items to docs/archive/ when convenient.</span>\n' +
+                    '<span class="t-dim">[info] reader hardcoded 120, another script hardcoded 150 (threshold drift)</span>\n' +
+                    '<span class="t-ok">Process exited with code 0 (commit allowed — 连续两周无人归档！)</span>'
+            },
+            fail: {
+              badge: 'EXIT 1 · BLOCKED (阳性对照真红)',
+              cls: 'badge-fail',
+              html: '<span class="t-cmd">$ node gates/examples/01-state-log-cap/test-positive-control.mjs</span>\n' +
+                    '<span class="t-dim">› importing { HEADING, LINE_LIMIT, readCurrentAction } from "./state-section.mjs"</span>\n' +
+                    '<span class="t-cyan">[check] SSOT parity: reader(HEADING="## 当前动作") === gate(LINE_LIMIT=120) ✓</span>\n' +
+                    '<span class="t-err">[GATE FAIL] docs/STATE.md section "## 当前动作": 569 lines (104.2 KB) > LINE_LIMIT 120 (+449).</span>\n' +
+                    '<span class="t-dim">  Fix: archive finished milestones into docs/archive/ and leave a pointer link in docs/STATE.md.</span>\n' +
+                    '<span class="t-err">check-state-log blocked commit (exit code 1).</span>'
+            },
+            pass: {
+              badge: 'EXIT 0 · VERIFIED (归档后真绿)',
+              cls: 'badge-pass',
+              html: '<span class="t-cmd">$ node gates/examples/01-state-log-cap/check-state-log.mjs</span>\n' +
+                    '<span class="t-cyan">[check] SSOT parity via state-section.mjs: HEADING="## 当前动作", LINE_LIMIT=120 ✓</span>\n' +
+                    '<span class="t-ok">[PASS] docs/STATE.md ("## 当前动作"): 54 lines <= 120 lines.</span>\n' +
+                    '<span class="t-ok">[PASS] test-positive-control.mjs verified red (exit 1) -> green (exit 0) loop.</span>\n' +
+                    '<span class="t-ok">Gate 01 passed (exit code 0).</span>'
+            }
+          }
+        },
+        {
+          title: '02 · doc-links 归档相对链接与 #anchor 锚点门禁',
+          cmdTitle: '.githooks/pre-commit → node gates/examples/02-doc-links/check-doc-links.mjs',
+          summary: '扫描全仓 Markdown 相对路径链接与 GitHub GFM 风格 #anchor 标题锚点，并对跨仓库外部基线做 .git 可达性前置判断——专治文档归档搬家后的静默死链与 CI 缺外部目录误报。',
+          fakeGreen: '实测事故：把 STATE.md 从 docs/ 归入 docs/archive/ 时正文一字未改，但基准目录深了一层导致 4 条相对链接静默 404；同时旧脚本在浅克隆 CI 中未判断外部跨仓基线是否存在，一口气误报 53 条假死链。',
+          ssotRule: 'check-doc-links.mjs 以每篇文档真实所在目录解析相对路径，按 GFM 规则归一化标题生成 slug 核验 #anchor 存在性；对跨仓外部引用先核对目标仓 .git 基线可达性，区分「仓内真断链」与「外部基线未挂载」。',
+          posControl: '运行 test-positive-control.mjs 构造迁入 archive/ 未改 ../ 层级的坏链接与指向不存在小节的 #bad-anchor → 确认精准报出文件行号并退 1 → 修正路径与锚点后复检退 0。',
+          paths: ['gates/examples/02-doc-links/check-doc-links.mjs', 'gates/examples/02-doc-links/test-positive-control.mjs', 'skills/docs-drift-audit/SKILL.md'],
+          states: {
+            warn: {
+              badge: 'EXIT 0 · FAKE GREEN (反面教材)',
+              cls: 'badge-warn',
+              html: '<span class="t-cmd">$ node scripts/naive-link-grep.mjs</span>\n' +
+                    '<span class="t-dim">[info] moved docs/STATE.md -> docs/archive/2026-09-state.md (body unchanged)</span>\n' +
+                    '<span class="t-warn">[WARN] basename "REFERENCE-STACK.md" exists somewhere in repo (skipping relative dirname math)</span>\n' +
+                    '<span class="t-warn">[WARN] #anchor fragments ignored; CI missing sibling repo caused 53 noisy warnings (exit 0)</span>\n' +
+                    '<span class="t-ok">Process exited with code 0 (归档页内 4 条相对链接与锚点已全部静默失效！)</span>'
+            },
+            fail: {
+              badge: 'EXIT 1 · BLOCKED (阳性对照真红)',
+              cls: 'badge-fail',
+              html: '<span class="t-cmd">$ node gates/examples/02-doc-links/check-doc-links.mjs</span>\n' +
+                    '<span class="t-dim">› scanning all markdown relative links, GFM #anchors &amp; external baseline reachability...</span>\n' +
+                    '<span class="t-err">[GATE FAIL] Broken relative link at docs/archive/2026-09-state.md:18 (4 broken after archive move)</span>\n' +
+                    '<span class="t-dim">  Link     : [生产参考全栈](./REFERENCE-STACK.md#异构双模型架构)</span>\n' +
+                    '<span class="t-dim">  Resolved : docs/archive/REFERENCE-STACK.md (ENOENT — base shifted by 1 directory level)</span>\n' +
+                    '<span class="t-err">[GATE FAIL] Missing GFM heading anchor at README.md:64 -> "#不存在的章节锚点"</span>\n' +
+                    '<span class="t-err">check-doc-links failed (exit code 1).</span>'
+            },
+            pass: {
+              badge: 'EXIT 0 · VERIFIED (修正后真绿)',
+              cls: 'badge-pass',
+              html: '<span class="t-cmd">$ node gates/examples/02-doc-links/check-doc-links.mjs</span>\n' +
+                    '<span class="t-cyan">[check] external repo baseline precheck: skip unreachable external root cleanly (0 false positives) ✓</span>\n' +
+                    '<span class="t-ok">[PASS] All repo-internal Markdown relative paths resolved from each file dirname.</span>\n' +
+                    '<span class="t-ok">[PASS] All GitHub GFM #anchor heading slugs matched target headings.</span>\n' +
+                    '<span class="t-ok">Gate 02 passed (exit code 0).</span>'
+            }
+          }
+        },
+        {
+          title: '03 · secret-shapes 凭据形状与双向白名单门禁',
+          cmdTitle: '.githooks/pre-commit → node gates/examples/03-secret-shapes/check-secret-shapes.mjs',
+          summary: '通过 git ls-files -z --cached --others --exclude-standard 扫描全仓已跟踪 + 未 git add 新建非二进制文件（含未暂存 .env.local / .conf），拦截高确定性凭据形状并强制双向白名单过期反查。',
+          fakeGreen: '只扫 git diff --cached 会漏掉工作区刚新建尚未暂存的配置文件；且普通 allowlist 放行教学假密钥后，哪天正文删了假串、白名单却永远残留死条目无人清理。',
+          ssotRule: '精准匹配三类高确定性形状：openai-style-key (sk-...)、bearer-token (Bearer ...)、jwt (eyJ...)；ALLOWED 映射表强制「测试假串字面量 → 非空理由说明」，若某白名单假串在全仓出现 0 次，同样退 exit 1 逼你删掉过期豁免！',
+          posControl: '运行 test-positive-control.mjs 分别测试未登记的 sk-/Bearer/eyJ 凭据形状，以及注入一条全仓未引用的死 ALLOWED 假串 → 确认两种情况均退 exit 1 → 清理后复检退 0。',
+          paths: ['gates/examples/03-secret-shapes/check-secret-shapes.mjs', 'gates/examples/03-secret-shapes/test-positive-control.mjs', 'scripts/check-no-private-leak.mjs'],
+          states: {
+            warn: {
+              badge: 'EXIT 0 · FAKE GREEN (反面教材)',
+              cls: 'badge-warn',
+              html: '<span class="t-cmd">$ git diff --cached | grep "API_KEY" || true</span>\n' +
+                    '<span class="t-dim">[info] untracked local file debug.conf not staged -> completely skipped by diff --cached!</span>\n' +
+                    '<span class="t-warn">[WARN] ALLOWED placeholder token removed from docs 3 weeks ago, exemption still active</span>\n' +
+                    '<span class="t-ok">Process exited with code 0 (未暂存凭据与僵尸白名单双双漏网！)</span>'
+            },
+            fail: {
+              badge: 'EXIT 1 · BLOCKED (阳性对照真红)',
+              cls: 'badge-fail',
+              html: '<span class="t-cmd">$ node gates/examples/03-secret-shapes/check-secret-shapes.mjs</span>\n' +
+                    '<span class="t-dim">› scanning git ls-files -z --cached --others --exclude-standard (non-binary)...</span>\n' +
+                    '<span class="t-err">[GATE FAIL] Unallowed credential shape [bearer-token] in untracked test-auth.conf:7</span>\n' +
+                    '<span class="t-dim">  Matched shape : openai-style-key / bearer-token / jwt must never live in plain files.</span>\n' +
+                    '<span class="t-err">[GATE FAIL] Stale ALLOWED literal never seen in scanned files (reason: "old demo jwt")</span>\n' +
+                    '<span class="t-dim">  Fix           : remove dead literal from ALLOWED map to keep exemptions minimal.</span>\n' +
+                    '<span class="t-err">check-secret-shapes blocked commit (exit code 1).</span>'
+            },
+            pass: {
+              badge: 'EXIT 0 · VERIFIED (双向清零真绿)',
+              cls: 'badge-pass',
+              html: '<span class="t-cmd">$ node gates/examples/03-secret-shapes/check-secret-shapes.mjs &amp;&amp; node scripts/check-no-private-leak.mjs</span>\n' +
+                    '<span class="t-cyan">[check] scanned cached + untracked non-binary files for openai-style-key, bearer-token, jwt ✓</span>\n' +
+                    '<span class="t-cyan">[check] bidirectional ALLOWED audit: every exempted test literal has non-empty reason &amp; >=1 hit ✓</span>\n' +
+                    '<span class="t-ok">[PASS] Zero unallowed credential shapes, zero private leaks, zero stale ALLOWED entries.</span>\n' +
+                    '<span class="t-ok">Gate 03 passed (exit code 0).</span>'
+            }
+          }
+        },
+        {
+          title: '04 · host-neutral 技能宿主中立门禁',
+          cmdTitle: 'scripts/check-all.mjs → node skills/skill-maintenance/scripts/check-host-neutral.mjs',
+          summary: '扫描 skills/ 下全部 10 个核心技能文本文件，严禁把单一编码宿主或特定操作系统的私有概念写死在通用技能流程里，确保 10 个核心 Skill 在任意宿主开箱即用。',
+          fakeGreen: '作者在某一宿主顺手把 Stop hook、PowerShell、mnemon、Memory Spaces、WorkBuddy 等宿主专属词写进通用 SKILL.md，自己用着没感觉，换到另一宿主或开源给外部读者时当场因找不到对应机制而卡死。',
+          ssotRule: 'check-host-neutral.mjs 全量扫描 skills/ 下全部 10 个技能目录，拦截宿主绑定词表（Stop hook / PowerShell / mnemon / Memory Spaces / WorkBuddy 等）；全仓唯一合法豁免文件是集中存放跨宿主映射表的 skills/lead-orchestration/references/host-adapters.md。',
+          posControl: '运行 check-host-neutral.mjs --self-test（向非豁免技能正文注入 Stop hook 或 WorkBuddy 绑定词）→ 确认精准报错并退 exit 1 → 将宿主差异收拢回 host-adapters.md 后复检退 0。',
+          paths: ['skills/skill-maintenance/scripts/check-host-neutral.mjs', 'skills/lead-orchestration/references/host-adapters.md', 'scripts/check-all.mjs'],
+          states: {
+            warn: {
+              badge: 'EXIT 0 · FAKE GREEN (反面教材)',
+              cls: 'badge-warn',
+              html: '<span class="t-cmd">$ node scripts/naive-skill-lint.mjs</span>\n' +
+                    '<span class="t-dim">[info] YAML frontmatter valid across 10 skills</span>\n' +
+                    '<span class="t-warn">[WARN] skills/pit-to-gate/SKILL.md mentions "Stop hook" &amp; "PowerShell" in generic workflow</span>\n' +
+                    '<span class="t-ok">Process exited with code 0 (宿主私有术语混入通用核心技能！)</span>'
+            },
+            fail: {
+              badge: 'EXIT 1 · BLOCKED (阳性对照真红)',
+              cls: 'badge-fail',
+              html: '<span class="t-cmd">$ node skills/skill-maintenance/scripts/check-host-neutral.mjs</span>\n' +
+                    '<span class="t-dim">› scanning all text files under skills/ (10 core skills)...</span>\n' +
+                    '<span class="t-err">[GATE FAIL] Host-specific term "Stop hook" found in skills/pit-to-gate/SKILL.md:44</span>\n' +
+                    '<span class="t-err">[GATE FAIL] Host-specific term "WorkBuddy" / "mnemon" found outside exempted adapter file!</span>\n' +
+                    '<span class="t-dim">  Only exempted file : skills/lead-orchestration/references/host-adapters.md</span>\n' +
+                    '<span class="t-dim">  Fix                : use host-neutral capability wording in SKILL.md and map host specifics in host-adapters.md.</span>\n' +
+                    '<span class="t-err">check-host-neutral failed (exit code 1).</span>'
+            },
+            pass: {
+              badge: 'EXIT 0 · VERIFIED (10 技能全中立真绿)',
+              cls: 'badge-pass',
+              html: '<span class="t-cmd">$ node skills/skill-maintenance/scripts/check-host-neutral.mjs --self-test &amp;&amp; node skills/skill-maintenance/scripts/check-host-neutral.mjs</span>\n' +
+                    '<span class="t-cyan">[check] positive-control --self-test caught synthetic host-bound terms (Stop hook / PowerShell / mnemon) ✓</span>\n' +
+                    '<span class="t-cyan">[check] sole exemption boundary verified: skills/lead-orchestration/references/host-adapters.md ✓</span>\n' +
+                    '<span class="t-ok">[PASS] All 10 skills under skills/ are 100% host-neutral.</span>\n' +
+                    '<span class="t-ok">Gate 04 passed (exit code 0).</span>'
+            }
+          }
+        }
+      ];
+
+      /* ----------------------------------------------------------------------
+         3. DATA DICTIONARY — 4 + 6 Self-Owned Skills + 4 Upstream Ecosystem
+         ---------------------------------------------------------------------- */
+      var SKILLS_DATA = [
+        {
+          idx: '01',
+          name: 'lead-orchestration',
+          cat: 'core',
+          catLabel: '方法论治理核心',
+          brief: '整套协作总纲：唯一主导拆单派工与合并、三派三不派、git worktree 物理隔离与分层证据验收。',
+          trigger: '写代码、改配置、跑验证、操作 Git 前作为工程规范入口；多会话并行、拆单委派或给新项目装协作脚手架时必读。',
+          incident: '挡住「口头提交权导致别人半成品被门禁连坐」「主导亲自下场改代码失去审查中立性」以及「把子代理口头回报直接当已验收」。',
+          path: 'skills/lead-orchestration/SKILL.md · scaffold/init-project.mjs'
+        },
+        {
+          idx: '02',
+          name: 'pit-to-gate',
+          cat: 'core',
+          catLabel: '方法论治理核心',
+          brief: '踩坑转化引擎：将真实缺陷或重复返工按三路判据分流至机器门禁、Skill 或记忆，强制阳性对照。',
+          trigger: '修复缺陷后、被用户纠正做法后、同一类错误二次出现时主动加载；优先更新已有门禁载体而非堆砌文档提醒。',
+          incident: '挡住「STATE.md 只打黄字退 0 两周涨到 569 行 / 104 KB」「预期值从被测实现反推的自证循环假绿」与「绕过 handler 顺序的假单测」。',
+          path: 'skills/pit-to-gate/SKILL.md · gates/PROTOCOL.md'
+        },
+        {
+          idx: '03',
+          name: 'defect-review',
+          cat: 'core',
+          catLabel: '方法论治理核心',
+          brief: '独立只读缺陷盲审：剥离作者上下文偏见，基于真实 merge-base diff 定位可证实回归并按 P0–P3 分级。',
+          trigger: '发布前、权限/支付/迁移等高风险改动、跨仓库契约变更，或负责人不便自证对错的产出需要独立审查时调用。',
+          incident: '挡住「直接 diff 分支顶端把上游未同步变更误判为本轮改动」及「把主观文风偏好与真实可触发 P0/P1 缺陷混为一谈」。',
+          path: 'skills/defect-review/SKILL.md'
+        },
+        {
+          idx: '04',
+          name: 'project-orientation',
+          cat: 'core',
+          catLabel: '方法论治理核心',
+          brief: '陌生项目接手与中断恢复：厘清资料分工、建立可执行功能地图，把设计/实现/单测/生产状态分开记账。',
+          trigger: '接手新仓库、恢复长周期中断进度，或发现多份项目状态文档互相冲突时启用；日常连续上下文小改动不重复启动。',
+          incident: '挡住「读了一堆过期文档就以为线上已生效」与「冒烟测试只断言容器存在，把 404 兜底壳页面当成业务正常假绿」。',
+          path: 'skills/project-orientation/SKILL.md'
+        },
+        {
+          idx: '05',
+          name: 'audit-fix-loop',
+          cat: 'playbook',
+          catLabel: '实战工程手册',
+          brief: '外部审计单逐项清零闭环：先核结论真伪（含前提不成立三形状）→ 最小回归测试 → 修复 → 退回缺陷态阳性对照。',
+          trigger: '收到外部审计清单、安全扫描报告或另一 AI 的 P0/P1/P2 评审意见要求逐条修复时使用（日常排障用 diagnosing-bugs）。',
+          incident: '挡住「盲信外部 AI 审计报告把有意设计改坏」「行号漂移改错位置」及「限流/冷却等环境坑伪装成代码缺陷导致无效重试」。',
+          path: 'skills/audit-fix-loop/SKILL.md'
+        },
+        {
+          idx: '06',
+          name: 'docs-drift-audit',
+          cat: 'playbook',
+          catLabel: '实战工程手册',
+          brief: '项目文档四类漂移审计：识别前提已不成立的僵尸待办、悬空引用、数字/命令失真与归档相对链接层级错位。',
+          trigger: '用户要求清理整理文档、归档历史记录、核查文档是否与当前代码脱节时调用。',
+          incident: '挡住「待办事项的目标流程早已停用却被误标为已完成」「删掉被引用文件而不从 git 历史恢复」与「归档后 ../ 相对路径批量断链」。',
+          path: 'skills/docs-drift-audit/SKILL.md'
+        },
+        {
+          idx: '07',
+          name: 'release-and-verify',
+          cat: 'playbook',
+          catLabel: '实战工程手册',
+          brief: '推送与远端 CI 真值核验：查授权与范围 → 校验构建产物非陈旧 → 后台推送 → 独立通道确认远端 CI 真实结论。',
+          trigger: '需要 git push、打包发布分支、部署上线或一轮迭代收尾验证远端流水线结论时调用。',
+          incident: '挡住「推完 58 个提交就报完成，1 小时后才发现远端 CI 早就红了」与「清空 dist 被安全策略拦截，构建失败却把旧产物发上线」。',
+          path: 'skills/release-and-verify/SKILL.md'
+        },
+        {
+          idx: '08',
+          name: 'git-branch-worktree-cleanup',
+          cat: 'playbook',
+          catLabel: '实战工程手册',
+          brief: '分支与 worktree 零丢失大扫除：先量化未合并提交并排查四个不可逆风险点，备份后再清理，最终直问远端复核。',
+          trigger: '仓库积压大量本地/远程分支与残留 worktree，需要安全收敛至只剩主干分支时调用。',
+          incident: '挡住「误信本地过期的 git branch -r 报告远端分支数（未跑 git ls-remote）」「误删 worktree 内未跟踪独有文件」与「符号链接 node_modules 穿透误删主仓依赖」。',
+          path: 'skills/git-branch-worktree-cleanup/SKILL.md'
+        },
+        {
+          idx: '09',
+          name: 'retire-dead-subsystem',
+          cat: 'playbook',
+          catLabel: '实战工程手册',
+          brief: '废弃子系统干净摘除：先摘门禁/构建硬依赖，再按 import 反向引用图清休眠件，不留死引用也不误伤共享模块。',
+          trigger: '需要彻底下线某个旧工具通道、废弃第三方集成或清理一批历史脚本与快照时使用。',
+          incident: '挡住「只按文件名通配符筛文件漏掉 4 个无前缀关联脚本，且差点误删仍有 2 条活跃下游消费的共享画布测量库」。',
+          path: 'skills/retire-dead-subsystem/SKILL.md'
+        },
+        {
+          idx: '10',
+          name: 'skill-maintenance',
+          cat: 'playbook',
+          catLabel: '实战工程手册',
+          brief: '本地技能资产治理：排查多副本分叉、触发条件重叠、33 条悬空软链真值检测与宿主中立校验。',
+          trigger: '新增或重构本地 Skill、两个技能触发边界打架、或跨宿主出现重复注册与旧副本漂移时使用。',
+          incident: '挡住「单凭 agent_created 标记误判所有权」「技能下架残留 33 条悬空软链报全绿」与「直接改供应商插件缓存导致升级后修改蒸发」。',
+          path: 'skills/skill-maintenance/SKILL.md · check-host-skills.mjs · check-host-neutral.mjs'
+        },
+        {
+          idx: 'U1',
+          name: 'mattpocock/skills',
+          cat: 'upstream',
+          catLabel: '推荐上游 · MIT',
+          brief: '软件设计、TDD、诊断排障（diagnosing-bugs）、领域建模（domain-modeling）与压力访谈（grilling）精选技能集。',
+          trigger: '日常复杂缺陷根因定位、新模块接口契约推敲、ADR 领域术语收敛或高歧义方案前置拷问时直接组合使用。',
+          incident: '避免在 gate-first 仓内重复造通用工程思维轮子；上游 MIT 协议开源，通过 Magpie 按需挂载并与本仓门禁无缝衔接。',
+          path: 'Upstream GitHub · mattpocock/skills (MIT License)'
+        },
+        {
+          idx: 'U2',
+          name: 'leonxlnx/taste-skill',
+          cat: 'upstream',
+          catLabel: '推荐上游 · MIT',
+          brief: '前端反模板化视觉设计系统（design-taste-frontend）：一屏一叙事、真实产品界面质感与浏览器实测收口门禁。',
+          trigger: '从零构建品牌官网、开发者工具着陆页、控制台界面，或需要消除「AI 流水线卡片味」时启用。',
+          incident: '系统性拦截等大三列水词卡片、廉价渐变字与失真占位图，把视觉审美标准转化为可逐项核验的结构约束。',
+          path: 'Upstream GitHub · leonxlnx/taste-skill (MIT License)'
+        },
+        {
+          idx: 'U3',
+          name: 'pbakaus/impeccable',
+          cat: 'upstream',
+          catLabel: '推荐上游 · Apache-2.0',
+          brief: '界面工艺地板（craft-floor）与 UI 深度打磨套件：覆盖对比度、排版尺度、自定义浏览器原生表面与无障碍细节。',
+          trigger: '对已有前端页面做 UX 审计、层级提纯、深浅主题校色与最终工艺地板验收时调用（本展示页即严格遵循其工艺禁令）。',
+          incident: '挡住「灰色次级字在深色底对比度跌破 4.5:1」「标题顶头贴廉价 Eyebrow 小标签」及「漏配滚动条/焦点环暴露拼装感」。',
+          path: 'Upstream GitHub · pbakaus/impeccable (Apache-2.0 License)'
+        },
+        {
+          idx: 'U4',
+          name: 'volcengine/openviking',
+          cat: 'upstream',
+          catLabel: '推荐上游 · Apache-2.0',
+          brief: '面向 Agent 的类文件系统分层上下文与长期记忆底座（viking:// URI 体系 + L0/L1/L2 渐进披露 + 异构模型接入）。',
+          trigger: '当跨会话、跨仓库长期协作需要引入语义经验检索与自动会话沉淀（从 3 分钟最小闭环升级至生产全栈）时接入。',
+          incident: '用清晰的目录树 URI 与 L0/L1/L2 分层取代黑盒扁平向量堆，配合本仓 gemini-embedding-2 × deepseek-v4.1-flash-1017 配置即插即用。',
+          path: 'Upstream GitHub · volcengine/openviking (Apache-2.0 License)'
+        }
+      ];
+
+      /* ----------------------------------------------------------------------
+         4. STATE & DOM CONTROLLERS
+         ---------------------------------------------------------------------- */
+      var rootEl = document.documentElement;
+      var currentStep = 0;
+      var selectedNode = 'magpie';
+      var playTimer = null;
+      var currentGate = 0;
+      var currentGateState = 'fail';
+      var currentSkillCat = 'all';
+      var openSkillId = '01';
+
+      function safeGetStorage(key) {
+        try { return window.localStorage.getItem(key); } catch (e) { return null; }
+      }
+      function safeSetStorage(key, val) {
+        try { window.localStorage.setItem(key, val); } catch (e) { /* file:// sandbox safe */ }
+      }
+
+      /* --- Theme Switcher --- */
+      var btnTheme = document.getElementById('btn-theme-toggle');
+      var themeLabel = document.getElementById('theme-label');
+
+      function applyTheme(theme) {
+        var isLight = theme === 'light';
+        rootEl.setAttribute('data-theme', isLight ? 'light' : 'dark');
+        btnTheme.setAttribute('aria-pressed', isLight ? 'true' : 'false');
+        themeLabel.textContent = isLight ? '深色蓝图' : '档案图纸';
+        safeSetStorage('gf-theme', isLight ? 'light' : 'dark');
+      }
+
+      var savedTheme = safeGetStorage('gf-theme');
+      if (savedTheme === 'light' || savedTheme === 'dark') {
+        applyTheme(savedTheme);
+      }
+
+      btnTheme.addEventListener('click', function () {
+        var next = rootEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        applyTheme(next);
+      });
+
+      /* --- Minimal Loop vs Full Stack Mode Filter --- */
+      var btnMinimal = document.getElementById('btn-mode-minimal');
+      var btnFull = document.getElementById('btn-mode-full');
+      var filterReadout = document.getElementById('active-filter-readout');
+      var ledgerBadge = document.getElementById('ledger-state-badge');
+
+      function applyStackMode(mode) {
+        var isMin = mode === 'minimal';
+        rootEl.setAttribute('data-stack', isMin ? 'minimal' : 'full');
+        btnMinimal.setAttribute('aria-pressed', isMin ? 'true' : 'false');
+        btnFull.setAttribute('aria-pressed', isMin ? 'false' : 'true');
+        filterReadout.textContent = isMin
+          ? 'ACTIVE VIEW · 3-MIN MINIMAL LOOP (5 CORE NODES HIGHLIGHTED, ENHANCED LAYER DIMMED)'
+          : 'ACTIVE VIEW · FULL PRODUCTION STACK (10/10 NODES LIT)';
+        ledgerBadge.textContent = isMin ? '最小闭环基座聚焦' : '生产全栈已点亮';
+      }
+
+      btnMinimal.addEventListener('click', function () { applyStackMode('minimal'); });
+      btnFull.addEventListener('click', function () { applyStackMode('full'); });
+
+      /* --- Node Inspector Renderer --- */
+      var insId = document.getElementById('ins-id');
+      var insTier = document.getElementById('ins-tier');
+      var insTitle = document.getElementById('ins-title');
+      var insSub = document.getElementById('ins-sub');
+      var insDuty = document.getElementById('ins-duty');
+      var insConfig = document.getElementById('ins-config');
+      var insIncident = document.getElementById('ins-incident');
+      var insPaths = document.getElementById('ins-paths');
+      var canvasSelectedIndicator = document.getElementById('canvas-selected-indicator');
+
+      function selectNode(nodeKey) {
+        if (!NODE_DETAILS[nodeKey]) return;
+        selectedNode = nodeKey;
+        var d = NODE_DETAILS[nodeKey];
+
+        insId.textContent = d.id;
+        insTier.textContent = d.tierLabel;
+        if (d.tier === 'full') {
+          insTier.classList.add('is-full');
+        } else {
+          insTier.classList.remove('is-full');
+        }
+        insTitle.textContent = d.title;
+        insSub.textContent = d.sub;
+        insDuty.textContent = d.duty;
+        insConfig.textContent = d.config;
+        insIncident.textContent = d.incident;
+
+        insPaths.innerHTML = '';
+        for (var i = 0; i < d.paths.length; i++) {
+          var span = document.createElement('span');
+          span.className = 'path-chip';
+          span.textContent = d.paths[i];
+          insPaths.appendChild(span);
+        }
+
+        var idxNum = NODES_ORDER.indexOf(nodeKey) + 1;
+        var idxStr = idxNum < 10 ? '0' + idxNum : String(idxNum);
+        canvasSelectedIndicator.textContent = 'INSPECTING · N' + idxStr + ' ' + nodeKey;
+
+        var allNodes = document.querySelectorAll('.bp-node');
+        for (var j = 0; j < allNodes.length; j++) {
+          var el = allNodes[j];
+          var isMatch = el.getAttribute('data-node') === nodeKey;
+          el.classList.toggle('is-selected', isMatch);
+        }
+      }
+
+      /* Bind SVG Node Click & Keyboard Activation */
+      var svgNodes = document.querySelectorAll('.bp-node');
+      for (var n = 0; n < svgNodes.length; n++) {
+        (function (nodeEl) {
+          var key = nodeEl.getAttribute('data-node');
+          nodeEl.addEventListener('click', function () {
+            stopAutoPlay();
+            selectNode(key);
+          });
+          nodeEl.addEventListener('keydown', function (ev) {
+            if (ev.key === 'Enter' || ev.key === ' ') {
+              ev.preventDefault();
+              stopAutoPlay();
+              selectNode(key);
+            }
+          });
+        })(svgNodes[n]);
+      }
+
+      document.getElementById('btn-node-prev').addEventListener('click', function () {
+        stopAutoPlay();
+        var idx = NODES_ORDER.indexOf(selectedNode);
+        var nextIdx = (idx - 1 + NODES_ORDER.length) % NODES_ORDER.length;
+        selectNode(NODES_ORDER[nextIdx]);
+      });
+
+      document.getElementById('btn-node-next').addEventListener('click', function () {
+        stopAutoPlay();
+        var idx = NODES_ORDER.indexOf(selectedNode);
+        var nextIdx = (idx + 1) % NODES_ORDER.length;
+        selectNode(NODES_ORDER[nextIdx]);
+      });
+
+      /* --- 6-Step Lifecycle Simulator --- */
+      var stepTabEls = document.querySelectorAll('.step-tab');
+      var pulseWires = document.querySelectorAll('.wire-pulse');
+      var simHeading = document.getElementById('sim-step-heading');
+      var simDesc = document.getElementById('sim-step-desc');
+      var btnPlay = document.getElementById('btn-step-play');
+      var labelPlay = document.getElementById('label-play');
+      var iconPlay = document.getElementById('icon-play');
+
+      function applyStep(stepIdx, syncFocusNode) {
+        currentStep = (stepIdx + STEPS.length) % STEPS.length;
+        var s = STEPS[currentStep];
+
+        simHeading.textContent = s.heading;
+        simDesc.textContent = s.desc;
+
+        for (var i = 0; i < stepTabEls.length; i++) {
+          var active = i === currentStep;
+          stepTabEls[i].setAttribute('aria-selected', active ? 'true' : 'false');
+        }
+
+        for (var j = 0; j < svgNodes.length; j++) {
+          var nKey = svgNodes[j].getAttribute('data-node');
+          svgNodes[j].classList.toggle('step-lit', s.nodes.indexOf(nKey) !== -1);
+        }
+
+        for (var k = 0; k < pulseWires.length; k++) {
+          var stepList = (pulseWires[k].getAttribute('data-steps') || '').split(',');
+          pulseWires[k].classList.toggle('active', stepList.indexOf(String(currentStep)) !== -1);
+        }
+
+        if (syncFocusNode !== false && s.focusNode) {
+          selectNode(s.focusNode);
+        }
+      }
+
+      function stopAutoPlay() {
+        if (playTimer) {
+          window.clearInterval(playTimer);
+          playTimer = null;
+        }
+        btnPlay.setAttribute('aria-pressed', 'false');
+        labelPlay.textContent = '自动推演';
+        iconPlay.innerHTML = '<polygon points="6 4 20 12 6 20 6 4" fill="currentColor" stroke="none" />';
+      }
+
+      function startAutoPlay() {
+        stopAutoPlay();
+        btnPlay.setAttribute('aria-pressed', 'true');
+        labelPlay.textContent = '暂停推演';
+        iconPlay.innerHTML = '<rect x="6" y="5" width="4" height="14" fill="currentColor" stroke="none" /><rect x="14" y="5" width="4" height="14" fill="currentColor" stroke="none" />';
+        playTimer = window.setInterval(function () {
+          applyStep(currentStep + 1, true);
+        }, 5200);
+      }
+
+      for (var st = 0; st < stepTabEls.length; st++) {
+        (function (idx) {
+          stepTabEls[idx].addEventListener('click', function () {
+            stopAutoPlay();
+            applyStep(idx, true);
+          });
+          stepTabEls[idx].addEventListener('keydown', function (ev) {
+            if (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft') {
+              ev.preventDefault();
+              stopAutoPlay();
+              var next = ev.key === 'ArrowRight'
+                ? (idx + 1) % stepTabEls.length
+                : (idx - 1 + stepTabEls.length) % stepTabEls.length;
+              stepTabEls[next].focus();
+              applyStep(next, true);
+            }
+          });
+        })(st);
+      }
+
+      document.getElementById('btn-step-prev').addEventListener('click', function () {
+        stopAutoPlay();
+        applyStep(currentStep - 1, true);
+      });
+      document.getElementById('btn-step-next').addEventListener('click', function () {
+        stopAutoPlay();
+        applyStep(currentStep + 1, true);
+      });
+      btnPlay.addEventListener('click', function () {
+        if (playTimer) {
+          stopAutoPlay();
+        } else {
+          startAutoPlay();
+        }
+      });
+
+      /* --- Module 4: Gate & Positive-Control Lab --- */
+      var labTabs = document.querySelectorAll('.lab-tab');
+      var stateBtns = document.querySelectorAll('.state-btn');
+      var labExitBadge = document.getElementById('lab-exit-badge');
+      var labCmdTitle = document.getElementById('lab-cmd-title');
+      var labTermOut = document.getElementById('lab-terminal-output');
+      var labTitle = document.getElementById('lab-analysis-title');
+      var labSummary = document.getElementById('lab-analysis-summary');
+      var labFakeGreen = document.getElementById('lab-fake-green');
+      var labSsotRule = document.getElementById('lab-ssot-rule');
+      var labPosControl = document.getElementById('lab-pos-control');
+      var labPaths = document.getElementById('lab-paths');
+
+      function renderGateLab() {
+        var g = GATES_LAB[currentGate];
+        var stObj = g.states[currentGateState];
+
+        for (var i = 0; i < labTabs.length; i++) {
+          labTabs[i].setAttribute('aria-selected', i === currentGate ? 'true' : 'false');
+        }
+        for (var j = 0; j < stateBtns.length; j++) {
+          var sKey = stateBtns[j].getAttribute('data-state');
+          stateBtns[j].setAttribute('aria-pressed', sKey === currentGateState ? 'true' : 'false');
+        }
+
+        labExitBadge.className = 'exit-badge mono ' + stObj.cls;
+        labExitBadge.textContent = stObj.badge;
+        labCmdTitle.textContent = g.cmdTitle;
+        labTermOut.innerHTML = stObj.html;
+
+        labTitle.textContent = g.title;
+        labSummary.textContent = g.summary;
+        labFakeGreen.textContent = g.fakeGreen;
+        labSsotRule.textContent = g.ssotRule;
+        labPosControl.textContent = g.posControl;
+
+        labPaths.innerHTML = '';
+        for (var p = 0; p < g.paths.length; p++) {
+          var chip = document.createElement('span');
+          chip.className = 'path-chip';
+          chip.textContent = g.paths[p];
+          labPaths.appendChild(chip);
+        }
+      }
+
+      for (var gt = 0; gt < labTabs.length; gt++) {
+        (function (idx) {
+          labTabs[idx].addEventListener('click', function () {
+            currentGate = idx;
+            renderGateLab();
+          });
+          labTabs[idx].addEventListener('keydown', function (ev) {
+            if (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft') {
+              ev.preventDefault();
+              var next = ev.key === 'ArrowRight'
+                ? (idx + 1) % labTabs.length
+                : (idx - 1 + labTabs.length) % labTabs.length;
+              currentGate = next;
+              labTabs[next].focus();
+              renderGateLab();
+            }
+          });
+        })(gt);
+      }
+
+      for (var sb = 0; sb < stateBtns.length; sb++) {
+        (function (btn) {
+          btn.addEventListener('click', function () {
+            currentGateState = btn.getAttribute('data-state');
+            renderGateLab();
+          });
+        })(stateBtns[sb]);
+      }
+
+      /* --- Module 5: 4 + 6 Skill & Ecosystem Explorer --- */
+      var filterBtns = document.querySelectorAll('.filter-btn');
+      var searchInput = document.getElementById('skill-search-input');
+      var ledgerList = document.getElementById('skill-ledger-list');
+      var emptyState = document.getElementById('skill-empty-state');
+      var countReadout = document.getElementById('skill-count-readout');
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      function renderSkills() {
+        var query = (searchInput.value || '').trim().toLowerCase();
+        var filtered = [];
+
+        for (var i = 0; i < SKILLS_DATA.length; i++) {
+          var item = SKILLS_DATA[i];
+          var catOk = currentSkillCat === 'all' || item.cat === currentSkillCat;
+          if (!catOk) continue;
+          if (query) {
+            var haystack = (item.name + ' ' + item.catLabel + ' ' + item.brief + ' ' + item.trigger + ' ' + item.incident + ' ' + item.path).toLowerCase();
+            if (haystack.indexOf(query) === -1) continue;
+          }
+          filtered.push(item);
+        }
+
+        countReadout.textContent = 'SHOWING ' + filtered.length + ' / ' + SKILLS_DATA.length + ' ENTRIES';
+
+        if (filtered.length === 0) {
+          ledgerList.innerHTML = '';
+          emptyState.style.display = 'block';
+          return;
+        }
+        emptyState.style.display = 'none';
+
+        var html = '';
+        for (var k = 0; k < filtered.length; k++) {
+          var s = filtered[k];
+          var isOpen = openSkillId === s.idx;
+          var catClass = s.cat === 'core' ? 'cat-core' : (s.cat === 'playbook' ? 'cat-playbook' : 'cat-upstream');
+
+          html += '<div class="skill-row" data-open="' + (isOpen ? 'true' : 'false') + '" data-skill-idx="' + escapeHtml(s.idx) + '">' +
+            '<button type="button" class="skill-row-trigger" aria-expanded="' + (isOpen ? 'true' : 'false') + '">' +
+              '<span class="skill-idx mono">' + escapeHtml(s.idx) + '</span>' +
+              '<span class="skill-name mono">' + escapeHtml(s.name) + '</span>' +
+              '<span class="skill-cat-tag ' + catClass + '">' + escapeHtml(s.catLabel) + '</span>' +
+              '<span class="skill-brief">' + escapeHtml(s.brief) + '</span>' +
+              '<svg class="icon chevron-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>' +
+            '</button>' +
+            '<div class="skill-drawer">' +
+              '<div class="drawer-grid">' +
+                '<div>' +
+                  '<div class="drawer-col-label">触发条件与适用边界</div>' +
+                  '<div class="drawer-col-text">' + escapeHtml(s.trigger) + '</div>' +
+                '</div>' +
+                '<div>' +
+                  '<div class="drawer-col-label">解决的典型真实事故</div>' +
+                  '<div class="drawer-col-text">' + escapeHtml(s.incident) + '</div>' +
+                '</div>' +
+                '<div>' +
+                  '<div class="drawer-col-label">仓内相对路径 / 上游协议</div>' +
+                  '<div class="drawer-col-text mono" style="font-size:0.78rem;">' + escapeHtml(s.path) + '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+        }
+
+        ledgerList.innerHTML = html;
+
+        var triggers = ledgerList.querySelectorAll('.skill-row-trigger');
+        for (var t = 0; t < triggers.length; t++) {
+          (function (btn) {
+            btn.addEventListener('click', function () {
+              var row = btn.parentNode;
+              var id = row.getAttribute('data-skill-idx');
+              openSkillId = (openSkillId === id) ? '' : id;
+              renderSkills();
+            });
+          })(triggers[t]);
+        }
+      }
+
+      for (var fb = 0; fb < filterBtns.length; fb++) {
+        (function (btn) {
+          btn.addEventListener('click', function () {
+            currentSkillCat = btn.getAttribute('data-cat');
+            for (var x = 0; x < filterBtns.length; x++) {
+              filterBtns[x].setAttribute('aria-pressed', filterBtns[x] === btn ? 'true' : 'false');
+            }
+            renderSkills();
+          });
+        })(filterBtns[fb]);
+      }
+
+      searchInput.addEventListener('input', function () {
+        renderSkills();
+      });
+
+      /* --- Initial Render --- */
+      applyStep(0, true);
+      renderGateLab();
+      renderSkills();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+# Local scratch and temporary test artifacts
+.tmp/
+*.tmp
+*.bak
+
+# Local maintainer privacy denylist (never committed)
+.privacy-denylist.local
+
+# Runtime & OS
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*

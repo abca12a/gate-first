@@ -1,0 +1,47 @@
+#!/bin/sh
+# 提交前门禁（由 lead-orchestration 的 init-project.mjs 装入）
+#
+# 为什么挂在 git 上：各家的 hook 机制互不相同，有的运行环境根本没有 hook 入口。
+# 挂在 git 上才是跨宿主的——谁提交都逃不掉。
+#
+# 装法（每个仓库一次）：
+#   git config --local core.hooksPath .githooks
+# 全局装法（所有仓库都生效）：
+#   git config --global core.hooksPath <这个目录的绝对路径>
+#
+# 本文件必须是 **LF** 换行：工作树是 CRLF 时，首行会变成 `#!/bin/sh\r`，内核按 shebang
+# 找解释器时找不到 /bin/sh。改完用 `grep -c $'\r' .githooks/pre-commit` 应为 0。
+
+GATE_ENTRY='{{GATE_ENTRY}}'
+GATE_FILE='{{GATE_ENTRY_FILE}}'
+
+# 缺门禁入口就**拦下**，不放行。放行会把「没跑过门禁」记成「门禁通过」，
+# 而项目规则往往写着「pre-commit 已跑同一套」—— 于是没人会再验一次，也没有信号会亮。
+if [ -n "$GATE_FILE" ] && [ ! -f "$GATE_FILE" ]; then
+  echo "提交被拦下：找不到门禁入口 $GATE_FILE（工作目录 $(pwd)）。" >&2
+  echo "多半是 core.hooksPath 指错了目录，或这个检出上还没有门禁脚本。" >&2
+  echo "确认后可用 git commit --no-verify 提交，并在提交说明里写明理由与补跑结果。" >&2
+  exit 1
+fi
+
+# git 跑 hook 时会注入 GIT_DIR / GIT_INDEX_FILE 等变量。门禁里的回归测试会临时建
+# 仓库并跑 git 命令，继承这些变量会指回真实仓库，测试因此假失败。先清掉再跑。
+unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_PREFIX GIT_OBJECT_DIRECTORY GIT_COMMON_DIR
+
+# 缺运行时同样拦下。门禁不经 node 运行的项目，把这段删掉并在本文件里写明理由。
+if ! command -v node >/dev/null 2>&1; then
+  echo "提交被拦下：PATH 里找不到 node —— 门禁没跑，这不是通过。" >&2
+  echo "装好 Node 再提交；临时绕过用 git commit --no-verify（需在提交说明里写明理由）。" >&2
+  exit 1
+fi
+
+echo "提交前门禁：$GATE_ENTRY"
+sh -c "$GATE_ENTRY"
+status=$?
+if [ "$status" -ne 0 ]; then
+  echo "" >&2
+  echo "提交被拦下：门禁没通过（上面就是原因，退出码 $status）。" >&2
+  echo "修好再提交。只在明确接受风险时用 git commit --no-verify 绕过，并在提交说明里写理由。" >&2
+  exit 1
+fi
+exit 0

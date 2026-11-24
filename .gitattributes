@@ -1,0 +1,16 @@
+# Enforce LF across text files in the repository
+* text=auto eol=lf
+
+# Shell hooks MUST stay strictly LF so POSIX kernels never see `#!/bin/sh\r`
+.githooks/** text eol=lf
+gates/hooks/** text eol=lf
+skills/**/templates/githooks/** text eol=lf
+*.sh text eol=lf
+*.mjs text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.md text eol=lf
+*.html text eol=lf
+*.css text eol=lf

@@ -1,0 +1,26 @@
+#!/bin/sh
+# gate-first 本仓狗粮提交前门禁（必须保持 LF 换行）
+# 安装命令：git config --local core.hooksPath .githooks
+
+unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_PREFIX GIT_OBJECT_DIRECTORY GIT_COMMON_DIR
+
+if [ ! -f scripts/check-all.mjs ]; then
+  echo "提交被拦下：找不到门禁入口 scripts/check-all.mjs（当前目录 $(pwd)）。" >&2
+  exit 1
+fi
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "提交被拦下：PATH 中找不到 node 运行时 —— 门禁未执行，不能记为通过。" >&2
+  exit 1
+fi
+
+echo "[gate-first pre-commit] 运行全仓狗粮门禁：node scripts/check-all.mjs"
+node scripts/check-all.mjs
+status=$?
+if [ "$status" -ne 0 ]; then
+  echo "" >&2
+  echo "[gate-first pre-commit] 提交被拦下：全仓门禁未通过（退出码 $status）。" >&2
+  exit 1
+fi
+
+exit 0
