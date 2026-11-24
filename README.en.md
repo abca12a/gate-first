@@ -6,9 +6,9 @@ A cross-host engineering governance kit for high-intensity AI-assisted developme
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D20-339933.svg)](./package.json)
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-0-success.svg)](./package.json)
-[![Live Blueprint](https://img.shields.io/badge/Live_Blueprint-GitHub_Pages-0ea5e9.svg)](https://abca12a.github.io/gate-first/)
+[![Live Blueprint](https://img.shields.io/badge/Live_Blueprint-GitHub_Pages-0ea5e9.svg)](https://abca12a.github.io/gate-first/?lang=en)
 
-[**Live Interactive Blueprint (`abca12a.github.io/gate-first`)**](https://abca12a.github.io/gate-first/) · [**Local Showcase (`showcase/index.html`)**](./showcase/index.html) · [**Production Reference Stack (`docs/REFERENCE-STACK.md`)**](./docs/REFERENCE-STACK.md) · [**简体中文主文档 (`README.md`)**](./README.md)
+[简体中文 (`README.md`)](./README.md) · **English** · [Live Interactive Blueprint (EN/中文)](https://abca12a.github.io/gate-first/?lang=en) · [Production Reference Stack (EN)](./docs/REFERENCE-STACK.en.md)
 
 ---
 
@@ -30,9 +30,9 @@ Teams running coding agents across real production repositories hit the same fou
 1. **Rules That Grow Gates ([`gates/PROTOCOL.md`](./gates/PROTOCOL.md))**: Keep always-loaded global instructions capped around **~30 lines** ([`prompts/`](./prompts/README.md)). Whenever an error can be checked deterministically, turn it into an **`exit 1`** script wired to `.githooks/pre-commit`, paired with an automated **positive control** proving the gate actually turns red on known bad inputs.
 2. **Single Lead, Isolated Executors ([`skills/lead-orchestration/`](./skills/lead-orchestration/SKILL.md))**: One Lead session owns alignment, task scoping, evidence review, and merging. Parallel writers run inside isolated `git worktree` checkouts verified across two phases (`--phase pre` before edits, `--phase post` after local commits). Subagents report verifiable receipts back to the Lead and **never** write to shared long-term memory.
 3. **Backend-Agnostic Memory Contract ([`memory/CONTRACT.md`](./memory/CONTRACT.md))**: Separate always-injected user preferences from repo-scoped facts (`peers`), cold long-form archives (`resources`), and reusable troubleshooting recipes (`experiences`), enforced with **L0 / L1 / L2 progressive disclosure** (abstracts screen candidates; full L2 bodies must be read before acting).
-4. **Start Zero-Dependency, Scale to a Six-Layer Production Stack ([`docs/REFERENCE-STACK.md`](./docs/REFERENCE-STACK.md))**: Run the entire core loop in 3 minutes using nothing but `Git` + `Node.js >= 20`, then optionally scale to multi-host distribution (**Magpie**), zero-public-exposure mesh networking (**EasyTier**), and heterogeneous dual-model memory (**OpenViking `v0.5.5`**).
+4. **Start Zero-Dependency, Scale to a Six-Layer Production Stack ([`docs/REFERENCE-STACK.en.md`](./docs/REFERENCE-STACK.en.md))**: Run the entire core loop in 3 minutes using nothing but `Git` + `Node.js >= 20`, then optionally scale to multi-host distribution (**Magpie**), zero-public-exposure mesh networking (**EasyTier**), and heterogeneous dual-model memory (**OpenViking `v0.5.5`**).
 
-> 💡 **Interactive Architecture Blueprint**: Visit the live GitHub Pages deployment at [**`https://abca12a.github.io/gate-first/`**](https://abca12a.github.io/gate-first/) (or open [**`showcase/index.html`**](./showcase/index.html) locally) to explore the 6-layer architecture flow, EasyTier mesh topology, dual-model memory pipeline, and interactive positive-control gate lab.
+> 💡 **Interactive Architecture Blueprint**: Visit the live GitHub Pages deployment at [**`https://abca12a.github.io/gate-first/?lang=en`**](https://abca12a.github.io/gate-first/?lang=en) (or open [**`showcase/index.html`**](./showcase/index.html) locally) to explore the 6-layer architecture flow, EasyTier mesh topology, dual-model memory pipeline, and interactive positive-control gate lab.
 
 ---
 
@@ -104,7 +104,7 @@ Each directory under [`gates/examples/`](./gates/PROTOCOL.md) ships with its rea
 
 ## Production Reference Stack Summary
 
-For power users working across multiple machines and **5+ coding hosts**, [`docs/REFERENCE-STACK.md`](./docs/REFERENCE-STACK.md) documents the complete six-layer production stack in full detail:
+For power users working across multiple machines and **5+ coding hosts**, [`docs/REFERENCE-STACK.en.md`](./docs/REFERENCE-STACK.en.md) documents the complete six-layer production stack in full detail:
 
 - **EasyTier Zero-Public-Exposure Encrypted Mesh**:
   - Replaces fragile `ssh -N -L` tunnels with an encrypted private mesh (`private_mode = true`, `dhcp = false`) connecting workstations directly to `http://<easytier-virtual-ip>:1933` (**2-second** onboarding; outbound-only `TCP` / `443 WSS` template for strict corporate networks).
@@ -133,7 +133,7 @@ For power users working across multiple machines and **5+ coding hosts**, [`docs
 
 - **Author**: **han**
 - **GitHub Repository**: [`https://github.com/abca12a/gate-first`](https://github.com/abca12a/gate-first)
-- **Live Architecture Blueprint**: [`https://abca12a.github.io/gate-first/`](https://abca12a.github.io/gate-first/)
+- **Live Architecture Blueprint**: [`https://abca12a.github.io/gate-first/?lang=en`](https://abca12a.github.io/gate-first/?lang=en)
 - **Personal Website**: [`dimilinks.com`](https://dimilinks.com/)
 
 ## License

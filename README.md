@@ -1,14 +1,15 @@
 # gate-first
 
 **让规则长成门禁，而不是把提示词越写越厚。**  
+*Grow deterministic Git gates out of real incidents instead of bloating your system prompts.* ([English Documentation →](./README.en.md))  
 面向高强度 AI 辅助研发的跨宿主协作规范、10 个实战工作流 Skill、自增长确定性门禁与分层长期记忆架构。
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D20-339933.svg)](./package.json)
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-0-success.svg)](./package.json)
-[![Live Blueprint](https://img.shields.io/badge/Live_Blueprint-GitHub_Pages-0ea5e9.svg)](https://abca12a.github.io/gate-first/)
+[![Live Blueprint](https://img.shields.io/badge/Live_Blueprint-GitHub_Pages-0ea5e9.svg)](https://abca12a.github.io/gate-first/?lang=zh)
 
-[**在线交互式全景蓝图 (`abca12a.github.io/gate-first`)**](https://abca12a.github.io/gate-first/) · [**本地展示页 (`showcase/index.html`)**](./showcase/index.html) · [**生产配套全栈白皮书 (`docs/REFERENCE-STACK.md`)**](./docs/REFERENCE-STACK.md) · [**English README (`README.en.md`)**](./README.en.md)
+**简体中文** · [English (`README.en.md`)](./README.en.md) · [在线全景蓝图 (中文/EN)](https://abca12a.github.io/gate-first/?lang=zh) · [国内加速镜](https://gate-first.dimilinks.com/?lang=zh) · [生产全栈白皮书](./docs/REFERENCE-STACK.md)
 
 ---
 
@@ -28,7 +29,7 @@
 - **事故向机器门禁单向收敛**：凡能二元判定的约束一律下沉为 `.githooks/pre-commit` 里 **`exit 1`** 的零依赖检查器，并强制配备**阳性对照**证明它真的会变红（[`gates/PROTOCOL.md`](./gates/PROTOCOL.md)）。
 - **后端无关的四层记忆契约**：从零服务的纯 Markdown 模板，平滑演进到零公网暴露虚拟网 + 异构双模型向量与语义编译引擎（[`memory/CONTRACT.md`](./memory/CONTRACT.md)）。
 
-> 💡 **交互式全景蓝图**：直接点击访问在线版 [**`https://abca12a.github.io/gate-first/`**](https://abca12a.github.io/gate-first/)（或本地打开 [**`showcase/index.html`**](./showcase/index.html)），即可交互式浏览六层架构流转、EasyTier 加密组网、双模型记忆流水线与门禁阳性对照实验室。
+> 💡 **交互式全景蓝图**：直接点击访问在线版 [**`https://abca12a.github.io/gate-first/?lang=zh`**](https://abca12a.github.io/gate-first/?lang=zh)（或国内加速镜 [**`https://gate-first.dimilinks.com/?lang=zh`**](https://gate-first.dimilinks.com/?lang=zh)、本地直开 [**`showcase/index.html`**](./showcase/index.html)），即可交互式浏览六层架构流转、EasyTier 加密组网、双模型记忆流水线与门禁阳性对照实验室。
 
 ---
 
@@ -170,7 +171,7 @@ gate-first/
 ├─ skills/                  # 10 个宿主中立核心工作流 Skill（含 skill-maintenance 4 个零依赖检查器）
 ├─ gates/                   # 门禁自增长协议、3 个真实事故复盘样本（含阳性对照）与 Git/Stop 钩子
 ├─ scaffold/                # 3 分钟给任意 Git 仓库接入协作骨架的零依赖初始化器
-├─ docs/                    # 六层生产配套全栈白皮书（REFERENCE-STACK.md）与本仓狗粮状态入口（STATE.md）
+├─ docs/                    # 六层生产配套全栈白皮书（REFERENCE-STACK.md / .en.md）与本仓狗粮状态入口（STATE.md）
 ├─ showcase/                # 在线 (GitHub Pages) 与本地直开的交互式全流程架构展示页
 ├─ scripts/                 # 本仓统一狗粮总门禁（check-all.mjs）与通用隐私脱敏门禁（check-no-private-leak.mjs）
 ├─ .github/workflows/       # GitHub Pages 零构建自动部署工作流（pages.yml）
