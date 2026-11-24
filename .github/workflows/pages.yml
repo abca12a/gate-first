@@ -16,10 +16,11 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  # Split upload (`build`) and deployment (`deploy`) into two jobs (`needs: build`)
+  # to avoid the sub-second Twirp ListArtifacts eventual-consistency race when
+  # `deploy-pages@v4` runs immediately after `upload-pages-artifact@v3` in the same job
+  # (upstream issue: actions/deploy-pages#451).
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -33,6 +34,13 @@ jobs:
         with:
           path: showcase
 
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
